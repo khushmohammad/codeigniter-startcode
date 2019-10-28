@@ -118,9 +118,28 @@
     //script       
   //validation
   $.validator.setDefaults( {
-		//	/submitHandler: function () {
-        debug: true
-		//	}
+			submitHandler: function (form) {
+       // debug: true
+       var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
+
+      $.ajax({
+             type: "POST",
+             url: url,
+             data: $(form).serialize(), // serializes the form's elements.
+             success: function(data)
+             {
+                $('#U_ID').val(data)
+                 //alert(data); // show response from the php script.
+                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                 setTimeout(function(){ 
+                  $('.AlertMessageModal').html('') ;
+                 }, 2000);
+            
+                 
+             }
+           });  
+       $('#datatables').DataTable().ajax.reload();
+			}
 		} );
 
 		$( document ).ready( function () {
@@ -169,32 +188,14 @@
   $(document).ready(function(){ 
     
 
-    $("#DashUserAddEdit_Form").submit(function(e) {
+    //$("#DashUserAddEdit_Form").submit(function(e) {
 
-      e.preventDefault(); // avoid to execute the actual submit of the form.
+      //e.preventDefault(); // avoid to execute the actual submit of the form.
 
-      var form = $(this);
-      var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
+    //  var form = $(this);
+      
 
-      $.ajax({
-             type: "POST",
-             url: url,
-             data: form.serialize(), // serializes the form's elements.
-             success: function(data)
-             {
-                $('#U_ID').val(data)
-                 //alert(data); // show response from the php script.
-                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
-                 setTimeout(function(){ 
-                  $('.AlertMessageModal').html('') ;
-                 }, 2000);
-            
-                 
-             }
-           });  
-       $('#datatables').DataTable().ajax.reload();
-
-    }); 
+    //}); 
     
   });
       $(document).on("click", "#DashUser_Delete", function(e) {
