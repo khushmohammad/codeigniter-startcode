@@ -22,8 +22,8 @@
             Data Table Example</div>
           <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-bordered nowrap" id="datatables" width="100%" cellspacing="0" >
-              <thead>
+            <table class="table table-striped table-bordered nowrap" id="datatables" width="100%" cellspacing="0" >
+              <thead class="thead-dark">
                 <tr>
                   <th data-class="expand" width="5%">ID</th>
                   <th data-class="expand" >NAME</th>
