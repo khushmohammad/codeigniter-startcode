@@ -1,4 +1,5 @@
         <!-- Breadcrumbs-->
+       
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
@@ -24,7 +25,7 @@
             <table class="table table-bordered nowrap" id="datatables" width="100%" cellspacing="0" >
               <thead>
                 <tr>
-                  <th data-class="expand" width="10%">ID</th>
+                  <th data-class="expand" width="5%">ID</th>
                   <th data-class="expand" >NAME</th>
                   <th data-class="expand" >GENDER</th>
                   <th data-class="expand" >PASSWORD</th>
@@ -48,7 +49,7 @@
         $(document).ready(function() {
          
           var DataTableObject=[
-            { data: 'U_ID' ,className:"all"},
+            { data: 'U_ID' ,className:"all text-center"},
             { data: 'U_USERNAME' ,className:"all"},
             { data: 'U_GENDER' ,className:"all"},
             { data: 'U_PASSWORD'},
@@ -56,10 +57,10 @@
             { data: 'U_CONTACT'},
             { data: null , 'searchable': false ,
             render : function (data, type, dataToSet) {
-            return data.U_ADDRESS + ", " + data.U_CITY + "<br>" + data.U_STATE + ", " + data.U_COUNTRY + "<br>"+ data.U_PINCODE;
+            return data.U_ADDRESS + ", " + data.U_CITY + "<br>" + data.U_STATE + ", " + data.U_COUNTRY +","+ data.U_PINCODE;
             }},
             { data: 'U_ACTIVE'},
-            { data: null, "orderable": false, 'searchable': false, className:"all", 
+            { data: null, "orderable": false, 'searchable': false, className:"all text-center", 
               render: function( data, type, row) {
                 sysid=data['U_ID'];				
                 return   '<div class="dropdown" >'
@@ -87,6 +88,7 @@
                   "url": "<?= base_url(); ?>Dashboard/DashUserView_Ajax",
                   "type": "POST"
               },
+            
           
           });
           linesSwitchery();

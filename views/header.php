@@ -44,9 +44,7 @@
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
   <!-- plugin  -->
   <style>
-  footer.sticky-footer {
-    width: calc(100% - 90px) !important;
-  }
+ 
   </style>
 </head>
 
