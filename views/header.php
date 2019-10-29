@@ -13,6 +13,7 @@
 
   <!-- Custom fonts for this template-->
     <link href="<?= site_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
+    <link href="<?= site_url('assets/css/style.css');?>" rel="stylesheet">
       
   <!-- Page level plugin CSS-->
     <link href="<?= site_url('assets/vendor/datatables/dataTables.bootstrap4.css');?>" rel="stylesheet">
