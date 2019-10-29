@@ -117,10 +117,6 @@
        var sysId =  $(this).attr('data-id');
         $('#U_ID').val(sysId);
         GetDashUserData_Ajax();
-        // setTimeout(function(){
-        //   $('#DashUserAddEdit_Form').valid();
-        // }, 800);
-       
        }
 
   });      
@@ -153,6 +149,7 @@
              }
             
            });  
+
            $('#datatables').DataTable().ajax.reload();
 			}
      
