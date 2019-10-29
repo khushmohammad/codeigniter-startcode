@@ -365,4 +365,14 @@ function DashUserModalForm_Reset(){
         </div>
       </div>
       <!-- modal end for add edit -->
- 
+ <!-- <select name="RPF_RPB_SYS_ID" id="RPF_RPB_SYS_ID" class="form-control selectpicker" data-live-search="true" data-style="btn-white btn-sm" data-value="<?= $RM_ST_CODE;?>">
+                    <?php
+                    $option = '<option value="">'.lang('select').'</option>';
+                    if(!empty($block)){
+                      foreach($block as $row){
+                        $option .= '<option value="'.$row['RPB_SYS_ID'].'">'.$row['RPB_BLOCK_DESC'].'</option>';
+                      }
+                    }
+                    echo $option;
+                    ?>
+                  </select> -->

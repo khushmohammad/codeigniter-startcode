@@ -25,6 +25,26 @@ class Dashboard extends CI_Controller {
         $this->load->view('pages/Dashboard_View');        
 		$this->load->view('footer');
 	}
+// comman function
+
+function getBlockAjax(){
+	    $prhCode=$this->input->post("prh_Code");
+		$searchData=$this->input->post("searchdata");
+	    $sql="SELECT * FROM REAL_M_PROPERTY_BLOCK
+				WHERE RPB_COMP_CODE = '".$this->companyCode."' AND RPB_PRH_SYS_ID = '".$prhCode."' AND RPB_ACTIVE_YN='Y'
+				AND(lower(RPB_BLOCK_DESC) LIKE lower('%".$searchData."%')) ORDER BY RPB_BLOCK_DESC ASC";
+	    $getResult = $this->db->query($sql, $return_object = TRUE)->result_array();
+		$option = '<option value="">Select Block</option>';
+	    if(!empty($getResult)){
+			foreach($getResult as $row){
+				$option .= '<option value="'.$row['RPB_SYS_ID'].'">'.$row['RPB_BLOCK_DESC'].'</option>';
+			}
+		}
+		echo $option;
+	}
+//comman function
+
+
 	public function AdminUser()
 	{
 		$this->load->view('header');				
