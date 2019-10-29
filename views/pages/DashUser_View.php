@@ -26,6 +26,7 @@
                 <tr>
                   <th data-class="expand" width="10%">ID</th>
                   <th data-class="expand" >NAME</th>
+                  <th data-class="expand" >GENDER</th>
                   <th data-class="expand" >PASSWORD</th>
                   <th data-class="expand">EMAIL</th>
                   <th data-class="expand">CONTACT</th>
@@ -49,6 +50,7 @@
           var DataTableObject=[
             { data: 'U_ID' ,className:"all"},
             { data: 'U_USERNAME' ,className:"all"},
+            { data: 'U_GENDER' ,className:"all"},
             { data: 'U_PASSWORD'},
             { data: 'U_EMAIL'},
             { data: 'U_CONTACT'},
@@ -105,12 +107,18 @@
       e.preventDefault();
        var buttonid =  $(this).attr('id');
        if(buttonid == 'Add'){
+        $('#U_ID').val('');
         
         
        }
-       else{
-        
-
+       else{        
+       var sysId =  $(this).attr('data-id');
+        $('#U_ID').val(sysId);
+        GetDashUserData_Ajax();
+        // setTimeout(function(){
+        //   $('#DashUserAddEdit_Form').valid();
+        // }, 800);
+       
        }
 
   });      
@@ -118,29 +126,65 @@
     //script       
   //validation
   $.validator.setDefaults( {
-		//	/submitHandler: function () {
-        debug: true
-		//	}
-		} );
+			submitHandler: function (form) {
+       // debug: true
+       var sysId = $('#U_ID').val();
+       var url = "<?php echo site_url('Dashboard/DashUser_UpdateAjax') ?>";
+       if(sysId == ''){
+       var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
+       }     
 
-		$( document ).ready( function () {
+      $.ajax({
+             type: "POST",
+             url: url,
+             data: $(form).serialize(), // serializes the form's elements.
+             success: function(data)
+             {
+                $('#U_ID').val(data)
+                 //alert(data); // show response from the php script.
+                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                 setTimeout(function(){ 
+                  $('.AlertMessageModal').html('') ;
+                 }, 2000);
+            
+                 GetDashUserData_Ajax();  
+             }
+            
+           });  
+           $('#datatables').DataTable().ajax.reload();
+			}
+     
+		});
+
+		$(document).ready( function () {      
 			$( "#DashUserAddEdit_Form" ).validate( {
+        onkeyup: function(element) {
+            $(element).valid();           
+          },       
 				rules: {
 					U_USERNAME: "required",
 					U_PASSWORD: "required",
-					U_COUNTRY: {
-						required: true,
-						minlength: 2
-					},			
+					U_GENDER: "required",
+					U_EMAIL: "required",
+					U_CONTACT: "required",
+					U_ADDRESS: "required",
+					U_COUNTRY: "required", 
+					U_STATE: "required",
+					U_CITY: "required",
+					U_PINCODE: "required"							
 				
 				},
 				messages: {
 					U_USERNAME: "Please enter your username",
 					U_PASSWORD: "Please enter your password",
-          U_COUNTRY: {
-						required: "Please enter a username"
-						
-					},					
+          U_GENDER: "Please enter your gender",
+					U_EMAIL: "Please enter your email",
+					U_CONTACT: "Please enter your contact",
+					U_ADDRESS: "Please enter your address",
+					U_COUNTRY: "Please enter your country",
+					U_STATE: "Please enter your state",
+					U_CITY: "Please enter your city",
+					U_PINCODE: "Please enter your pincode",         				
 				},
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {
@@ -159,50 +203,13 @@
 				unhighlight: function (element, errorClass, validClass) {
 					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
 				}
-			} );
-
+			});       
 		} );
-
-
-
   //validation
-  $(document).ready(function(){ 
-    
-
-    $("#DashUserAddEdit_Form").submit(function(e) {
-
-      e.preventDefault(); // avoid to execute the actual submit of the form.
-
-      var form = $(this);
-      var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
-
-      $.ajax({
-             type: "POST",
-             url: url,
-             data: form.serialize(), // serializes the form's elements.
-             success: function(data)
-             {
-                $('#U_ID').val(data)
-                 //alert(data); // show response from the php script.
-                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
-                 setTimeout(function(){ 
-                  $('.AlertMessageModal').html('') ;
-                 }, 2000);
-            
-                 
-             }
-           });  
-       $('#datatables').DataTable().ajax.reload();
-
-    }); 
-    
-  });
       $(document).on("click", "#DashUser_Delete", function(e) {
          var sysId = $(this).attr('data-id');
         bootbox.confirm("Are you sure you want to delete?", function(result) {
-
-          if(result){
-           
+          if(result){           
            $.ajax({
              type: "POST",
              url: "<?= site_url('Dashboard/DashUserDelete_Ajax'); ?>",
@@ -222,20 +229,63 @@
            });
            $('#datatables').DataTable().ajax.reload();
             }
-
         }); 
-
     });
- 
-</script>
+ function GetDashUserData_Ajax(){
+   var sysId = $('#U_ID').val();   
+   $.ajax({
+             type: "POST",
+             url: "<?= site_url('Dashboard/GetDashUserData_Ajax'); ?>",
+             data: {sysId : sysId} ,
+             dataType:'json',
+             success: function(json)
+             {
+               var obj = json[0];
+                $('#U_ID').val(obj.U_ID);
+                $('#U_USERNAME').val(obj.U_USERNAME);
+                $('#U_GENDER').val(obj.U_GENDER);
+                $('#U_PASSWORD').val(obj.U_PASSWORD);
+                $('#U_EMAIL').val(obj.U_EMAIL);
+                $('#U_CONTACT').val(obj.U_CONTACT);
+                $('#U_ADDRESS').val(obj.U_ADDRESS);
+                $('#U_COUNTRY').val(obj.U_COUNTRY);
+                $('#U_STATE').val(obj.U_STATE);
+                $('#U_CITY').val(obj.U_CITY);
+                $('#U_PINCODE').val(obj.U_PINCODE);                
+                $('#U_ACTIVE').val(obj.U_ACTIVE);
+                var $ActiveYn = obj.U_ACTIVE;
+                if($ActiveYn == 'Y'){
+                  $('#U_ACTIVE_YN').lcs_on();
+                }else{
+                  $('#U_ACTIVE_YN').lcs_off();
+                }
+               $(".selectpicker").selectpicker('refresh');
 
+                $('#DashUserAddEdit_Form').valid(); 
+             },
+             error: function (jqXHR, exception) {
+              console.log(jqXHR);
+                // Your error handling logic here..
+              }  
+           });          
+ }
+
+function DashUserModalForm_Reset(){
+     $("#DashUserAddEdit_Form")[0].reset();   
+     $(".selectpicker").selectpicker('refresh');
+     $('#DashUserAddEdit_Form').valid(); 
+     var validator = $( "#DashUserAddEdit_Form" ).validate();
+     validator.resetForm();
+     $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid");     
+}
+</script>
 <!-- modal for add and edit -->
 <div class="modal" id="DashUser_Modal">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Add User</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" onclick="DashUserModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
               </div>
              <div class="AlertMessageModal"></div> 
               <form mathod="POST" id="DashUserAddEdit_Form">            
@@ -253,9 +303,10 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Gender</label>
-                          <select class="form-control form-control-sm selectpicker border border-secondary" id="U_GENDER" data-live-search="true" name="U_GENDER">
-                            <option>Male</option>
-                            <option>Female</option>                            
+                          <select class="form-control form-control-sm selectpicker" id="U_GENDER" data-live-search="true" name="U_GENDER">
+                            <option value="">select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>                            
                           </select> 
                           
                         </div>
@@ -286,7 +337,7 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="city">City</label>
-                            <input type="text" class="form-control form-control-sm" id="U_CITY " name="U_CITY">
+                            <input type="text" class="form-control form-control-sm" id="U_CITY" name="U_CITY">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="Pincode">Pincode</label>
@@ -298,13 +349,14 @@
               </div>
              
               <div class="modal-footer">
-              <div class="col-md-6 ">             
-              <input type="checkbox" value="Y" class="lcs_check" autocomplete="off" id="U_ACTIVE_YN"/>
-              <input type="hidden" name="U_ACTIVE" value="Y"  id="U_ACTIVE"/>                            
+              <div class="col-md-6" id="Activedivfooter">             
+              <input type="checkbox" value="Y" class="lcs_check" id="U_ACTIVE_YN" autocomplete="off"/>
+              <input type="hidden" name="U_ACTIVE" value="N"  id="U_ACTIVE"/>
+              <input type="hidden" name="U_ID" value=""  id="U_ID"/>
               <label class="checkbox-inline text-left"> Active</label>
               </div>
               <div class="col-md-6 text-right">   
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
               </div>
               </div>
