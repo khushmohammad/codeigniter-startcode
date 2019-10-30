@@ -126,11 +126,8 @@
     //script       
   //validation
   $.validator.setDefaults( {
-
-    
-
 			submitHandler: function (form) {
-       // debug: true
+       // debug: true       
        var sysId = $('#U_ID').val();
        var url = "<?php echo site_url('Dashboard/DashUser_UpdateAjax') ?>";
        if(sysId == ''){
@@ -157,9 +154,10 @@
            }); 
            $('#datatables').DataTable().ajax.reload();
 			}     
-		});
+		}); 
 		$(document).ready( function () {
-			$( "#DashUserAddEdit_Form" ).validate( {
+
+			$( "#DashUserAddEdit_Form" ).validate( {        
         onkeyup: function(element) {
             $(element).valid();           
           },       
@@ -188,6 +186,7 @@
 					U_PINCODE: "Please enter your pincode",         				
 				},
 				errorElement: "span",
+         errorClass: 'help-block',
 				errorPlacement: function ( error, element ) {
 					// Add the `invalid-feedback` class to the error element
 					error.addClass( "invalid-feedback" );
