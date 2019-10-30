@@ -41,7 +41,7 @@ class Dashboard extends CI_Controller {
 
 	function DashUser_SaveAjax(){
 		header('Content-Type: application/json');
-		$this->LoginModel->DashUser_SaveAjax();
+		$this->LoginModel->DashUser_SaveAjax($this->userId);
 	}
 	function DashUserDelete_Ajax(){
 	$sysId =	$this->input->post('sysId');	
@@ -58,7 +58,7 @@ class Dashboard extends CI_Controller {
 	}
 	function DashUser_UpdateAjax(){
 		header('Content-Type: application/json');
-		$this->LoginModel->DashUser_UpdateAjax();
+		$this->LoginModel->DashUser_UpdateAjax($this->userId);
 	}
 	
 }

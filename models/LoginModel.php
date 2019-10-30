@@ -6,10 +6,14 @@ class LoginModel extends CI_Model {
 		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD'],'U_ACTIVE' => 'Y'));
 		 if($query->num_rows() == 1) {
             return $query->row();
-			}  
+			} 			 
+	}
+	function date(){
+		date_default_timezone_set('Asia/Dubai');
+		return  date('Y/m/d H:i:s');
 	}
 
-	public function DashUser_SaveAjax(){ 
+	public function DashUser_SaveAjax($userId){ 
 
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
@@ -24,7 +28,8 @@ class LoginModel extends CI_Model {
 		$U_ACTIVE = $this->input->post('U_ACTIVE'); 
 		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
 		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
-		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 
+		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE');
+		
 		 
 		
 		$data = array(
@@ -41,7 +46,9 @@ class LoginModel extends CI_Model {
 			'U_ACTIVE' => $U_ACTIVE, 
 			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
 			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
-			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
+			'U_ACCESS_DELETE' => $U_ACCESS_DELETE,
+			'V_USER_ID' => $userId,
+			
 
 		);
 
@@ -56,7 +63,7 @@ class LoginModel extends CI_Model {
 		 
 		}
 		}
-		function DashUser_UpdateAjax(){
+		function DashUser_UpdateAjax($userId){
 		$id = $this->input->post('U_ID');	
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
@@ -72,6 +79,8 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
 		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
+		$V_UP_TIME = $this->date(); 	 
+		
 		
 		$data = array(
 			'U_USERNAME' => $U_USERNAME, 
@@ -88,6 +97,9 @@ class LoginModel extends CI_Model {
 			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
 			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
 			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
+			'V_USER_ID' => $userId,
+			'V_UP_TIME' => $V_UP_TIME, 
+
 
 		);
 

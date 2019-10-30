@@ -271,6 +271,9 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
                 $('#U_CITY').val(obj.U_CITY);
                 $('#U_PINCODE').val(obj.U_PINCODE);                
                 $('#U_ACTIVE').val(obj.U_ACTIVE);
+                $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT);
+                $('#U_ACCESS_DELETE').val(obj.U_ACCESS_DELETE);
+                $('#U_ACCESS_UPDATE').val(obj.U_ACCESS_UPDATE);
                 var $ActiveYn = obj.U_ACTIVE;
                 if($ActiveYn == 'Y'){
                   $('#U_ACTIVE_YN').lcs_on();
@@ -323,7 +326,7 @@ function DashUserModalForm_Reset(){
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Gender</label>
-                          <select class="form-control form-control-sm" id="U_GENDER" name="U_GENDER">                           
+                          <select class="form-control form-control-sm selectpicker" id="U_GENDER" name="U_GENDER">                           
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>                            
                           </select> 
@@ -339,21 +342,21 @@ function DashUserModalForm_Reset(){
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Insert</label>
-                          <select class="form-control form-control-sm" id="U_ACCESS_INSERT" name="U_ACCESS_INSERT">                            
+                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_INSERT" name="U_ACCESS_INSERT">                            
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                            
                           </select>                           
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Update</label>
-                          <select class="form-control form-control-sm" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
+                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                            
                           </select>                           
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Delete</label>
-                          <select class="form-control form-control-sm" id="U_ACCESS_DELETE" name="U_ACCESS_DELETE">
+                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_DELETE" name="U_ACCESS_DELETE">
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                             
                           </select>                           
