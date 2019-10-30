@@ -261,7 +261,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
                var obj = json[0];
                 $('#U_ID').val(obj.U_ID);
                 $('#U_USERNAME').val(obj.U_USERNAME);
-                $('#U_GENDER').val(obj.U_GENDER);
+                $('#U_GENDER').val(obj.U_GENDER).trigger('change');
                 $('#U_PASSWORD').val(obj.U_PASSWORD);
                 $('#U_EMAIL').val(obj.U_EMAIL);
                 $('#U_CONTACT').val(obj.U_CONTACT);
@@ -271,16 +271,16 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
                 $('#U_CITY').val(obj.U_CITY);
                 $('#U_PINCODE').val(obj.U_PINCODE);                
                 $('#U_ACTIVE').val(obj.U_ACTIVE);
-                $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT);
-                $('#U_ACCESS_DELETE').val(obj.U_ACCESS_DELETE);
-                $('#U_ACCESS_UPDATE').val(obj.U_ACCESS_UPDATE);
+                $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
+                $('#U_ACCESS_DELETE').val(obj.U_ACCESS_DELETE).trigger('change');
+                $('#U_ACCESS_UPDATE').val(obj.U_ACCESS_UPDATE).trigger('change');
                 var $ActiveYn = obj.U_ACTIVE;
                 if($ActiveYn == 'Y'){
                   $('#U_ACTIVE_YN').lcs_on();
                 }else{
                   $('#U_ACTIVE_YN').lcs_off();
                 }
-               $(".selectpicker").selectpicker('refresh');
+               //$(".selectpicker").selectpicker('refresh');
 
                 $('#DashUserAddEdit_Form').valid(); 
              },
@@ -299,7 +299,7 @@ function DashUserModalForm_Reset(){
      var validator = $( "#DashUserAddEdit_Form" ).validate();
      validator.resetForm();
      $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
-     $(".selectpicker").selectpicker('refresh');    
+    // $(".selectpicker").selectpicker('refresh');    
 }
 </script>
 <!-- modal for add and edit -->
@@ -326,7 +326,7 @@ function DashUserModalForm_Reset(){
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Gender</label>
-                          <select class="form-control form-control-sm selectpicker" id="U_GENDER" name="U_GENDER">                           
+                          <select class="form-control form-control-sm custom-select" id="U_GENDER" name="U_GENDER">                           
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>                            
                           </select> 
@@ -342,21 +342,21 @@ function DashUserModalForm_Reset(){
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Insert</label>
-                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_INSERT" name="U_ACCESS_INSERT">                            
+                          <select class="form-control form-control-sm custom-select" id="U_ACCESS_INSERT" name="U_ACCESS_INSERT">                            
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                            
                           </select>                           
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Update</label>
-                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
+                          <select class="form-control form-control-sm custom-select" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                            
                           </select>                           
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Delete</label>
-                          <select class="form-control form-control-sm selectpicker" id="U_ACCESS_DELETE" name="U_ACCESS_DELETE">
+                          <select class="form-control form-control-sm custom-select" id="U_ACCESS_DELETE" name="U_ACCESS_DELETE">
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                             
                           </select>                           
