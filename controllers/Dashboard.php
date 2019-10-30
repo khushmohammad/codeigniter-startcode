@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller {
 	
 	function DashUserView_Ajax()	
 	{			
-		$this->datatables->select("U_ID, U_USERNAME,U_PASSWORD, U_EMAIL, U_CONTACT, U_ADDRESS, U_COUNTRY, U_STATE, U_CITY ,U_PINCODE,U_ACTIVE ")
+		$this->datatables->select("*")
 		->from('dash_users');
 		echo $this->datatables->generate();	   
 	}
@@ -42,16 +42,23 @@ class Dashboard extends CI_Controller {
 	function DashUser_SaveAjax(){
 		header('Content-Type: application/json');
 		$this->LoginModel->DashUser_SaveAjax();
-
-
-
 	}
 	function DashUserDelete_Ajax(){
 	$sysId =	$this->input->post('sysId');	
-	 $delete = $this->db->delete('dash_users',"U_ID = '".$sysId."'");
+	$delete = $this->db->delete('dash_users',"U_ID = '".$sysId."'");
 	 if($delete){
 	 	echo json_encode('delete seccessfully');
 	 }
+	}
+	function GetDashUserData_Ajax(){
+		$sysId = 	$this->input->post('sysId');
+		$sql = 'SELECT * FROM dash_users WHERE U_ID = "'.$sysId.'"';
+		$result = $this->db->query($sql)->result_array();
+		echo json_encode($result);
+	}
+	function DashUser_UpdateAjax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->DashUser_UpdateAjax();
 	}
 	
 }

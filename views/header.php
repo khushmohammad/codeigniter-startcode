@@ -13,6 +13,7 @@
 
   <!-- Custom fonts for this template-->
     <link href="<?= site_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
+    <link href="<?= site_url('assets/css/style.css');?>" rel="stylesheet">
       
   <!-- Page level plugin CSS-->
     <link href="<?= site_url('assets/vendor/datatables/dataTables.bootstrap4.css');?>" rel="stylesheet">
@@ -44,12 +45,11 @@
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
   <!-- plugin  -->
   <style>
-  footer.sticky-footer {
-    width: calc(100% - 90px) !important;
-  }
+ 
   </style>
 </head>
 
 <body id="page-top">
 <?php $this->view('nav'); ?>    
-    
+  
+<div class="loader" style="display: none" ><img src="<?= site_url('assets/img/PageLoader.gif') ?>"></div>
