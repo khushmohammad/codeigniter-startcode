@@ -51,4 +51,5 @@
 
 <body id="page-top">
 <?php $this->view('nav'); ?>    
-    
+  
+<div class="loader" style="display: none" ><img src="<?= site_url('assets/img/PageLoader.gif') ?>"></div>

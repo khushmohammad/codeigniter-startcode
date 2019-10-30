@@ -41,5 +41,6 @@
 </body>
 
 <script src="<?= site_url('assets/vendor/js/sb-admin.min.js');?>"></script> 
+<script src="<?= site_url('assets/js/custom.js');?>"></script>
 
 </html>

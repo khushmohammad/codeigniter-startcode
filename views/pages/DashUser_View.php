@@ -25,7 +25,7 @@
             <table class="table table-striped table-bordered nowrap" id="datatables" width="100%" cellspacing="0" >
               <thead class="thead-dark">
                 <tr>
-                  <th data-class="expand" width="5%">ID</th>
+                  <th data-class="expand" width="15px">ID</th>
                   <th data-class="expand" >NAME</th>
                   <th data-class="expand" >GENDER</th>
                   <th data-class="expand" >PASSWORD</th>
@@ -33,7 +33,7 @@
                   <th data-class="expand">CONTACT</th>
                   <th data-class="expand">ADDRESS</th>
                   <th data-class="expand">ACTIVE</th>
-                  <th data-hide="phone,tablet" width="10%">ACTION</th>
+                  <th data-hide="phone,tablet" width="20px">ACTION</th>
                 </tr>
               </thead>
               <tbody>			
@@ -43,11 +43,12 @@
           </div>
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
-       
-<script type="text/javascript">
+     
+<script type="text/javascript"> 
+
           //datatable view data
         $(document).ready(function() {
-         
+
           var DataTableObject=[
             { data: 'U_ID' ,className:"all text-center"},
             { data: 'U_USERNAME' ,className:"all"},
@@ -102,7 +103,8 @@
 					$('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-off', function() {
             $('#U_ACTIVE').val('N');						
 					});
-          }  
+          } 
+    
       //functions
     //script 
     $(document).on('click' , '.AddEditButton' , function(e){ 
@@ -124,14 +126,17 @@
     //script       
   //validation
   $.validator.setDefaults( {
+
+    
+
 			submitHandler: function (form) {
        // debug: true
        var sysId = $('#U_ID').val();
        var url = "<?php echo site_url('Dashboard/DashUser_UpdateAjax') ?>";
        if(sysId == ''){
        var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
-       }     
-
+       } 
+       loader();
       $.ajax({
              type: "POST",
              url: url,
@@ -145,17 +150,15 @@
                   $('.AlertMessageModal').html('') ;
                  }, 2000);
             
-                 GetDashUserData_Ajax();  
+                 GetDashUserData_Ajax(); 
+                  unloader();                 
              }
             
-           });  
-
+           }); 
            $('#datatables').DataTable().ajax.reload();
-			}
-     
+			}     
 		});
-
-		$(document).ready( function () {      
+		$(document).ready( function () {
 			$( "#DashUserAddEdit_Form" ).validate( {
         onkeyup: function(element) {
             $(element).valid();           
@@ -170,8 +173,7 @@
 					U_COUNTRY: "required", 
 					U_STATE: "required",
 					U_CITY: "required",
-					U_PINCODE: "required"							
-				
+					U_PINCODE: "required"
 				},
 				messages: {
 					U_USERNAME: "Please enter your username",
@@ -185,7 +187,7 @@
 					U_CITY: "Please enter your city",
 					U_PINCODE: "Please enter your pincode",         				
 				},
-				errorElement: "em",
+				errorElement: "span",
 				errorPlacement: function ( error, element ) {
 					// Add the `invalid-feedback` class to the error element
 					error.addClass( "invalid-feedback" );
@@ -195,6 +197,11 @@
 					} else {
 						error.insertAfter( element );
 					}
+          if (element.prop( "type" ) == "select") {
+          error.insertAfter(".bootstrap-select");
+           } else {
+          error.insertAfter(element);
+        }
 				},
 				highlight: function ( element, errorClass, validClass ) {
 					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
@@ -202,13 +209,15 @@
 				unhighlight: function (element, errorClass, validClass) {
 					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
 				}
-			});       
+			});
+
 		} );
   //validation
       $(document).on("click", "#DashUser_Delete", function(e) {
          var sysId = $(this).attr('data-id');
         bootbox.confirm("Are you sure you want to delete?", function(result) {
-          if(result){           
+          if(result){ 
+           loader();          
            $.ajax({
              type: "POST",
              url: "<?= site_url('Dashboard/DashUserDelete_Ajax'); ?>",
@@ -220,17 +229,20 @@
                  setTimeout(function(){ 
                   $('.AlertMessage').html('') ;
                  }, 2000);
+                unloader();  
              },
              error: function (jqXHR, exception) {
               console.log(jqXHR);
                 // Your error handling logic here..
               }  
+
            });
            $('#datatables').DataTable().ajax.reload();
             }
         }); 
     });
  function GetDashUserData_Ajax(){
+   loader();
    var sysId = $('#U_ID').val();   
    $.ajax({
              type: "POST",
@@ -265,17 +277,20 @@
              error: function (jqXHR, exception) {
               console.log(jqXHR);
                 // Your error handling logic here..
-              }  
-           });          
+              }
+           }); 
+             unloader();    
+
  }
 
 function DashUserModalForm_Reset(){
-     $("#DashUserAddEdit_Form")[0].reset();   
-     $(".selectpicker").selectpicker('refresh');
+     $("#DashUserAddEdit_Form")[0].reset();
+    
      $('#DashUserAddEdit_Form').valid(); 
      var validator = $( "#DashUserAddEdit_Form" ).validate();
      validator.resetForm();
-     $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid");     
+     $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
+     $(".selectpicker").selectpicker('refresh');    
 }
 </script>
 <!-- modal for add and edit -->
