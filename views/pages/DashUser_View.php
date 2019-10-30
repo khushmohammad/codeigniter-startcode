@@ -1,4 +1,9 @@
-<?php echo   $this->session->userdata('U_ACCESS_DELETE'); ?>        <!-- Breadcrumbs-->       
+<?php
+$AccessDelete = $this->session->userdata('U_ACCESS_DELETE');
+$AccessInsert = $this->session->userdata('U_ACCESS_INSERT');
+$AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
+?>  
+  <!-- Breadcrumbs-->       
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
@@ -6,7 +11,7 @@
           <li class="breadcrumb-item active">Users</li>
         </ol>
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button id="Add" type="button" class="btn btn-primary AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn btn-primary AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -73,8 +78,8 @@
                       +'	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">'
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
-                      +	  '<a id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</a>'
-                      +	  '<a class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'"  href="#">Delete</a>'								
+                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
+                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'"  href="#">Delete</button>'								
                       +	'</div>'
                       +' </div>';          
               }
