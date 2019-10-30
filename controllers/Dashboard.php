@@ -17,8 +17,18 @@ class Dashboard extends CI_Controller {
                 redirect('Welcome');			
             }
             
-        }      
+        }
 
+        //comman function
+        function Get_StateList_Ajax(){
+
+        	$Country_Id = $this->input->post('id',TRUE);
+			$data = $this->LoginModel->Get_StateList($Country_Id)->result();
+			echo json_encode($data);
+
+        }
+        //common function
+   
 	public function index()
 	{
 		$this->load->view('header');				
@@ -27,8 +37,9 @@ class Dashboard extends CI_Controller {
 	}
 	public function AdminUser()
 	{
-		$this->load->view('header');				
-        $this->load->view('pages/DashUser_View');        
+		$this->load->view('header');	
+		$data['countries']	= $this->LoginModel->country_list();		
+        $this->load->view('pages/DashUser_View',$data);                
 		$this->load->view('footer');
 	}
 	

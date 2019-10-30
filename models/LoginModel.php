@@ -8,10 +8,27 @@ class LoginModel extends CI_Model {
             return $query->row();
 			} 			 
 	}
+	
+	 //common function
 	function date(){
 		date_default_timezone_set('Asia/Dubai');
 		return  date('Y/m/d H:i:s');
 	}
+
+     public function country_list(){
+
+     	$query =  $this->db->get('countries')->result_array();
+     	return $query;
+     }   
+
+     function Get_StateList($country_id){
+     	$query = $this->db->get_where('states', array('country_id' => $country_id));
+		return $query;
+
+     }
+    //common function
+
+
 
 	public function DashUser_SaveAjax($userId){ 
 

@@ -184,7 +184,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_ADDRESS: "required",
 					U_COUNTRY: "required", 
 					U_STATE: "required",
-					U_CITY: "required",
+					//U_CITY: "required",
 					U_PINCODE: "required"
 				},
 				messages: {
@@ -196,7 +196,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_ADDRESS: "Please enter your address",
 					U_COUNTRY: "Please enter your country",
 					U_STATE: "Please enter your state",
-					U_CITY: "Please enter your city",
+					//U_CITY: "Please enter your city",
 					U_PINCODE: "Please enter your pincode",         				
 				},
 				    errorElement: "em",
@@ -249,6 +249,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
         }); 
     });
  function GetDashUserData_Ajax(){
+
    loader();
    var sysId = $('#U_ID').val();   
    $.ajax({
@@ -266,9 +267,11 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
                 $('#U_EMAIL').val(obj.U_EMAIL);
                 $('#U_CONTACT').val(obj.U_CONTACT);
                 $('#U_ADDRESS').val(obj.U_ADDRESS);
-                $('#U_COUNTRY').val(obj.U_COUNTRY);
-                $('#U_STATE').val(obj.U_STATE);
-                $('#U_CITY').val(obj.U_CITY);
+                $('#U_COUNTRY').val(obj.U_COUNTRY).trigger('change');
+                
+                $('#U_STATE').val(obj.U_STATE).trigger('change');
+               
+                $('#U_CITY').val(obj.U_CITY).trigger('change');
                 $('#U_PINCODE').val(obj.U_PINCODE);                
                 $('#U_ACTIVE').val(obj.U_ACTIVE);
                 $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
@@ -301,6 +304,33 @@ function DashUserModalForm_Reset(){
      $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
     // $(".selectpicker").selectpicker('refresh');    
 }
+
+ $(document).ready(function(){
+      //call function get data edit
+      $('#U_COUNTRY').click(function(){
+         var id=$(this).val();
+                $.ajax({
+                    url : "<?php echo site_url('Dashboard/Get_StateList_Ajax');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                        
+                        var html = '';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
+                        }
+                        $('#U_STATE').html(html);
+
+                    }
+                });
+                return false;
+
+      });
+
+     });
 </script>
 <!-- modal for add and edit -->
 <div class="modal" id="DashUser_Modal">
@@ -371,15 +401,36 @@ function DashUserModalForm_Reset(){
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="country">Country</label>
-                            <input type="text" class="form-control form-control-sm" id="U_COUNTRY" name="U_COUNTRY">
+                            <select class="form-control form-control-sm custom-select" id="U_COUNTRY" name="U_COUNTRY">
+                            <?php
+                           
+                            if(!empty($countries)){
+                               $option = "<option value='' selected>Select</option>";
+                               echo $option;
+                              foreach ($countries as $value) {
+
+                              echo "<option country-code=".$value['sortname']." value=".$value['id'].">".$value['name']."</option>";
+                              }
+                            }                            
+                             ?>                                                         
+                          </select>  
+                            
                           </div>
                           <div class="form-group col-md-6">
                             <label for="State">State</label>
-                            <input type="text" class="form-control form-control-sm" id="U_STATE" name="U_STATE">  
+                            <select class="form-control form-control-sm custom-select" id="U_STATE" name="U_STATE">                            
+                            <option value="">Select</option>
+                                                      
+                          </select>
+                             
                           </div>
                           <div class="form-group col-md-6">
                             <label for="city">City</label>
-                            <input type="text" class="form-control form-control-sm" id="U_CITY" name="U_CITY">
+                            <select class="form-control form-control-sm custom-select" id="U_CITY" name="U_CITY">                            
+                            <option value="">Select</option>
+                                                      
+                          </select>
+                           
                           </div>
                           <div class="form-group col-md-6">
                             <label for="Pincode">Pincode</label>
