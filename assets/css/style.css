@@ -1,0 +1,7 @@
+ footer.sticky-footer {
+    width: calc(100% - 90px) !important;
+  }
+  #datatables td
+  {
+    padding: 0px 0px 0px 10px;
+  }

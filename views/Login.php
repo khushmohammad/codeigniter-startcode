@@ -1,23 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
-
 <div class="container">
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
+          <div class="alertMessage"></div>
         <form  method="post">
           <div class="form-group">
            
             <label for="">Username</label> 
               <input type="text" id="U_USERNAME" class="form-control" placeholder="Username" required="required">
-              
-            
           </div>
           <div class="form-group">
            
             <label for="">Password</label>  
               <input type="password" id="U_PASSWORD" class="form-control" placeholder="Password" required="required">
-            
-            
           </div>
           <div class="form-group">
             <div class="checkbox">
@@ -47,7 +43,11 @@
   // Returns error message when submitted without req fields.  
   if(U_USERNAME==''||U_PASSWORD=='')  
   {  
-        alert('wrong entry');
+       
+        $('.alertMessage').append('<div class="alert alert-warning" role="alert">Please Enter Username And Password </div>');
+        setTimeout(function(){ 
+          $('.alertMessage').empty();
+         }, 2000);
   }  
   else  
   {  
@@ -62,12 +62,18 @@
           // On success redirect.  
       window.location.replace(result);   
       }  
-      else  
-         alert('failed')  
+      else  {
+          $('.alertMessage').append('<div class="alert alert-danger" role="alert">Wrong Username And Password </div>');
+        setTimeout(function(){ 
+          $('.alertMessage').empty();
+         }, 2000);
+  } 
+  
   }  
   });  
-  }  
   return false;  
-  });  
-  });  
+  }  
+  });
+  });
+   
   </script>   
