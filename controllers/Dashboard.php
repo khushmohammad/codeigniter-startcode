@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller {
 	
 	function DashUserView_Ajax()	
 	{			
-		$this->datatables->select("U_ID, U_USERNAME,U_GENDER ,U_PASSWORD, U_EMAIL, U_CONTACT, U_ADDRESS, U_COUNTRY, U_STATE, U_CITY ,U_PINCODE,U_ACTIVE ")
+		$this->datatables->select("*")
 		->from('dash_users');
 		echo $this->datatables->generate();	   
 	}

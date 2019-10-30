@@ -3,8 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LoginModel extends CI_Model {
 	public function login($data){  
-		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD']));  
-		return $query->num_rows();  
+		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD'],'U_ACTIVE' => 'Y'));
+		 if($query->num_rows() == 1) {
+            return $query->row();
+			}  
 	}
 
 	public function DashUser_SaveAjax(){ 
@@ -20,6 +22,9 @@ class LoginModel extends CI_Model {
 		$U_CITY = $this->input->post('U_CITY'); 
 		$U_PINCODE = $this->input->post('U_PINCODE'); 
 		$U_ACTIVE = $this->input->post('U_ACTIVE'); 
+		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
+		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
+		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 
 		 
 		
 		$data = array(
@@ -34,6 +39,9 @@ class LoginModel extends CI_Model {
 			'U_CITY' => $U_CITY, 
 			'U_PINCODE' => $U_PINCODE, 
 			'U_ACTIVE' => $U_ACTIVE, 
+			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
+			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
+			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
 
 		);
 
@@ -61,7 +69,9 @@ class LoginModel extends CI_Model {
 		$U_CITY = $this->input->post('U_CITY'); 
 		$U_PINCODE = $this->input->post('U_PINCODE'); 
 		$U_ACTIVE = $this->input->post('U_ACTIVE'); 
-		 
+		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
+		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
+		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
 		
 		$data = array(
 			'U_USERNAME' => $U_USERNAME, 
@@ -74,7 +84,10 @@ class LoginModel extends CI_Model {
 			'U_STATE' => $U_STATE, 
 			'U_CITY' => $U_CITY, 
 			'U_PINCODE' => $U_PINCODE, 
-			'U_ACTIVE' => $U_ACTIVE, 
+			'U_ACTIVE' => $U_ACTIVE,
+			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
+			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
+			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
 
 		);
 

@@ -1,4 +1,4 @@
-        <!-- Breadcrumbs-->       
+<?php echo   $this->session->userdata('U_ACCESS_DELETE'); ?>        <!-- Breadcrumbs-->       
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
@@ -32,6 +32,9 @@
                   <th data-class="expand">CONTACT</th>
                   <th data-class="expand">ADDRESS</th>
                   <th data-class="expand">ACTIVE</th>
+                  <th data-class="expand">INSERT</th>
+                  <th data-class="expand">UPDATE</th>
+                  <th data-class="expand">DELETE</th>                
                   <th data-hide="phone,tablet" width="20px">ACTION</th>
                 </tr>
               </thead>
@@ -60,6 +63,9 @@
             return data.U_ADDRESS + ", " + data.U_CITY + "<br>" + data.U_STATE + ", " + data.U_COUNTRY +","+ data.U_PINCODE;
             }},
             { data: 'U_ACTIVE'},
+            { data: 'U_ACCESS_INSERT'},
+            { data: 'U_ACCESS_UPDATE'},
+            { data: 'U_ACCESS_DELETE'},
             { data: null, "orderable": false, 'searchable': false, className:"all text-center", 
               render: function( data, type, row) {
                 sysid=data['U_ID'];				
@@ -154,8 +160,7 @@
            $('#datatables').DataTable().ajax.reload();
 			}     
 		}); 
-		$(document).ready( function () {
-      $('#U_GENDER').selectpicker();
+		$(document).ready( function () {      
 			$( "#DashUserAddEdit_Form" ).validate( {      
         onkeyup: function(element) {
             $(element).valid();           
@@ -313,8 +318,7 @@ function DashUserModalForm_Reset(){
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Gender</label>
-                          <select class="form-control form-control-sm selectpicker" id="U_GENDER" data-live-search="true" name="U_GENDER">
-                            <option value="">select</option>
+                          <select class="form-control form-control-sm" id="U_GENDER" name="U_GENDER">                           
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>                            
                           </select> 
@@ -327,9 +331,29 @@ function DashUserModalForm_Reset(){
                         <div class="form-group col-md-6">
                           <label for="contact">Contact</label>
                           <input type="text" class="form-control form-control-sm"  placeholder="contact" id="U_CONTACT" name="U_CONTACT">
-                        </div>                             
+                        </div> 
+                        <div class="form-group col-md-6">
+                          <label for="access">Insert</label>
+                          <select class="form-control form-control-sm" id="U_ACCESS_INSERT" name="U_ACCESS_INSERT">                            
+                            <option value="Y">Enable</option>
+                            <option value="N">Disable</option>                            
+                          </select>                           
+                        </div> 
+                        <div class="form-group col-md-6">
+                          <label for="access">Update</label>
+                          <select class="form-control form-control-sm" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
+                            <option value="Y">Enable</option>
+                            <option value="N">Disable</option>                            
+                          </select>                           
+                        </div> 
+                        <div class="form-group col-md-6">
+                          <label for="access">Delete</label>
+                          <select class="form-control form-control-sm" id="U_ACCESS_DELETE" name="U_ACCESS_DELETE">
+                            <option value="Y">Enable</option>
+                            <option value="N">Disable</option>                             
+                          </select>                           
+                        </div>                                                  
                       </div>
-                      
                   </div>
                   <div class="col-sm-6"> 
                        <div class="form-group">
