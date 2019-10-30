@@ -132,11 +132,6 @@
   //validation
   $.validator.setDefaults( {
 			submitHandler: function (form) {
-<<<<<<< HEAD
-       // debug: true
-       var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
-
-=======
        // debug: true       
        var sysId = $('#U_ID').val();
        var url = "<?php echo site_url('Dashboard/DashUser_UpdateAjax') ?>";
@@ -144,7 +139,6 @@
        var url = "<?php echo site_url('Dashboard/DashUser_SaveAjax') ?>";
        } 
        loader();
->>>>>>> 17f647bfa961bf283bae4201421723d90dc4c12b
       $.ajax({
              type: "POST",
              url: url,
@@ -158,25 +152,6 @@
                   $('.AlertMessageModal').html('') ;
                  }, 2000);
             
-<<<<<<< HEAD
-                 
-             }
-           });  
-       $('#datatables').DataTable().ajax.reload();
-			}
-		} );
-
-		$( document ).ready( function () {
-			$( "#DashUserAddEdit_Form" ).validate( {
-				rules: {
-					U_USERNAME: "required",
-					U_PASSWORD: "required",
-					U_COUNTRY: {
-						required: true,
-						minlength: 2
-					},			
-				
-=======
                  GetDashUserData_Ajax(); 
                   unloader();                 
              }
@@ -206,55 +181,10 @@
 					U_STATE: "required",
 					U_CITY: "required",
 					U_PINCODE: "required"
->>>>>>> 17f647bfa961bf283bae4201421723d90dc4c12b
 				},
 				messages: {
 					U_USERNAME: "Please enter your username",
 					U_PASSWORD: "Please enter your password",
-<<<<<<< HEAD
-          U_COUNTRY: {
-						required: "Please enter a username"
-						
-					},					
-				},
-				errorElement: "em",
-				errorPlacement: function ( error, element ) {
-					// Add the `invalid-feedback` class to the error element
-					error.addClass( "invalid-feedback" );
-
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertAfter( element.next( "label" ) );
-					} else {
-						error.insertAfter( element );
-					}
-				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
-				},
-				unhighlight: function (element, errorClass, validClass) {
-					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
-				}
-			} );
-
-		} );
-
-
-
-  //validation
-  $(document).ready(function(){ 
-    
-
-    //$("#DashUserAddEdit_Form").submit(function(e) {
-
-      //e.preventDefault(); // avoid to execute the actual submit of the form.
-
-    //  var form = $(this);
-      
-
-    //}); 
-    
-  });
-=======
           U_GENDER: "Please enter your gender",
 					U_EMAIL: "Please enter your email",
 					U_CONTACT: "Please enter your contact",
@@ -285,7 +215,6 @@
 
 		} );
   //validation
->>>>>>> 17f647bfa961bf283bae4201421723d90dc4c12b
       $(document).on("click", "#DashUser_Delete", function(e) {
          var sysId = $(this).attr('data-id');
         bootbox.confirm("Are you sure you want to delete?", function(result) {
