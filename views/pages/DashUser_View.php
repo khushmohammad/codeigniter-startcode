@@ -1,5 +1,4 @@
-        <!-- Breadcrumbs-->
-       
+        <!-- Breadcrumbs-->       
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
@@ -156,15 +155,20 @@
 			}     
 		}); 
 		$(document).ready( function () {
-
-			$( "#DashUserAddEdit_Form" ).validate( {        
+      $('#U_GENDER').selectpicker();
+			$( "#DashUserAddEdit_Form" ).validate( {      
         onkeyup: function(element) {
             $(element).valid();           
-          },       
+          }, 
+        onfocusout: function (element) {
+          $(element).valid();
+        },        
 				rules: {
 					U_USERNAME: "required",
 					U_PASSWORD: "required",
-					U_GENDER: "required",
+					U_GENDER: {
+                required: true
+            },
 					U_EMAIL: "required",
 					U_CONTACT: "required",
 					U_ADDRESS: "required",
@@ -185,29 +189,23 @@
 					U_CITY: "Please enter your city",
 					U_PINCODE: "Please enter your pincode",         				
 				},
-				errorElement: "span",
-         errorClass: 'help-block',
-				errorPlacement: function ( error, element ) {
-					// Add the `invalid-feedback` class to the error element
-					error.addClass( "invalid-feedback" );
+				    errorElement: "em",
+            errorClass: 'is-invalid',
+            validClass: 'is-valid',
+           
+            errorPlacement: function (error, element) {
+                // Add the `invalid-feedback` class to the error element
+                error.addClass("invalid-feedback");
+                //console.log(element);
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.siblings("label"));
+                } 
+                
+                else {
+                    error.insertAfter(element);
+                }
 
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertAfter( element.next( "label" ) );
-					} else {
-						error.insertAfter( element );
-					}
-          if (element.prop( "type" ) == "select") {
-          error.insertAfter(".bootstrap-select");
-           } else {
-          error.insertAfter(element);
-        }
-				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
-				},
-				unhighlight: function (element, errorClass, validClass) {
-					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
-				}
+              }
 			});
 
 		} );
@@ -283,8 +281,7 @@
  }
 
 function DashUserModalForm_Reset(){
-     $("#DashUserAddEdit_Form")[0].reset();
-    
+     $("#DashUserAddEdit_Form")[0].reset();    
      $('#DashUserAddEdit_Form').valid(); 
      var validator = $( "#DashUserAddEdit_Form" ).validate();
      validator.resetForm();
