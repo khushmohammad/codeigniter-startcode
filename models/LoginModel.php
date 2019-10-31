@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LoginModel extends CI_Model {
 	public function login($data){  
-		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD'],'U_ACTIVE' => 'Y'));
+		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>md5($data['U_PASSWORD']),'U_ACTIVE' => 'Y'));
 		 if($query->num_rows() == 1) {
             return $query->row();
 			} 			 
@@ -22,18 +22,22 @@ class LoginModel extends CI_Model {
      }   
 
      function Get_StateList($country_id){
-     	$query = $this->db->get_where('states', array('country_id' => $country_id));
+     	$query = $this->db->get_where('states', array('COUNTRY_ID' => $country_id));
 		return $query;
 
      }
      function Get_CityList($State_Id){
-     	$query = $this->db->get_where('cities', array('state_id' => $State_Id));
+     	$query = $this->db->get_where('cities', array('STATE_ID' => $State_Id));
 		return $query;
 
      }
     //common function
 
+     public function GetDashUserData($sysId){
 
+     	$sql = 'SELECT * FROM dash_users WHERE U_ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
 
 	public function DashUser_SaveAjax($userId){
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
@@ -96,7 +100,7 @@ class LoginModel extends CI_Model {
 		$V_UP_TIME = $this->date();
 		$data = array(
 			'U_USERNAME' => $U_USERNAME, 
-			'U_PASSWORD' => $U_PASSWORD, 
+			'U_PASSWORD' => md5($U_PASSWORD), 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
 			'U_CONTACT' => $U_CONTACT, 

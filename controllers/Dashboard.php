@@ -25,32 +25,31 @@ class Dashboard extends CI_Controller {
 			echo json_encode($data);
         }
         function Get_CityList_Ajax(){
-
         	$State_Id = $this->input->post('id',TRUE);
 			$data = $this->LoginModel->Get_CityList($State_Id)->result();
 			echo json_encode($data);
         }
 
         function getSelectedState($selectedCountryCode){
-	    $sql="SELECT * FROM states WHERE country_id='".$selectedCountryCode."' ORDER BY name ASC";
+	    $sql="SELECT * FROM states WHERE COUNTRY_ID='".$selectedCountryCode."' ORDER BY ST_NAME ASC";
 	    $stateArray = $this->db->query($sql)->result_array();
 	    $optionHtml = '';
 	    $optionHtml .= '<option value="">Select State</option>';
 	    if(!empty($stateArray)){
 			foreach($stateArray as $row) {
-				$optionHtml .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+				$optionHtml .= '<option value="'.$row['ST_ID'].'">'.$row['ST_NAME'].'</option>';
 			}
         }
 		return $optionHtml;
 		}
 		function getSelectedCity($selectedStateCode){
-		    $sql="SELECT * FROM cities WHERE state_id='".$selectedStateCode."' ORDER BY name ASC";
+		    $sql="SELECT * FROM cities WHERE STATE_ID='".$selectedStateCode."' ORDER BY CT_NAME ASC";
 		    $cityArray = $this->db->query($sql)->result_array();
 		    $optionHtml = '';
 		    $optionHtml .= '<option value="">Select city</option>';
 		    if(!empty($cityArray)){
 				foreach($cityArray as $row) {
-					$optionHtml .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+					$optionHtml .= '<option value="'.$row['CT_ID'].'">'.$row['CT_NAME'].'</option>';
 				}
 	        }
 			return $optionHtml;
@@ -72,9 +71,12 @@ class Dashboard extends CI_Controller {
 	}
 	
 	function DashUserView_Ajax()	
-	{			
-		$this->datatables->select("*")
-		->from('dash_users');
+	{		
+		$this->datatables->select('*')
+		->from('dashuser_view');
+		// $this->datatables->join('countries', 'countries.CN_ID = dash_users.U_COUNTRY');
+		// $this->datatables->join('states', 'states.ST_ID = dash_users.U_STATE');
+		// $this->datatables->join('cities', 'cities.CT_ID = dash_users.U_CITY');
 		echo $this->datatables->generate();	   
 	}
 
@@ -91,9 +93,8 @@ class Dashboard extends CI_Controller {
 	}
 
 	function GetDashUserData_Ajax(){
-		$sysId = 	$this->input->post('sysId');
-		$sql = 'SELECT * FROM dash_users WHERE U_ID = "'.$sysId.'"';
-		$result['data'] = $this->db->query($sql)->result_array();
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetDashUserData($sysId);
 		$result['stateOption'] = $this->getSelectedState($result['data'][0]['U_COUNTRY']);
 		$result['cityOption'] = $this->getSelectedCity($result['data'][0]['U_STATE']);
 		echo json_encode($result);

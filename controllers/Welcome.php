@@ -28,8 +28,8 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('U_USERNAME')){
             redirect('Dashboard');
         }
-		$data['U_USERNAME']=$this->input->post('U_USERNAME');//htmlspecialchars($_POST['U_USERNAME']);  
-		$data['U_PASSWORD']=$this->input->post('U_PASSWORD');//htmlspecialchars($_POST['U_PASSWORD']);  
+		$data['U_USERNAME']=$this->input->post('U_USERNAME');// 
+		$data['U_PASSWORD']=$this->input->post('U_PASSWORD');//  
 		$res=$this->LoginModel->Login($data);  
 		if(!empty($res)){
 			$userdata = array(

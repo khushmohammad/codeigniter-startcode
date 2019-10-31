@@ -55,6 +55,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 
           //datatable view data
         $(document).ready(function() {
+           //$.fn.dataTable.ext.errMode = 'throw';
           State_List('U_COUNTRY','U_STATE','U_CITY');
           City_List('U_STATE','U_CITY');
           var DataTableObject=[
@@ -66,7 +67,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
             { data: 'U_CONTACT'},
             { data: null , 'searchable': false ,
             render : function (data, type, dataToSet) {
-            return data.U_ADDRESS + ", " + data.U_CITY + "<br>" + data.U_STATE + ", " + data.U_COUNTRY +","+ data.U_PINCODE;
+            return data.U_ADDRESS + ", " + data.CT_NAME + "<br>" + data.ST_NAME + ", " + data.CN_NAME +","+ data.U_PINCODE;
             }},
             { data: 'U_ACTIVE'},
             { data: 'U_ACCESS_INSERT'},
@@ -87,7 +88,8 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
             }
             ];
           
-          var table = $('#datatables').DataTable( {       
+          var table = $('#datatables').DataTable( {  
+
           "processing": true,
           "serverSide": true,
           'responsive': true,		
@@ -391,7 +393,7 @@ function DashUserModalForm_Reset(){
                                $option = "<option value='' Selected>Select</option>";
                                echo $option;
                               foreach ($countries as $value) {
-                              echo "<option country-code=".$value['sortname']." value=".$value['id'].">".$value['name']."</option>";
+                              echo "<option country-code=".$value['CN_CODE']." value=".$value['CN_ID'].">".$value['CN_NAME']."</option>";
                               }
                             }                            
                              ?>                                                         

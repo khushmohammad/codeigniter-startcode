@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 31, 2019 at 04:09 PM
+-- Generation Time: Oct 29, 2019 at 02:46 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -30,17 +30,17 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `cities`;
 CREATE TABLE IF NOT EXISTS `cities` (
-  `CT_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CT_NAME` varchar(30) NOT NULL,
-  `STATE_ID` int(11) NOT NULL,
-  PRIMARY KEY (`CT_ID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48357 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cities`
 --
 
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (1, 'Bombuflat', 1),
 (2, 'Garacharma', 1),
 (3, 'Port Blair', 1),
@@ -2362,7 +2362,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (2319, 'Mauganj', 21),
 (2320, 'Meghnagar', 21),
 (2321, 'Mehara Gaon', 21);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (2322, 'Mehgaon', 21),
 (2323, 'Mhaugaon', 21),
 (2324, 'Mhow', 21),
@@ -4520,7 +4520,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (4476, 'Mandamarri', 36),
 (4477, 'Manuguru', 36),
 (4478, 'Medak', 36);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (4479, 'Medchal', 36),
 (4480, 'Miryalaguda', 36),
 (4481, 'Nagar Karnul', 36),
@@ -6671,7 +6671,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (6626, 'Gladstone', 269),
 (6627, 'Gold Coast', 269),
 (6628, 'Gowrie Junction', 269);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (6629, 'Gympie', 269),
 (6630, 'Helensvale', 269),
 (6631, 'Hervey Bay', 269),
@@ -8764,7 +8764,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (8718, 'Ibicarai', 516),
 (8719, 'Ibicui', 516),
 (8720, 'Ibipeba', 516);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (8721, 'Ibirapitanga', 516),
 (8722, 'Ibirataia', 516),
 (8723, 'Ibotirama', 516),
@@ -10762,7 +10762,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (10715, 'Saint-Cesaire', 673),
 (10716, 'Saint-Cyrill-de-Wendover', 673),
 (10717, 'Saint-Damase', 673);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (10718, 'Saint-Damien-de-Buckland', 673),
 (10719, 'Saint-Denis', 673),
 (10720, 'Saint-Donat-de-Montcalm', 673),
@@ -12843,7 +12843,7 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (13204, 'Cerro San Antonio', 794),
 (13205, 'Chivolo', 794),
 (13206, 'Cienaga', 794);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (13207, 'Concordia', 794),
 (13208, 'El Banco', 794),
 (13209, 'El Pinon', 794),
@@ -14880,9 +14880,9 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (15240, 'Svebolle', 962),
 (15241, 'Svinninge', 962),
 (15242, 'Tollose', 962),
-(15243, 'Vipperod', 962);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
-(15244, 'Aalestrup', 963),
+(15243, 'Vipperod', 962),
+(15244, 'Aalestrup', 963);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (15245, 'Bjerringbro', 963),
 (15246, 'Hanstholm', 963),
 (15247, 'Hojslev', 963),
@@ -16900,9 +16900,9 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (17259, 'Valence', 1220),
 (17260, 'Athis-Mons', 1221),
 (17261, 'Bretigny-sur-Orge', 1221),
-(17262, 'Brunoy', 1221);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
-(17263, 'Bures-sur-Yvette', 1221),
+(17262, 'Brunoy', 1221),
+(17263, 'Bures-sur-Yvette', 1221);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (17264, 'Chilly-Mazarin', 1221),
 (17265, 'Corbeil-Essonnes', 1221),
 (17266, 'Courcouronnes', 1221),
@@ -18746,10 +18746,10 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (19104, 'Bad Orb', 1367),
 (19105, 'Bad Schwalbach', 1367),
 (19106, 'Bad Soden', 1367),
-(19107, 'Bad Soden-Salmunster', 1367);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(19107, 'Bad Soden-Salmunster', 1367),
 (19108, 'Bad Sooden-Allendorf', 1367),
-(19109, 'Bad Vilbel', 1367),
+(19109, 'Bad Vilbel', 1367);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (19110, 'Bad Wildungen', 1367),
 (19111, 'Baunatal', 1367),
 (19112, 'Bebra', 1367),
@@ -20684,11 +20684,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (21041, 'Fabiansebestyen', 1642),
 (21042, 'Foldeak', 1642),
 (21043, 'Hodmezovasarhely', 1642),
-(21044, 'Kiskundorozsma', 1642);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(21044, 'Kiskundorozsma', 1642),
 (21045, 'Kistelek', 1642),
 (21046, 'Kiszombor', 1642),
-(21047, 'Mako', 1642),
+(21047, 'Mako', 1642);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (21048, 'Mindszent', 1642),
 (21049, 'Morahalom', 1642),
 (21050, 'Pusztaszer', 1642),
@@ -22571,11 +22571,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (22933, 'Bedizzole', 1847),
 (22934, 'Bergamo', 1847),
 (22935, 'Bernareggio', 1847),
-(22936, 'Besana in Brianza', 1847);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(22936, 'Besana in Brianza', 1847),
 (22937, 'Besozzo', 1847),
 (22938, 'Biassono', 1847),
-(22939, 'Bienate', 1847),
+(22939, 'Bienate', 1847);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (22940, 'Bollate', 1847),
 (22941, 'Botticino', 1847),
 (22942, 'Bovisio-Masciago', 1847),
@@ -24504,11 +24504,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (24866, 'Moriguchi', 1951),
 (24867, 'Neyagawa', 1951),
 (24868, 'Osaka', 1951),
-(24869, 'Osakasayama', 1951);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(24869, 'Osakasayama', 1951),
 (24870, 'Sakai', 1951),
 (24871, 'Sennan', 1951),
-(24872, 'Settsu', 1951),
+(24872, 'Settsu', 1951);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (24873, 'Shijonawate', 1951),
 (24874, 'Shimamoto', 1951),
 (24875, 'Suita', 1951),
@@ -26484,11 +26484,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (26845, 'Ikongo', 2276),
 (26846, 'Manakara', 2276),
 (26847, 'Manandriana', 2276),
-(26848, 'Mananjary', 2276);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(26848, 'Mananjary', 2276),
 (26849, 'Nosy Varika', 2276),
 (26850, 'Vangaindrano', 2276),
-(26851, 'Vondrozo', 2276),
+(26851, 'Vondrozo', 2276);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (26852, 'Ambato Boina', 2277),
 (26853, 'Antsohihy', 2277),
 (26854, 'Bealanana', 2277),
@@ -28345,11 +28345,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (28705, 'Panixtlahuaca', 2447),
 (28706, 'Petapa', 2447),
 (28707, 'Pinotepa Nacional', 2447),
-(28708, 'Pinotepa de Don Luis', 2447);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(28708, 'Pinotepa de Don Luis', 2447),
 (28709, 'Pochutla', 2447),
 (28710, 'Puerto Escondido', 2447),
-(28711, 'Putla', 2447),
+(28711, 'Putla', 2447);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (28712, 'Quetzaltepec', 2447),
 (28713, 'Rincon Viejo', 2447),
 (28714, 'Rio Grande', 2447),
@@ -30266,11 +30266,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (30625, 'San Rafael del Sur', 2633),
 (30626, 'Ticuantepe', 2633),
 (30627, 'Tipitapa', 2633),
-(30628, 'La Concepcion', 2634);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(30628, 'La Concepcion', 2634),
 (30629, 'Masaya', 2634),
 (30630, 'Nandasmo', 2634),
-(30631, 'Nindiri', 2634),
+(30631, 'Nindiri', 2634);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (30632, 'Niquinohomo', 2634),
 (30633, 'Ciudad Dario', 2635),
 (30634, 'Esquipulas', 2635),
@@ -32252,10 +32252,10 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (32610, 'Busko-Zdroj', 2888),
 (32611, 'Jedrzejow', 2888),
 (32612, 'Kielce', 2888),
-(32613, 'Konskie', 2888);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(32613, 'Konskie', 2888),
 (32614, 'Ostrowiec Swietokrzyski', 2888),
-(32615, 'Pinczow', 2888),
+(32615, 'Pinczow', 2888);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (32616, 'Polaniec', 2888),
 (32617, 'Sandomierz', 2888),
 (32618, 'Skarzysko-Kamienna', 2888),
@@ -34216,11 +34216,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (34573, 'Martinis', 2955),
 (34574, 'Meresti', 2955),
 (34575, 'Miercurea-Ciuc', 2955),
-(34576, 'Mihaileni', 2955);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(34576, 'Mihaileni', 2955),
 (34577, 'Mugeni', 2955),
 (34578, 'Ocland', 2955),
-(34579, 'Odorheiu Secuiesc', 2955),
+(34579, 'Odorheiu Secuiesc', 2955);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (34580, 'Pauleni-Ciuc', 2955),
 (34581, 'Plaiesii-de-Jos', 2955),
 (34582, 'Praid', 2955),
@@ -36174,11 +36174,11 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (36530, 'Jemva', 3015),
 (36531, 'Komsomolskij', 3015),
 (36532, 'Krasnozatonskij', 3015),
-(36533, 'Mikun', 3015);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(36533, 'Mikun', 3015),
 (36534, 'Nizhnij Odes', 3015),
 (36535, 'Pechora', 3015),
-(36536, 'Promyshlennyj', 3015),
+(36536, 'Promyshlennyj', 3015);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (36537, 'Severnyj', 3015),
 (36538, 'Sosnogorsk', 3015),
 (36539, 'Syktyvkar', 3015),
@@ -38088,12 +38088,12 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (38443, 'Huetor Tajar', 3285),
 (38444, 'Huetor Vega', 3285),
 (38445, 'Illora', 3285),
-(38446, 'La Zubia', 3285);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(38446, 'La Zubia', 3285),
 (38447, 'Las Gabias', 3285),
 (38448, 'Loja', 3285),
 (38449, 'Maracena', 3285),
-(38450, 'Motril', 3285),
+(38450, 'Motril', 3285);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (38451, 'Ogijares', 3285),
 (38452, 'Peligros', 3285),
 (38453, 'Pinos Puente', 3285),
@@ -40040,12 +40040,12 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (40394, 'Sindirgi', 3674),
 (40395, 'Susurluk', 3674),
 (40396, 'Amasra', 3675),
-(40397, 'Bartin', 3675);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(40397, 'Bartin', 3675),
 (40398, 'Kurucasile', 3675),
 (40399, 'Ulus', 3675),
 (40400, 'Batman', 3676),
-(40401, 'Besiri', 3676),
+(40401, 'Besiri', 3676);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (40402, 'Gercus', 3676),
 (40403, 'Hasankeyf', 3676),
 (40404, 'Kozluk', 3676),
@@ -42006,12 +42006,12 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (42359, 'Boness', 3889),
 (42360, 'Bonnybridge', 3889),
 (42361, 'Broxburn', 3889),
-(42362, 'Broxham', 3889);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(42362, 'Broxham', 3889),
 (42363, 'Buckhaven', 3889),
 (42364, 'Burntisland', 3889),
 (42365, 'Carluke', 3889),
-(42366, 'Carnoustie', 3889),
+(42366, 'Carnoustie', 3889);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (42367, 'Coatbridge', 3889),
 (42368, 'Cowdenbeath', 3889),
 (42369, 'Cumbernauld', 3889),
@@ -43889,12 +43889,12 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (44241, 'Huntley', 3934),
 (44242, 'Illinois City', 3934),
 (44243, 'Ingleside', 3934),
-(44244, 'Itasca', 3934);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(44244, 'Itasca', 3934),
 (44245, 'Jacksonville', 3934),
 (44246, 'Johnston City', 3934),
 (44247, 'Joliet', 3934),
-(44248, 'Justice', 3934),
+(44248, 'Justice', 3934);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (44249, 'Kankakee', 3934),
 (44250, 'Kenilworth', 3934),
 (44251, 'Kewanee', 3934),
@@ -45790,12 +45790,12 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (46141, 'Sharon', 3963),
 (46142, 'Shermans Dale', 3963),
 (46143, 'Somerset', 3963),
-(46144, 'Souderton', 3963);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(46144, 'Souderton', 3963),
 (46145, 'South Park Township', 3963),
 (46146, 'Southampton', 3963),
 (46147, 'Springfield', 3963),
-(46148, 'State College', 3963),
+(46148, 'State College', 3963);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (46149, 'Strasburg', 3963),
 (46150, 'Sunbury', 3963),
 (46151, 'Susquehanna', 3963),
@@ -47721,13 +47721,13 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 (48071, 'Rochester', 3956),
 (48072, 'Rockville Centre', 3956),
 (48073, 'Rome', 3956),
-(48074, 'Rotterdam', 3956);
-INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
+(48074, 'Rotterdam', 3956),
 (48075, 'Rye', 3956),
 (48076, 'Rye Brook', 3956),
 (48077, 'Salamanca', 3956),
 (48078, 'Salina', 3956),
-(48079, 'Saratoga Springs', 3956),
+(48079, 'Saratoga Springs', 3956);
+INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 (48080, 'Saugerties', 3956),
 (48081, 'Scarsdale', 3956),
 (48082, 'Schenectady', 3956),
@@ -48014,18 +48014,18 @@ INSERT INTO `cities` (`CT_ID`, `CT_NAME`, `STATE_ID`) VALUES
 
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
-  `CN_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CN_CODE` varchar(3) NOT NULL,
-  `CN_NAME` varchar(150) NOT NULL,
-  `CN_PHONECODE` int(11) NOT NULL,
-  PRIMARY KEY (`CN_ID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sortname` varchar(3) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `phonecode` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `countries`
 --
 
-INSERT INTO `countries` (`CN_ID`, `CN_CODE`, `CN_NAME`, `CN_PHONECODE`) VALUES
+INSERT INTO `countries` (`id`, `sortname`, `name`, `phonecode`) VALUES
 (1, 'AF', 'Afghanistan', 93),
 (2, 'AL', 'Albania', 355),
 (3, 'DZ', 'Algeria', 213),
@@ -48451,37 +48451,6 @@ INSERT INTO `currency` (`iso`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `dashuser_view`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `dashuser_view`;
-CREATE TABLE IF NOT EXISTS `dashuser_view` (
-`U_ID` int(4)
-,`U_USERNAME` varchar(200)
-,`U_GENDER` varchar(200)
-,`U_PASSWORD` varchar(200)
-,`U_EMAIL` varchar(200)
-,`U_CONTACT` varchar(200)
-,`U_ADDRESS` varchar(200)
-,`U_COUNTRY` varchar(200)
-,`U_STATE` varchar(200)
-,`U_CITY` varchar(200)
-,`U_PINCODE` varchar(200)
-,`U_ACTIVE` varchar(200)
-,`U_ACCESS_UPDATE` varchar(200)
-,`U_ACCESS_INSERT` varchar(200)
-,`U_ACCESS_DELETE` varchar(200)
-,`ST_ID` int(11)
-,`ST_NAME` varchar(30)
-,`CN_ID` int(11)
-,`CN_NAME` varchar(150)
-,`CT_ID` int(11)
-,`CT_NAME` varchar(30)
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `dash_users`
 --
 
@@ -48503,22 +48472,22 @@ CREATE TABLE IF NOT EXISTS `dash_users` (
   `U_ACCESS_UPDATE` varchar(200) NOT NULL,
   `U_ACCESS_INSERT` varchar(200) NOT NULL,
   `U_ACCESS_DELETE` varchar(200) NOT NULL,
-  `U_ACCESS_VIEW` varchar(200) NOT NULL DEFAULT 'Y',
+  `U_ACCESS_VIEW` varchar(200) NOT NULL,
   `V_USER_ID` varchar(200) NOT NULL,
   `V_UP_TIME` varchar(200) NOT NULL,
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`U_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dash_users`
 --
 
 INSERT INTO `dash_users` (`U_ID`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `V_LANG_CODE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
-(4, 'admin', 'Male', '202cb962ac59075b964b07152d234b70', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'en', 'N', 'N', 'N', 'Y', 'admin', '2019/10/31 16:07:52', '2019-10-29 06:43:27'),
-(2, 'admin', 'Male', '81dc9bdb52d04dc20036dbd8313ed055', 'khush@email.com', '76909', 'sedar', '101', '33', '3295', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'khush', '2019/10/31 16:06:41', '2019-10-29 04:33:29'),
-(7, 'admin', 'Male', '21232f297a57a5a743894a0e4a801fc3', 'khushbhaijaan007@gmail.com', '769090', '123', '2', '76', '6023', '12331', 'N', 'en', 'Y', 'Y', 'Y', 'Y', 'admin', '2019/10/31 16:08:14', '2019-10-30 12:30:41'),
-(5, 'khush', 'Male', '202cb962ac59075b964b07152d234b70', 'khushbhaijaan007@gmail.com', '7690903270', 'phulia kalan', '1', '44', '5919', '311407', 'N', 'en', 'Y', 'Y', 'N', 'Y', 'admin', '2019/10/31 16:08:00', '2019-10-29 12:06:34');
+(4, 'admin', 'Male', '123', 'khushbhaijaan007@gmail.com', '7687464654', '1234', 'india', 'shrajsh', 'andhra', '3', 'Y', 'en', '', '', '', '', '', '', '2019-10-29 06:43:27'),
+(2, 'admin', 'Male', '0786', 'khush@email.com', '76909', 'sedar', 'india', 'rajast', 'FDFDF', '311407', 'Y', 'en', '', '', '', '', '', '', '2019-10-29 04:33:29'),
+(6, 'khush', 'Male', '123', 'khushbhaijaan007@gmail.com', '7690903270', '123', 'india', 'rajastahn', 'ajmer', '314444', 'N', 'en', '', '', '', '', '', '', '2019-10-29 12:09:08'),
+(5, 'khush', 'Male', '123', 'khushbhaijaan007@gmail.com', '7690903270', 'phulia kalan', 'india', 'rajastahn', 'bhilwara', '311407', 'Y', 'en', '', '', '', '', '', '', '2019-10-29 12:06:34');
 
 -- --------------------------------------------------------
 
@@ -48528,17 +48497,17 @@ INSERT INTO `dash_users` (`U_ID`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_EMA
 
 DROP TABLE IF EXISTS `states`;
 CREATE TABLE IF NOT EXISTS `states` (
-  `ST_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ST_NAME` varchar(30) NOT NULL,
-  `COUNTRY_ID` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`ST_ID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `country_id` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4122 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `states`
 --
 
-INSERT INTO `states` (`ST_ID`, `ST_NAME`, `COUNTRY_ID`) VALUES
+INSERT INTO `states` (`id`, `name`, `country_id`) VALUES
 (1, 'Andaman and Nicobar Islands', 101),
 (2, 'Andhra Pradesh', 101),
 (3, 'Arunachal Pradesh', 101),
@@ -48648,8 +48617,8 @@ INSERT INTO `states` (`ST_ID`, `ST_NAME`, `COUNTRY_ID`) VALUES
 (107, 'Tirane', 2),
 (108, 'Tropoje', 2),
 (109, 'Vlore', 2),
-(110, 'Ayn Daflah', 3),
-(111, 'Ayn Tamushanat', 3),
+(110, '\'Ayn Daflah', 3),
+(111, '\'Ayn Tamushanat', 3),
 (112, 'Adrar', 3),
 (113, 'Algiers', 3),
 (114, 'Annabah', 3),
@@ -50722,7 +50691,7 @@ INSERT INTO `states` (`ST_ID`, `ST_NAME`, `COUNTRY_ID`) VALUES
 (2190, 'Sawfajjin', 124),
 (2191, 'Surt', 124),
 (2192, 'Tarabulus', 124);
-INSERT INTO `states` (`ST_ID`, `ST_NAME`, `COUNTRY_ID`) VALUES
+INSERT INTO `states` (`id`, `name`, `country_id`) VALUES
 (2193, 'Tarhunah', 124),
 (2194, 'Tripolitania', 124),
 (2195, 'Tubruq', 124),
@@ -52635,21 +52604,6 @@ INSERT INTO `states` (`ST_ID`, `ST_NAME`, `COUNTRY_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `user_view`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `user_view`;
-CREATE TABLE IF NOT EXISTS `user_view` (
-`U_COUNTRY` varchar(200)
-,`CN_ID` int(11)
-,`CN_NAME` varchar(150)
-,`ST_ID` int(11)
-,`ST_NAME` varchar(30)
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `v_employee`
 --
 
@@ -52731,24 +52685,6 @@ CREATE TABLE IF NOT EXISTS `v_pets_pictures` (
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`PP_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure for view `dashuser_view`
---
-DROP TABLE IF EXISTS `dashuser_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `user_view`
---
-DROP TABLE IF EXISTS `user_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_view`  AS  select `dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME` from ((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

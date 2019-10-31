@@ -14,7 +14,7 @@
                         var html = '';
                         var i;
                         for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
+                            html += '<option value='+data[i].ST_ID+'>'+data[i].ST_NAME+'</option>';
                         }
                         $('#'+stateId).html(html);
                     }
@@ -39,7 +39,7 @@ function City_List(stateId,cityId){
                         if(!data.length == ''){
                         for(i=0; i<data.length; i++){
 
-                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
+                            html += '<option value='+data[i].CT_ID+'>'+data[i].CT_NAME+'</option>';
                         }
                       }else{
                             html += '<option value="">Select</option>';                       
