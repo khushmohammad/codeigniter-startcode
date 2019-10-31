@@ -1,4 +1,4 @@
-
+<?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
@@ -70,7 +70,18 @@
           <span>Dashboard</span>
         </a>
       </li>
-     <li class="nav-item">
+      <?php if($userNameSession=="Khush@vilayat"){ 
+
+        echo "<li  class='nav-item'>"; 
+      }  
+      else{
+
+        echo "<li  class='nav-item' style='display: none;'  >"; 
+
+      }
+
+      ?>
+     
         <a class="nav-link" href="<?= site_url('Dashboard/AdminUser'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Users</span>

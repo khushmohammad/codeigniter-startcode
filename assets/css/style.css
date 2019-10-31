@@ -30,3 +30,22 @@
     padding: 0px !important;
     }
 
+.modal-header{
+    background:#343a40 !important;
+    border-radius: 0px  !important;
+    color:#fff  !important;
+    padding: 10px !important
+}
+
+.sidebar{
+    
+    background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
+}
+li .active{
+    background: yellowgreen;
+}
+.sidebar li a{
+
+    color:#fff !important;
+    font-weight: bold !important;
+}

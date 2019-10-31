@@ -72,8 +72,9 @@ class Dashboard extends CI_Controller {
 	
 	function DashUserView_Ajax()	
 	{		
-		$this->datatables->select('*')
-		->from('dashuser_view');
+		header('Content-Type: application/json');
+		$this->datatables->select('U_ID,U_USERNAME,U_GENDER,U_PASSWORD,U_EMAIL,U_CONTACT,U_ADDRESS,U_PINCODE,U_ACTIVE,U_ACCESS_UPDATE, U_ACCESS_INSERT ,U_ACCESS_DELETE,ST_NAME,CN_NAME,CT_NAME');
+		$this->datatables->from('dashuser_view');
 		// $this->datatables->join('countries', 'countries.CN_ID = dash_users.U_COUNTRY');
 		// $this->datatables->join('states', 'states.ST_ID = dash_users.U_STATE');
 		// $this->datatables->join('cities', 'cities.CT_ID = dash_users.U_CITY');

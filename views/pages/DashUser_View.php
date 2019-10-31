@@ -1,7 +1,13 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 $AccessDelete = $this->session->userdata('U_ACCESS_DELETE');
 $AccessInsert = $this->session->userdata('U_ACCESS_INSERT');
 $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
+$userNameSession = $this->session->userdata('U_USERNAME');
+if($userNameSession  !=="Khush@vilayat"){    
+        redirect('Dashboard'); 
+         }    
 ?>  
   <!-- Breadcrumbs-->       
         <ol class="breadcrumb">
@@ -55,6 +61,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 
           //datatable view data
         $(document).ready(function() {
+
            //$.fn.dataTable.ext.errMode = 'throw';
           State_List('U_COUNTRY','U_STATE','U_CITY');
           City_List('U_STATE','U_CITY');
@@ -212,7 +219,8 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
               }  
 
            });
-           $('#datatables').DataTable().ajax.reload();
+           $("#datatables").DataTable().draw();
+           //$('#datatables').DataTable().ajax.reload();
             }
         }); 
     });
@@ -246,7 +254,8 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
              }
             
            }); 
-           $('#datatables').DataTable().ajax.reload();
+           $("#datatables").DataTable().draw();
+           //$('#datatables').DataTable().ajax.reload();
 			}     
 		}); 
 		$(document).ready( function () {      
