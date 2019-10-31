@@ -184,7 +184,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_ADDRESS: "required",
 					U_COUNTRY: "required", 
 					U_STATE: "required",
-					//U_CITY: "required",
+					U_CITY: "required",
 					U_PINCODE: "required"
 				},
 				messages: {
@@ -196,7 +196,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_ADDRESS: "Please enter your address",
 					U_COUNTRY: "Please enter your country",
 					U_STATE: "Please enter your state",
-					//U_CITY: "Please enter your city",
+					U_CITY: "Please enter your city",
 					U_PINCODE: "Please enter your pincode",         				
 				},
 				    errorElement: "em",
@@ -259,7 +259,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
              dataType:'json',
              success: function(json)
              {
-               var obj = json[0];
+               var obj = json['data'][0];
                 $('#U_ID').val(obj.U_ID);
                 $('#U_USERNAME').val(obj.U_USERNAME);
                 $('#U_GENDER').val(obj.U_GENDER).trigger('change');
@@ -267,11 +267,17 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
                 $('#U_EMAIL').val(obj.U_EMAIL);
                 $('#U_CONTACT').val(obj.U_CONTACT);
                 $('#U_ADDRESS').val(obj.U_ADDRESS);
-                $('#U_COUNTRY').val(obj.U_COUNTRY).trigger('change');
+
+               // $('#U_COUNTRY').val().trigger('change');
+                $('#U_COUNTRY option[value='+obj.U_COUNTRY+']').attr('selected','selected');
+
+
+                $('#U_STATE').html(json.stateOption);                
+                $('#U_STATE option[value='+obj.U_STATE+']').attr('selected','selected');
+
+                $('#U_CITY').html(json.cityOption);               
+                $('#U_CITY option[value='+obj.U_CITY+']').attr('selected','selected');
                 
-                $('#U_STATE').val(obj.U_STATE).trigger('change');
-               
-                $('#U_CITY').val(obj.U_CITY).trigger('change');
                 $('#U_PINCODE').val(obj.U_PINCODE);                
                 $('#U_ACTIVE').val(obj.U_ACTIVE);
                 $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
@@ -307,7 +313,8 @@ function DashUserModalForm_Reset(){
 
  $(document).ready(function(){
       //call function get data edit
-      $('#U_COUNTRY').click(function(){
+      $('#U_COUNTRY').change(function(){
+         $('#U_CITY').html('<option value="" selected> select </option>'); 
          var id=$(this).val();
                 $.ajax({
                     url : "<?php echo site_url('Dashboard/Get_StateList_Ajax');?>",
@@ -323,6 +330,29 @@ function DashUserModalForm_Reset(){
                             html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
                         }
                         $('#U_STATE').html(html);
+
+                    }
+                });
+                return false;
+
+      });
+
+       $('#U_STATE').change(function(){
+         var id=$(this).val();
+                $.ajax({
+                    url : "<?php echo site_url('Dashboard/Get_CityList_Ajax');?>",
+                    method : "POST",
+                    data : {id: id},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                        
+                        var html = '';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
+                        }
+                        $('#U_CITY').html(html);
 
                     }
                 });

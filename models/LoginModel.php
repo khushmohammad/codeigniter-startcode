@@ -26,6 +26,11 @@ class LoginModel extends CI_Model {
 		return $query;
 
      }
+     function Get_CityList($State_Id){
+     	$query = $this->db->get_where('cities', array('state_id' => $State_Id));
+		return $query;
+
+     }
     //common function
 
 

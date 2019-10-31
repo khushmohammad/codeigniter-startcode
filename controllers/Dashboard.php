@@ -27,6 +27,14 @@ class Dashboard extends CI_Controller {
 			echo json_encode($data);
 
         }
+        function Get_CityList_Ajax(){
+
+        	$State_Id = $this->input->post('id',TRUE);
+			$data = $this->LoginModel->Get_CityList($State_Id)->result();
+			echo json_encode($data);
+
+        }
+
         //common function
    
 	public function index()
@@ -64,8 +72,35 @@ class Dashboard extends CI_Controller {
 	function GetDashUserData_Ajax(){
 		$sysId = 	$this->input->post('sysId');
 		$sql = 'SELECT * FROM dash_users WHERE U_ID = "'.$sysId.'"';
-		$result = $this->db->query($sql)->result_array();
+		$result['data'] = $this->db->query($sql)->result_array();
+		$result['stateOption'] = $this->getSelectedState($result['data'][0]['U_COUNTRY']);
+		$result['cityOption'] = $this->getSelectedCity($result['data'][0]['U_STATE']);
 		echo json_encode($result);
+	}
+
+	function getSelectedState($selectedCountryCode){
+	    $sql="SELECT * FROM states WHERE country_id='".$selectedCountryCode."' ORDER BY name ASC";
+	    $stateArray = $this->db->query($sql)->result_array();
+	    $optionHtml = '';
+	    $optionHtml .= '<option value="">Select State</option>';
+	    if(!empty($stateArray)){
+			foreach($stateArray as $row) {
+				$optionHtml .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+			}
+        }
+		return $optionHtml;
+	}
+	function getSelectedCity($selectedStateCode){
+	    $sql="SELECT * FROM cities WHERE state_id='".$selectedStateCode."' ORDER BY name ASC";
+	    $cityArray = $this->db->query($sql)->result_array();
+	    $optionHtml = '';
+	    $optionHtml .= '<option value="">Select city</option>';
+	    if(!empty($cityArray)){
+			foreach($cityArray as $row) {
+				$optionHtml .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+			}
+        }
+		return $optionHtml;
 	}
 	function DashUser_UpdateAjax(){
 		header('Content-Type: application/json');
