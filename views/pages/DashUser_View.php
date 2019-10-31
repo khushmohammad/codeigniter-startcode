@@ -55,7 +55,8 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 
           //datatable view data
         $(document).ready(function() {
-
+          State_List('U_COUNTRY','U_STATE','U_CITY');
+          City_List('U_STATE','U_CITY');
           var DataTableObject=[
             { data: 'U_ID' ,className:"all text-center"},
             { data: 'U_USERNAME' ,className:"all"},
@@ -103,6 +104,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
           
           });
           linesSwitchery();
+          
       });
       // functions
      function linesSwitchery() {
@@ -114,7 +116,62 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
             $('#U_ACTIVE').val('N');						
 					});
           } 
-    
+
+     
+     function GetDashUserData_Ajax(){
+
+   loader();
+   var sysId = $('#U_ID').val();   
+   $.ajax({
+             type: "POST",
+             url: "<?= site_url('Dashboard/GetDashUserData_Ajax'); ?>",
+             data: {sysId : sysId} ,
+             dataType:'json',
+             success: function(json)
+             {
+               var obj = json['data'][0];
+                $('#U_ID').val(obj.U_ID);
+                $('#U_USERNAME').val(obj.U_USERNAME);
+                $('#U_GENDER').val(obj.U_GENDER).trigger('change');
+                $('#U_PASSWORD').val(obj.U_PASSWORD);
+                $('#U_EMAIL').val(obj.U_EMAIL);
+                $('#U_CONTACT').val(obj.U_CONTACT);
+                $('#U_ADDRESS').val(obj.U_ADDRESS);               
+                $('#U_COUNTRY option[value='+obj.U_COUNTRY+']').attr('selected','selected');
+               // $('#U_COUNTRY').val(obj.U_COUNTRY).trigger('change');
+
+                $('#U_STATE').html(json.stateOption);                
+                $('#U_STATE option[value='+obj.U_STATE+']').attr('selected','selected');
+               // $('#U_STATE').val(obj.U_STATE).trigger('change');
+
+                $('#U_CITY').html(json.cityOption);               
+                $('#U_CITY option[value='+obj.U_CITY+']').attr('selected','selected');
+              //  $('#U_CITY').val(obj.U_CITY).trigger('change');
+                
+                $('#U_PINCODE').val(obj.U_PINCODE);                
+                $('#U_ACTIVE').val(obj.U_ACTIVE);
+                $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
+                $('#U_ACCESS_DELETE').val(obj.U_ACCESS_DELETE).trigger('change');
+                $('#U_ACCESS_UPDATE').val(obj.U_ACCESS_UPDATE).trigger('change');
+                var $ActiveYn = obj.U_ACTIVE;
+                if($ActiveYn == 'Y'){
+                  $('#U_ACTIVE_YN').lcs_on();
+                }else{
+                  $('#U_ACTIVE_YN').lcs_off();
+                }
+               //$(".selectpicker").selectpicker('refresh');
+
+                $('#DashUserAddEdit_Form').valid(); 
+             },
+             error: function (jqXHR, exception) {
+              console.log(jqXHR);
+                // Your error handling logic here..
+              }
+           }); 
+             unloader();    
+
+ }
+
       //functions
     //script 
     $(document).on('click' , '.AddEditButton' , function(e){ 
@@ -122,16 +179,41 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
        var buttonid =  $(this).attr('id');
        if(buttonid == 'Add'){
         $('#U_ID').val('');
-        
-        
        }
        else{        
        var sysId =  $(this).attr('data-id');
         $('#U_ID').val(sysId);
         GetDashUserData_Ajax();
        }
+  });  
+    $(document).on("click", "#DashUser_Delete", function(e) {
+         var sysId = $(this).attr('data-id');
+        bootbox.confirm("Are you sure you want to delete?", function(result) {
+          if(result){ 
+           loader();          
+           $.ajax({
+             type: "POST",
+             url: "<?= site_url('Dashboard/DashUserDelete_Ajax'); ?>",
+             data: {sysId : sysId} ,// serializes the form's elements.
+             success: function(data)
+             {
+                 //alert(data); // show response from the php script.
+                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                 setTimeout(function(){ 
+                  $('.AlertMessage').html('') ;
+                 }, 2000);
+                unloader();  
+             },
+             error: function (jqXHR, exception) {
+              console.log(jqXHR);
+                // Your error handling logic here..
+              }  
 
-  });      
+           });
+           $('#datatables').DataTable().ajax.reload();
+            }
+        }); 
+    });
 
     //script       
   //validation
@@ -184,7 +266,9 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_ADDRESS: "required",
 					U_COUNTRY: "required", 
 					U_STATE: "required",
-					U_CITY: "required",
+          U_ACCESS_INSERT: "required",
+          U_ACCESS_UPDATE: "required",
+					U_ACCESS_DELETE: "required",
 					U_PINCODE: "required"
 				},
 				messages: {
@@ -195,8 +279,7 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 					U_CONTACT: "Please enter your contact",
 					U_ADDRESS: "Please enter your address",
 					U_COUNTRY: "Please enter your country",
-					U_STATE: "Please enter your state",
-					U_CITY: "Please enter your city",
+					U_STATE: "Please enter your state",					
 					U_PINCODE: "Please enter your pincode",         				
 				},
 				    errorElement: "em",
@@ -220,147 +303,18 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 
 		} );
   //validation
-      $(document).on("click", "#DashUser_Delete", function(e) {
-         var sysId = $(this).attr('data-id');
-        bootbox.confirm("Are you sure you want to delete?", function(result) {
-          if(result){ 
-           loader();          
-           $.ajax({
-             type: "POST",
-             url: "<?= site_url('Dashboard/DashUserDelete_Ajax'); ?>",
-             data: {sysId : sysId} ,// serializes the form's elements.
-             success: function(data)
-             {
-                 //alert(data); // show response from the php script.
-                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
-                 setTimeout(function(){ 
-                  $('.AlertMessage').html('') ;
-                 }, 2000);
-                unloader();  
-             },
-             error: function (jqXHR, exception) {
-              console.log(jqXHR);
-                // Your error handling logic here..
-              }  
-
-           });
-           $('#datatables').DataTable().ajax.reload();
-            }
-        }); 
-    });
- function GetDashUserData_Ajax(){
-
-   loader();
-   var sysId = $('#U_ID').val();   
-   $.ajax({
-             type: "POST",
-             url: "<?= site_url('Dashboard/GetDashUserData_Ajax'); ?>",
-             data: {sysId : sysId} ,
-             dataType:'json',
-             success: function(json)
-             {
-               var obj = json['data'][0];
-                $('#U_ID').val(obj.U_ID);
-                $('#U_USERNAME').val(obj.U_USERNAME);
-                $('#U_GENDER').val(obj.U_GENDER).trigger('change');
-                $('#U_PASSWORD').val(obj.U_PASSWORD);
-                $('#U_EMAIL').val(obj.U_EMAIL);
-                $('#U_CONTACT').val(obj.U_CONTACT);
-                $('#U_ADDRESS').val(obj.U_ADDRESS);
-
-               // $('#U_COUNTRY').val().trigger('change');
-                $('#U_COUNTRY option[value='+obj.U_COUNTRY+']').attr('selected','selected');
-
-
-                $('#U_STATE').html(json.stateOption);                
-                $('#U_STATE option[value='+obj.U_STATE+']').attr('selected','selected');
-
-                $('#U_CITY').html(json.cityOption);               
-                $('#U_CITY option[value='+obj.U_CITY+']').attr('selected','selected');
-                
-                $('#U_PINCODE').val(obj.U_PINCODE);                
-                $('#U_ACTIVE').val(obj.U_ACTIVE);
-                $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
-                $('#U_ACCESS_DELETE').val(obj.U_ACCESS_DELETE).trigger('change');
-                $('#U_ACCESS_UPDATE').val(obj.U_ACCESS_UPDATE).trigger('change');
-                var $ActiveYn = obj.U_ACTIVE;
-                if($ActiveYn == 'Y'){
-                  $('#U_ACTIVE_YN').lcs_on();
-                }else{
-                  $('#U_ACTIVE_YN').lcs_off();
-                }
-               //$(".selectpicker").selectpicker('refresh');
-
-                $('#DashUserAddEdit_Form').valid(); 
-             },
-             error: function (jqXHR, exception) {
-              console.log(jqXHR);
-                // Your error handling logic here..
-              }
-           }); 
-             unloader();    
-
- }
 
 function DashUserModalForm_Reset(){
-     $("#DashUserAddEdit_Form")[0].reset();    
+     $("#DashUserAddEdit_Form")[0].reset();
+     $('#U_COUNTRY option:selected').removeAttr('selected');     
+     $('#U_CITY,#U_STATE').html("<option value=''> Select </option>"); 
      $('#DashUserAddEdit_Form').valid(); 
      var validator = $( "#DashUserAddEdit_Form" ).validate();
      validator.resetForm();
      $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
-    // $(".selectpicker").selectpicker('refresh');    
+    // $(".selectpicker").selectpicker('refresh');
 }
 
- $(document).ready(function(){
-      //call function get data edit
-      $('#U_COUNTRY').change(function(){
-         $('#U_CITY').html('<option value="" selected> select </option>'); 
-         var id=$(this).val();
-                $.ajax({
-                    url : "<?php echo site_url('Dashboard/Get_StateList_Ajax');?>",
-                    method : "POST",
-                    data : {id: id},
-                    async : true,
-                    dataType : 'json',
-                    success: function(data){
-                        
-                        var html = '';
-                        var i;
-                        for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
-                        }
-                        $('#U_STATE').html(html);
-
-                    }
-                });
-                return false;
-
-      });
-
-       $('#U_STATE').change(function(){
-         var id=$(this).val();
-                $.ajax({
-                    url : "<?php echo site_url('Dashboard/Get_CityList_Ajax');?>",
-                    method : "POST",
-                    data : {id: id},
-                    async : true,
-                    dataType : 'json',
-                    success: function(data){
-                        
-                        var html = '';
-                        var i;
-                        for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].id+'>'+data[i].name+'</option>';
-                        }
-                        $('#U_CITY').html(html);
-
-                    }
-                });
-                return false;
-
-      });
-
-     });
 </script>
 <!-- modal for add and edit -->
 <div class="modal" id="DashUser_Modal">
@@ -432,13 +386,11 @@ function DashUserModalForm_Reset(){
                           <div class="form-group col-md-6">
                             <label for="country">Country</label>
                             <select class="form-control form-control-sm custom-select" id="U_COUNTRY" name="U_COUNTRY">
-                            <?php
-                           
+                            <?php                           
                             if(!empty($countries)){
-                               $option = "<option value='' selected>Select</option>";
+                               $option = "<option value='' Selected>Select</option>";
                                echo $option;
                               foreach ($countries as $value) {
-
                               echo "<option country-code=".$value['sortname']." value=".$value['id'].">".$value['name']."</option>";
                               }
                             }                            
@@ -449,18 +401,14 @@ function DashUserModalForm_Reset(){
                           <div class="form-group col-md-6">
                             <label for="State">State</label>
                             <select class="form-control form-control-sm custom-select" id="U_STATE" name="U_STATE">                            
-                            <option value="">Select</option>
-                                                      
-                          </select>
-                             
+                            <option value="">Select</option>                  
+                          </select>                             
                           </div>
                           <div class="form-group col-md-6">
                             <label for="city">City</label>
                             <select class="form-control form-control-sm custom-select" id="U_CITY" name="U_CITY">                            
-                            <option value="">Select</option>
-                                                      
-                          </select>
-                           
+                            <option value="">Select</option>                   
+                          </select>                           
                           </div>
                           <div class="form-group col-md-6">
                             <label for="Pincode">Pincode</label>
@@ -469,8 +417,7 @@ function DashUserModalForm_Reset(){
                         </div>                        
                   </div>
                 </div>
-              </div>
-             
+              </div>             
               <div class="modal-footer">
               <div class="col-md-6" id="Activedivfooter">             
               <input type="checkbox" value="Y" class="lcs_check" id="U_ACTIVE_YN" autocomplete="off"/>

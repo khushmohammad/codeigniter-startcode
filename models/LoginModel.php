@@ -15,7 +15,7 @@ class LoginModel extends CI_Model {
 		return  date('Y/m/d H:i:s');
 	}
 
-     public function country_list(){
+     function country_list(){
 
      	$query =  $this->db->get('countries')->result_array();
      	return $query;
@@ -35,8 +35,7 @@ class LoginModel extends CI_Model {
 
 
 
-	public function DashUser_SaveAjax($userId){ 
-
+	public function DashUser_SaveAjax($userId){
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
@@ -50,9 +49,7 @@ class LoginModel extends CI_Model {
 		$U_ACTIVE = $this->input->post('U_ACTIVE'); 
 		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
 		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
-		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE');
-		
-		 
+		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE');	 
 		
 		$data = array(
 			'U_USERNAME' => $U_USERNAME, 
@@ -69,21 +66,16 @@ class LoginModel extends CI_Model {
 			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
 			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
 			'U_ACCESS_DELETE' => $U_ACCESS_DELETE,
-			'V_USER_ID' => $userId,
-			
-
+			'V_USER_ID' => $userId
 		);
-
 		$insert =  $this->db->insert('dash_users',$data); 
 		$insertId = $this->db->insert_id();
-		if($insert){
-			echo json_encode($insertId);
-		} 
-		else{
-			echo json_encode('seccess');
-
-		 
-		}
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('seccess');
+			}
 		}
 		function DashUser_UpdateAjax($userId){
 		$id = $this->input->post('U_ID');	
@@ -101,9 +93,7 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
 		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
-		$V_UP_TIME = $this->date(); 	 
-		
-		
+		$V_UP_TIME = $this->date();
 		$data = array(
 			'U_USERNAME' => $U_USERNAME, 
 			'U_PASSWORD' => $U_PASSWORD, 
@@ -120,20 +110,15 @@ class LoginModel extends CI_Model {
 			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
 			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
 			'V_USER_ID' => $userId,
-			'V_UP_TIME' => $V_UP_TIME, 
-
-
+			'V_UP_TIME' => $V_UP_TIME,
 		);
-
-		$update = $this->db->update('dash_users', $data, array('U_ID' => $id)); 
-		
-		if($update){
-			echo json_encode($id);
-		} 
-		else{
-			echo json_encode('error');
-		}
-
+		$update = $this->db->update('dash_users', $data, array('U_ID' => $id));		
+			if($update){
+				echo json_encode($id);
+			} 
+			else{
+				echo json_encode('error');
+			}
 		}
 	
 	
