@@ -3,8 +3,6 @@
       }
         //display loader on page load 
         
-       function unloader(){
+  function unloader(){
         $('.loader').fadeOut();
-  }
-
-  
+  }  

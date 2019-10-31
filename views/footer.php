@@ -1,5 +1,5 @@
 <script type="text/javascript"> 
- 
+
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){
          $('#'+cityId).html('<option value="" selected> select </option>'); 
@@ -62,15 +62,15 @@ function City_List(stateId,cityId){
         </div>
       </footer>
 
-    </div>
+</div>
     <!-- /.content-wrapper -->
 
-  </div> 
+
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-</body>
-<script src="<?= site_url('assets/vendor/js/sb-admin.min.js');?>"></script> 
 <script src="<?= site_url('assets/js/custom.js');?>"></script>
+<script src="<?= site_url('assets/vendor/js/sb-admin.min.js');?>"></script> 
 
+  </body>
 </html>

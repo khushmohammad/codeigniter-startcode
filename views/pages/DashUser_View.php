@@ -406,7 +406,7 @@ function DashUserModalForm_Reset(){
                           </div>
                           <div class="form-group col-md-6">
                             <label for="city">City</label>
-                            <select class="form-control form-control-sm custom-select" id="U_CITY" name="U_CITY">                            
+                            <select class="form-control  custom-select form-control-sm" id="U_CITY" name="U_CITY">                            
                             <option value="">Select</option>                   
                           </select>                           
                           </div>
