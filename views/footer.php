@@ -56,7 +56,8 @@ function City_List(stateId,cityId){
       preferredCountries: [ "AE","IN"],
       utilsScript: "<?php echo site_url('assets/plugins/build/js/utils.js');?>",
     });
-   }     
+   }
+      
 </script>
 </div>
  <!-- /.container-fluid -->

@@ -20,4 +20,12 @@
         });
 
 });
-  
+
+ 
+      
+ if($('#menu1sub1 a').find('.active').length !== 0) {
+   $('#menu1sub1').addClass('show');
+  }
+ 
+
+

@@ -22,7 +22,7 @@
     <!-- plugin  -->
     <link href="<?= site_url('assets/plugins/bootstrap-select.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/lc_switch.css');?>" rel="stylesheet">
-    <link href="<?= site_url('assets/plugins/build/css/intlTelInput.css');?>" rel="stylesheet">
+    <link href="<?= site_url('assets/plugins/inputflag/build/css/intlTelInput.css');?>" rel="stylesheet">
     <!-- plugin  -->
   <!-- Custom styles for this template-->
     <link href="<?= site_url('assets/vendor/css/sb-admin.css');?>" rel="stylesheet">
@@ -45,7 +45,7 @@
     <script src="<?= site_url('assets/plugins/jquery.validate.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
-    <script src="<?= site_url('assets/plugins/build/js/intlTelInput.js');?>"></script>    
+    <script src="<?= site_url('assets/plugins/inputflag/build/js/intlTelInput.js');?>"></script>    
   <!-- plugin  -->
   <style>
  

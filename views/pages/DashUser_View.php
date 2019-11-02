@@ -63,12 +63,12 @@ if($userNameSession  !=="Khush@vilayat"){
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
      
-<script type="text/javascript"> 
-
+<script type="text/javascript">  
+    
           //datatable view data
         $(document).ready(function() {
              //FOOTER FUNCTION
-
+          //changeCountryFlag('contactInputMasking','RM_CONTACT_NUMBER_HIDDEN','RM_CONTACT_NUMBER');
           InputContact_flag('U_CONTACT');
           State_List('U_COUNTRY','U_STATE','U_CITY');
           City_List('U_STATE','U_CITY');
@@ -300,14 +300,13 @@ if($userNameSession  !=="Khush@vilayat"){
                         }
                   }                         
             },
-					U_PASSWORD: "required",
-					U_GENDER: {
-                required: true
-            },
-					U_EMAIL: "required",
-					U_CONTACT: "required",
-       
-                
+          U_PASSWORD: "required",
+					U_GENDER: "required",
+					U_EMAIL: "required",					
+          U_CONTACT: {
+              required: true,
+              number: true
+            },                
 					U_ADDRESS: "required",
 					U_COUNTRY: "required", 
 					U_STATE: "required",

@@ -1,12 +1,9 @@
 <?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
     <a class="navbar-brand mr-1" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
-
-    <button  class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+    <button style="display: none;" class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
@@ -69,39 +66,29 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
-      </li>
-      <?php if($userNameSession=="Khush@vilayat"){ 
-
-        echo "<li  class='nav-item'>"; 
-      }  
-      else{
-
-        echo "<li  class='nav-item' style='display: none;'  >"; 
-
-      }
-
-      ?>
-     
+      </li>     
+    <!--  <li  class='nav-item'>
         <a class="nav-link" href="<?= site_url('Dashboard/AdminUser'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Users</span>
         </a>
-      </li>    
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </li> -->    
+      <li class="nav-item" id="dropmenu">
+         <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>Setting</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
-        </div>
+        <div class="collapse" id="menu1sub1">
+        <?php if($userNameSession=="Khush@vilayat"){ 
+           echo  '<a href="'.site_url('Dashboard/AdminUser').'" class="nav-link bg-dark" data-parent="#menu1sub1"> <i class="fas fa-fw fa-folder"></i><span>Users</span></a>';
+              
+                }
+           ?>
+          
+          <a href="#" class="nav-link bg-dark" data-parent="#menu1sub1"> <i class="fas fa-fw fa-folder"></i><span>Pages</span></a>
+          
+        </div>       
+        
       </li>
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
