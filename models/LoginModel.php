@@ -31,6 +31,18 @@ class LoginModel extends CI_Model {
 		return $query;
 
      }
+      public function isU_USERNAME_EXISTS($USERNAME) {
+		           $query = $this->db
+		                   ->select('U_USERNAME')
+		                   ->where('U_USERNAME', $USERNAME)
+		                   ->get('dash_users');
+		           if( $query->num_rows() > 0 ){
+		               return TRUE;                 
+		           } else { 
+		               return FALSE;                
+		           }
+
+		   }	
     //common function
 
      public function GetDashUserData($sysId){
@@ -40,6 +52,7 @@ class LoginModel extends CI_Model {
      }
 
 	public function DashUser_SaveAjax($userId){
+		$U_NAME = $this->input->post('U_NAME'); 
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
@@ -56,6 +69,7 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE');	 
 		
 		$data = array(
+			'U_NAME' => $U_NAME, 
 			'U_USERNAME' => $U_USERNAME, 
 			'U_PASSWORD' => md5($U_PASSWORD), 
 			'U_GENDER' => $U_GENDER, 
@@ -83,6 +97,7 @@ class LoginModel extends CI_Model {
 		}
 		function DashUser_UpdateAjax($userId){
 		$id = $this->input->post('U_ID');	
+		$U_NAME = $this->input->post('U_NAME'); 
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
@@ -99,6 +114,7 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
 		$V_UP_TIME = $this->date();
 		$data = array(
+			'U_NAME' => $U_NAME, 
 			'U_USERNAME' => $U_USERNAME, 
 			'U_PASSWORD' => md5($U_PASSWORD), 
 			'U_GENDER' => $U_GENDER, 

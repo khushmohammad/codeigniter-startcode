@@ -34,6 +34,7 @@ class Welcome extends CI_Controller {
 		if(!empty($res)){
 			$userdata = array(
                     'U_ID' => $res->U_ID,
+                    'U_NAME' => $res->U_NAME,
                     'U_USERNAME' => $res->U_USERNAME,
                     'U_PASSWORD' => $res->U_PASSWORD,
                     'U_ACCESS_UPDATE' => $res->U_ACCESS_UPDATE,

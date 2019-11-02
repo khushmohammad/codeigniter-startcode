@@ -19,7 +19,6 @@ class Dashboard extends CI_Controller {
         }
         //comman function
         function Get_StateList_Ajax(){
-
         	$Country_Id = $this->input->post('id',TRUE);
 			$data = $this->LoginModel->Get_StateList($Country_Id)->result();
 			echo json_encode($data);
@@ -54,6 +53,15 @@ class Dashboard extends CI_Controller {
 	        }
 			return $optionHtml;
 		}
+		function U_USERNAME_EXISTS(){
+		       $count= $this->LoginModel->isU_USERNAME_EXISTS($this->input->post('U_USERNAME'));
+		           if ( $count == TRUE ) {
+		               echo json_encode(FALSE);
+		           } else {
+		               echo json_encode(TRUE);
+		           }
+		   }
+			
         //common function
    
 	public function index()
@@ -73,7 +81,7 @@ class Dashboard extends CI_Controller {
 	function DashUserView_Ajax()	
 	{		
 		header('Content-Type: application/json');
-		$this->datatables->select('U_ID,U_USERNAME,U_GENDER,U_PASSWORD,U_EMAIL,U_CONTACT,U_ADDRESS,U_PINCODE,U_ACTIVE,U_ACCESS_UPDATE, U_ACCESS_INSERT ,U_ACCESS_DELETE,ST_NAME,CN_NAME,CT_NAME');
+		$this->datatables->select('U_ID,U_NAME,U_USERNAME,U_GENDER,U_PASSWORD,U_EMAIL,U_CONTACT,U_ADDRESS,U_PINCODE,U_ACTIVE,U_ACCESS_UPDATE, U_ACCESS_INSERT ,U_ACCESS_DELETE,ST_NAME,CN_NAME,CT_NAME');
 		$this->datatables->from('dashuser_view');
 		// $this->datatables->join('countries', 'countries.CN_ID = dash_users.U_COUNTRY');
 		// $this->datatables->join('states', 'states.ST_ID = dash_users.U_STATE');

@@ -37,6 +37,7 @@ if($userNameSession  !=="Khush@vilayat"){
                 <tr>
                   <th data-class="expand" width="15px">ID</th>
                   <th data-class="expand" >NAME</th>
+                  <th data-class="expand" >USERNAME</th>
                   <th data-class="expand" >GENDER</th>
                   <th data-class="expand" >PASSWORD</th>
                   <th data-class="expand">EMAIL</th>
@@ -67,6 +68,7 @@ if($userNameSession  !=="Khush@vilayat"){
           City_List('U_STATE','U_CITY');
           var DataTableObject=[
             { data: 'U_ID' ,className:"all text-center"},
+            { data: 'U_NAME' ,className:"all"},
             { data: 'U_USERNAME' ,className:"all"},
             { data: 'U_GENDER' ,className:"all"},
             { data: 'U_PASSWORD'},
@@ -140,6 +142,7 @@ if($userNameSession  !=="Khush@vilayat"){
              {
                var obj = json['data'][0];
                 $('#U_ID').val(obj.U_ID);
+                $('#U_NAME').val(obj.U_NAME);
                 $('#U_USERNAME').val(obj.U_USERNAME);
                 $('#U_GENDER').val(obj.U_GENDER).trigger('change');
                 $('#U_PASSWORD').val(obj.U_PASSWORD);
@@ -258,8 +261,10 @@ if($userNameSession  !=="Khush@vilayat"){
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		}); 
-		$(document).ready( function () {      
-			$( "#DashUserAddEdit_Form" ).validate( {      
+		$(document).ready( function () {  
+          
+			$( "#DashUserAddEdit_Form" ).validate( { 
+
         onkeyup: function(element) {
             $(element).valid();           
           }, 
@@ -267,7 +272,19 @@ if($userNameSession  !=="Khush@vilayat"){
           $(element).valid();
         },        
 				rules: {
-					U_USERNAME: "required",
+          U_NAME: "required",				
+          U_USERNAME:{                
+                required: true,
+                remote: 
+                  {
+                        url: "<?php echo site_url("Dashboard/U_USERNAME_EXISTS"); ?>",
+                        type: "post",
+                        data: 
+                        {
+                          U_USERNAME: function(){ return $("#U_USERNAME").val(); }
+                        }
+                  }                         
+            },
 					U_PASSWORD: "required",
 					U_GENDER: {
                 required: true
@@ -283,7 +300,8 @@ if($userNameSession  !=="Khush@vilayat"){
 					U_PINCODE: "required"
 				},
 				messages: {
-					U_USERNAME: "Please enter your username",
+          U_USERNAME: "Please enter your name",
+					U_USERNAME: "This username in not available",
 					U_PASSWORD: "Please enter your password",
           U_GENDER: "Please enter your gender",
 					U_EMAIL: "Please enter your email",
@@ -295,24 +313,21 @@ if($userNameSession  !=="Khush@vilayat"){
 				},
 				    errorElement: "em",
             errorClass: 'is-invalid',
-            validClass: 'is-valid',
-           
+            validClass: 'is-valid',           
             errorPlacement: function (error, element) {
                 // Add the `invalid-feedback` class to the error element
                 error.addClass("invalid-feedback");
                 //console.log(element);
                 if (element.prop("type") === "checkbox") {
                     error.insertAfter(element.siblings("label"));
-                } 
-                
+                }                 
                 else {
                     error.insertAfter(element);
                 }
-
               }
 			});
 
-		} );
+		});
   //validation
 
 function DashUserModalForm_Reset(){
@@ -342,7 +357,11 @@ function DashUserModalForm_Reset(){
                   <div class="col-sm-6">
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="Name">Name</label>
+                          <label for="Name">NAME</label>
+                          <input type="text" class="form-control form-control-sm" id="U_NAME" placeholder="name" name="U_NAME">
+                        </div>
+                         <div class="form-group col-md-6">
+                          <label for="USERNAME">LOGIN USERNAME</label>
                           <input type="text" class="form-control form-control-sm" id="U_USERNAME" placeholder="Username" name="U_USERNAME">
                         </div>
                         <div class="form-group col-md-6">
@@ -431,14 +450,14 @@ function DashUserModalForm_Reset(){
               </div>             
               <div class="modal-footer">
               <div class="col-md-6" id="Activedivfooter">             
-              <input type="checkbox" value="Y" class="lcs_check" id="U_ACTIVE_YN" autocomplete="off"/>
+              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="U_ACTIVE_YN" autocomplete="off"/>              
+              <label class="checkbox-inline text-left"> Active</label>
               <input type="hidden" name="U_ACTIVE" value="N"  id="U_ACTIVE"/>
               <input type="hidden" name="U_ID" value=""  id="U_ID"/>
-              <label class="checkbox-inline text-left"> Active</label>
               </div>
               <div class="col-md-6 text-right">   
-                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
               </div>
               </div>
             </form> 
