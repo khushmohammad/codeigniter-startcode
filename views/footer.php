@@ -49,6 +49,13 @@ function City_List(stateId,cityId){
                 });
                 return false;
       });
+   }
+  function InputContact_flag(Input_id){
+     var input = document.querySelector("#"+Input_id);
+    window.intlTelInput(input, {
+      preferredCountries: [ "AE","IN"],
+      utilsScript: "<?php echo site_url('assets/plugins/build/js/utils.js');?>",
+    });
    }     
 </script>
 </div>

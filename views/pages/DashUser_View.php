@@ -9,6 +9,11 @@ if($userNameSession  !=="Khush@vilayat"){
         redirect('Dashboard'); 
          }    
 ?>  
+<style type="text/css">
+.iti__selected-flag{
+  display: block ruby !important;
+}
+</style>
   <!-- Breadcrumbs-->       
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -62,10 +67,14 @@ if($userNameSession  !=="Khush@vilayat"){
 
           //datatable view data
         $(document).ready(function() {
+             //FOOTER FUNCTION
 
-           //$.fn.dataTable.ext.errMode = 'throw';
+          InputContact_flag('U_CONTACT');
           State_List('U_COUNTRY','U_STATE','U_CITY');
           City_List('U_STATE','U_CITY');
+          //FOOTER FUNCTION
+           //$.fn.dataTable.ext.errMode = 'throw';
+
           var DataTableObject=[
             { data: 'U_ID' ,className:"all text-center"},
             { data: 'U_NAME' ,className:"all"},
@@ -231,6 +240,7 @@ if($userNameSession  !=="Khush@vilayat"){
     //script       
   //validation
   $.validator.setDefaults( {
+
 			submitHandler: function (form) {
        // debug: true       
        var sysId = $('#U_ID').val();
@@ -261,8 +271,13 @@ if($userNameSession  !=="Khush@vilayat"){
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		}); 
-		$(document).ready( function () {  
-          
+      //   $.validator.addMethod("intlTelNumber", function(phone_number, element) {
+      //     phone_number = phone_number.replace( /\s+/g, "" );
+      // return this.optional( element ) || phone_number.length > 9 &&
+      //     phone_number.match( /^(\+?1-?)?(\([2-9]([02-9]\d|1[02-9])\)|[2-9]([02-9]\d|1[02-9]))-?[2-9]([02-9]\d|1[02-9])-?\d{4}$/ );
+      // }, "Please enter a valid International Phone Number");
+		$(document).ready( function () {
+
 			$( "#DashUserAddEdit_Form" ).validate( { 
 
         onkeyup: function(element) {
@@ -291,6 +306,8 @@ if($userNameSession  !=="Khush@vilayat"){
             },
 					U_EMAIL: "required",
 					U_CONTACT: "required",
+       
+                
 					U_ADDRESS: "required",
 					U_COUNTRY: "required", 
 					U_STATE: "required",
@@ -311,7 +328,7 @@ if($userNameSession  !=="Khush@vilayat"){
 					U_STATE: "Please enter your state",					
 					U_PINCODE: "Please enter your pincode",         				
 				},
-				    errorElement: "em",
+				    errorElement: "label",
             errorClass: 'is-invalid',
             validClass: 'is-valid',           
             errorPlacement: function (error, element) {
@@ -324,7 +341,8 @@ if($userNameSession  !=="Khush@vilayat"){
                 else {
                     error.insertAfter(element);
                 }
-              }
+              },
+             
 			});
 
 		});
@@ -340,6 +358,9 @@ function DashUserModalForm_Reset(){
      $("#DashUserAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
     // $(".selectpicker").selectpicker('refresh');
 }
+// jQuery
+
+
 
 </script>
 <!-- modal for add and edit -->
@@ -382,7 +403,7 @@ function DashUserModalForm_Reset(){
                         </div>
                         <div class="form-group col-md-6">
                           <label for="contact">Contact</label>
-                          <input type="text" class="form-control form-control-sm"  placeholder="contact" id="U_CONTACT" name="U_CONTACT">
+                          <input type="tel" class="form-control form-control-sm"  placeholder="contact" id="U_CONTACT" name="U_CONTACT">
                         </div> 
                         <div class="form-group col-md-6">
                           <label for="access">Insert</label>
