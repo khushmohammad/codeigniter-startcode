@@ -1,16 +1,16 @@
 <?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
 
-  <nav class="navbar navbar-expand navbar-dark bg-secondary static-top">
-    <a class="navbar-brand mr-1" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
-    <button style="display: none;" class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+  <nav class="navbar navbar-expand navbar-dark back-color static-top">
+    <div class="col-md-6">
+    <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
+    <button style="display: none;" class="btn btn-link btn-sm text-white" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
     <!-- Navbar Search -->
- 
-
+   </div>
+  <div class="col-md-6">
     <!-- Navbar -->
-    <ul class="navbar-nav">
-
+    <ul class="navbar-nav" style="float: right;">
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="badge badge-danger">9+</span>
@@ -36,7 +36,7 @@
         </div>
       </li>
     </ul>
-
+    </div>
   </nav>
 
   <div id="wrapper">

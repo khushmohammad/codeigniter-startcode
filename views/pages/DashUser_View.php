@@ -43,6 +43,7 @@ if($userNameSession  !=="Khush@vilayat"){
                   <th data-class="expand">ID</th>
                   <th data-class="expand" >NAME</th>
                   <th data-class="expand" >USERNAME</th>
+                  <th data-class="expand" >TYPE</th>
                   <th data-class="expand" >GENDER</th>
                   <th data-class="expand" >PASSWORD</th>
                   <th data-class="expand">EMAIL</th>
@@ -79,6 +80,7 @@ if($userNameSession  !=="Khush@vilayat"){
             { data: 'U_ID' ,className:"all text-center"},
             { data: 'U_NAME' ,className:"all"},
             { data: 'U_USERNAME' ,className:"all"},
+            { data: 'U_USER_TYPE' ,className:"all"},
             { data: 'U_GENDER' ,className:"all"},
             { data: 'U_PASSWORD'},
             { data: 'U_EMAIL'},
@@ -152,6 +154,7 @@ if($userNameSession  !=="Khush@vilayat"){
                       $('#U_ID').val(obj.U_ID);
                       $('#U_NAME').val(obj.U_NAME);
                       $('#U_USERNAME').val(obj.U_USERNAME);
+                      $('#U_USER_TYPE').val(obj.U_USER_TYPE).trigger('change');
                       $('#U_GENDER').val(obj.U_GENDER).trigger('change');
                       $('#U_PASSWORD').val(obj.U_PASSWORD);
                       $('#U_EMAIL').val(obj.U_EMAIL);
@@ -301,6 +304,7 @@ if($userNameSession  !=="Khush@vilayat"){
                   }                         
             },
           U_PASSWORD: "required",
+          U_USER_TYPE: "required",
 					U_GENDER: "required",
 					U_EMAIL: "required",         	
           U_CONTACT: {
@@ -320,6 +324,7 @@ if($userNameSession  !=="Khush@vilayat"){
 					U_USERNAME: "This username in not available",
 					U_PASSWORD: "Please enter your password",
           U_GENDER: "Please enter your gender",
+          U_USER_TYPE: "Please enter uers type",
 					U_EMAIL: "Please enter your email",
 					U_CONTACT: "Please enter your contact",
 					U_ADDRESS: "Please enter your address",
@@ -384,6 +389,16 @@ function DashUserModalForm_Reset(){
                          <div class="form-group col-md-6">
                           <label for="USERNAME">LOGIN USERNAME</label>
                           <input type="text" class="form-control form-control-sm" id="U_USERNAME" placeholder="Username" name="U_USERNAME">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="TYPE">TYPE</label>
+                          <select class="form-control form-control-sm custom-select" id="U_USER_TYPE" name="U_USER_TYPE">                           
+                            <option value="" selected>SELECT</option>
+                            <option value="SUPERADMIN">SUPER ADMIN</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="EMPLOYEE">EMPLOYEE</option>                            
+                            <option value="CUSTOMER">CUSTOMER</option>                            
+                          </select>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="password">Password</label>

@@ -36,6 +36,7 @@ class Welcome extends CI_Controller {
                     'U_ID' => $res->U_ID,
                     'U_NAME' => $res->U_NAME,
                     'U_USERNAME' => $res->U_USERNAME,
+                    'U_USER_TYPE' => $res->U_USER_TYPE,
                     'U_PASSWORD' => $res->U_PASSWORD,
                     'U_ACCESS_UPDATE' => $res->U_ACCESS_UPDATE,
                     'U_ACCESS_INSERT' => $res->U_ACCESS_INSERT,
@@ -44,14 +45,12 @@ class Welcome extends CI_Controller {
                 );			
 		$this->session->set_userdata($userdata);   
 		  echo base_url()."Dashboard/"; 		 
-		}  
-		
-
+		}
 	}
-	public function logout(){  
-		$this->session->sess_destroy();  
-		header('location:'.base_url()."Welcome/".$this->index());  
-		  
+	public function logout(){
+		$userdata= 	array("U_NAME", "U_ID", "U_USERNAME","U_USER_TYPE", "U_PASSWORD", "U_ACCESS_UPDATE", "U_ACCESS_INSERT", "U_ACCESS_DELETE");		
+		$this->session->unset_userdata($userdata);  
+		header('location:'.base_url()."Welcome/".$this->index());
 	}
 
 }

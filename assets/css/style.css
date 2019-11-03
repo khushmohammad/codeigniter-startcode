@@ -31,7 +31,7 @@
     }
 
 .modal-header{
-    background:#6c757d !important;
+    background:#9898e6 !important;
     border-radius: 0px  !important;
     color:#fff  !important;
     padding: 10px !important
@@ -50,13 +50,13 @@ background:#f66fd9  !important;
     color:#fff !important;
     font-weight: bold !important;
 }
-table.dataTable thead {background-color:#6c757d; color: #fff;}
+table.dataTable thead {background-color:#9898e6; color: #fff;}
 @media only screen and (max-width: 768px) {
     #sidebarToggle{
         display: block !important;
     }   
 } 
 .back-color{
-background-color:#f66fd9 !important;    
+background-color:#9898e6 !important;    
 }
 

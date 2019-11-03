@@ -54,6 +54,7 @@ class LoginModel extends CI_Model {
 	public function DashUser_SaveAjax($userId){
 		$U_NAME = $this->input->post('U_NAME'); 
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
+		$U_USER_TYPE = $this->input->post('U_USER_TYPE'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
 		$U_EMAIL = $this->input->post('U_EMAIL'); 
@@ -71,6 +72,7 @@ class LoginModel extends CI_Model {
 		$data = array(
 			'U_NAME' => $U_NAME, 
 			'U_USERNAME' => $U_USERNAME, 
+			'U_USER_TYPE' => $U_USER_TYPE, 
 			'U_PASSWORD' => md5($U_PASSWORD), 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
@@ -98,7 +100,8 @@ class LoginModel extends CI_Model {
 		function DashUser_UpdateAjax($userId){
 		$id = $this->input->post('U_ID');	
 		$U_NAME = $this->input->post('U_NAME'); 
-		$U_USERNAME = $this->input->post('U_USERNAME'); 
+		$U_USERNAME = $this->input->post('U_USERNAME');
+		$U_USER_TYPE = $this->input->post('U_USER_TYPE');
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
 		$U_EMAIL = $this->input->post('U_EMAIL'); 
@@ -115,7 +118,8 @@ class LoginModel extends CI_Model {
 		$V_UP_TIME = $this->date();
 		$data = array(
 			'U_NAME' => $U_NAME, 
-			'U_USERNAME' => $U_USERNAME, 
+			'U_USERNAME' => $U_USERNAME,
+			'U_USER_TYPE' => $U_USER_TYPE,
 			'U_PASSWORD' => $U_PASSWORD, 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
