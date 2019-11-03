@@ -22,7 +22,7 @@ if($userNameSession  !=="Khush@vilayat"){
           <li class="breadcrumb-item active">Users</li>
         </ol>
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn btn-primary AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn back-color AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -38,7 +38,7 @@ if($userNameSession  !=="Khush@vilayat"){
           <div class="card-body">
             <div class="">
             <table class="table table-striped table-bordered nowrap" id="datatables" width="100%">
-              <thead class="thead-dark">
+              <thead>
                 <tr>
                   <th data-class="expand">ID</th>
                   <th data-class="expand" >NAME</th>
@@ -477,8 +477,8 @@ function DashUserModalForm_Reset(){
               <input type="hidden" name="U_ID" value=""  id="U_ID"/>
               </div>
               <div class="col-md-6 text-right">   
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
-                <button type="submit" class="btn btn-primary btn-sm" id="SaveButton">Save</button>
+                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
+                <button type="submit" class="btn back-color btn-sm" id="SaveButton">Save</button>
               </div>
               </div>
             </form> 
