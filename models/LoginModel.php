@@ -116,7 +116,7 @@ class LoginModel extends CI_Model {
 		$data = array(
 			'U_NAME' => $U_NAME, 
 			'U_USERNAME' => $U_USERNAME, 
-			'U_PASSWORD' => md5($U_PASSWORD), 
+			'U_PASSWORD' => $U_PASSWORD, 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
 			'U_CONTACT' => $U_CONTACT, 

@@ -41,17 +41,17 @@
     
     background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
 }
-li .active{
-    background: yellowgreen;
+.sidebar li.active{
+background:#343a40  !important;    
 }
-.sidebar li > .active{
+
+.sidebar li a{
 
     color:#fff !important;
     font-weight: bold !important;
 }
 
 @media only screen and (max-width: 768px) {
-
     #sidebarToggle{
         display: block !important;
     }   

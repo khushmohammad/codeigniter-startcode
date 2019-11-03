@@ -1,4 +1,5 @@
 <?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
+
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
     <button style="display: none;" class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
@@ -46,7 +47,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <div  class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a class="dropdown-item" href="#">Settings</a>
           <a class="dropdown-item" href="#">Activity Log</a>
           <div class="dropdown-divider"></div>
@@ -58,38 +59,27 @@
   </nav>
 
   <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav toggled">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="<?= site_url('Dashboard'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
-      </li>     
-    <!--  <li  class='nav-item'>
-        <a class="nav-link" href="<?= site_url('Dashboard/AdminUser'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Users</span>
-        </a>
-      </li> -->    
-      <li class="nav-item" id="dropmenu">
-         <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Setting</span>
-        </a>
-        <div class="collapse" id="menu1sub1">
-        <?php if($userNameSession=="Khush@vilayat"){ 
-           echo  '<a href="'.site_url('Dashboard/AdminUser').'" class="nav-link bg-dark" data-parent="#menu1sub1"> <i class="fas fa-fw fa-folder"></i><span>Users</span></a>';
-              
-                }
-           ?>
-          
-          <a href="#" class="nav-link bg-dark" data-parent="#menu1sub1"> <i class="fas fa-fw fa-folder"></i><span>Pages</span></a>
-          
-        </div>       
-        
-      </li>
+      </li>   
+      <?php if($userNameSession=="Khush@vilayat"){  ?>
+        <li class="nav-item" id="dropmenu">
+             <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Setting</span>
+            </a>
+        </li>  
+       <div class="collapse" id="menu1sub1">
+          <li class="nav-item">
+          <a href="<?php echo site_url('Dashboard/AdminUser'); ?>" class="nav-link" > <i class="fas fa-fw fa-folder"></i><span>Users</span></a>
+          </li>
+      </div> 
+    <?php } ?>
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
