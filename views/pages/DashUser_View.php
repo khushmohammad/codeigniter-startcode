@@ -15,12 +15,7 @@ if($userTypeSession  !=="SUPERADMIN"){
 }
 </style>
   <!-- Breadcrumbs-->       
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Users</li>
-        </ol>
+    
         <div class="addButton" style="padding: 10px 0 10px 0;">
           <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn back-color AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
@@ -43,8 +38,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                   <th data-class="expand" >NAME</th>
                   <th data-class="expand" >USERNAME</th>
                   <th data-class="expand" >TYPE</th>
-                  <th data-class="expand" >GENDER</th>
-                  <th data-class="expand" >PASSWORD</th>
+                  <th data-class="expand" >GENDER</th>                  
                   <th data-class="expand">EMAIL</th>
                   <th data-class="expand">CONTACT</th>
                   <th data-class="expand">ADDRESS</th>
@@ -60,7 +54,7 @@ if($userTypeSession  !=="SUPERADMIN"){
             </table>             
             </div>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+         
         </div>
      
 <script type="text/javascript">  
@@ -81,7 +75,7 @@ if($userTypeSession  !=="SUPERADMIN"){
             { data: 'U_USERNAME' ,className:"all"},
             { data: 'U_USER_TYPE' ,className:"all"},
             { data: 'U_GENDER' ,className:"all"},
-            { data: 'U_PASSWORD'},
+           // { data: 'U_PASSWORD'},
             { data: 'U_EMAIL'},
             { data: 'U_CONTACT'},
             { data: null , 'searchable': false ,
@@ -156,6 +150,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                       $('#U_USER_TYPE').val(obj.U_USER_TYPE).trigger('change');
                       $('#U_GENDER').val(obj.U_GENDER).trigger('change');
                       $('#U_PASSWORD').val(obj.U_PASSWORD);
+                      $('#U_PASSWORD_CONFIRM').val(obj.U_PASSWORD);
                       $('#U_EMAIL').val(obj.U_EMAIL);
                       $('#U_CONTACT').val(obj.U_CONTACT);
                       $('#U_ADDRESS').val(obj.U_ADDRESS);               
@@ -203,6 +198,12 @@ if($userTypeSession  !=="SUPERADMIN"){
         $('#U_ID').val('');
          $('#U_USERNAME').prop('readonly', false);
          $('#SaveButton').text('Save');
+          var $ActiveYn = $('#U_ACTIVE_YN').val();
+                      if($ActiveYn == 'Y'){
+                        $('#U_ACTIVE_YN').lcs_on();
+                      }else{
+                        $('#U_ACTIVE_YN').lcs_off();
+                      }
 
        }
        else{        
@@ -302,7 +303,16 @@ if($userTypeSession  !=="SUPERADMIN"){
                         }
                   }                         
             },
-          U_PASSWORD: "required",
+         // U_PASSWORD: "required",
+          U_PASSWORD : 
+                {
+                    required:true,
+                    minlength : 5
+                },
+          U_PASSWORD_CONFIRM : {
+              minlength : 5,
+              equalTo : "#U_PASSWORD"
+          },
           U_USER_TYPE: "required",
 					U_GENDER: "required",
 					U_EMAIL: "required",         	
@@ -382,12 +392,20 @@ function DashUserModalForm_Reset(){
                   <div class="col-sm-6">
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="Name">NAME</label>
+                          <label for="Name">Name</label>
                           <input type="text" class="form-control form-control-sm" id="U_NAME" placeholder="name" name="U_NAME">
                         </div>
                          <div class="form-group col-md-6">
-                          <label for="USERNAME">LOGIN USERNAME</label>
+                          <label for="USERNAME">Login Username</label>
                           <input type="text" class="form-control form-control-sm" id="U_USERNAME" placeholder="Username" name="U_USERNAME">
+                        </div>
+                         <div class="form-group col-md-6">
+                          <label for="password">Password</label>
+                          <input type="password" class="form-control form-control-sm" id="U_PASSWORD" placeholder="Password" name="U_PASSWORD">
+                        </div> 
+                        <div class="form-group col-md-6">
+                          <label for="password">Confirm Password</label>
+                          <input type="password" class="form-control form-control-sm" id="U_PASSWORD_CONFIRM" placeholder="Password" name="U_PASSWORD_CONFIRM">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="TYPE">TYPE</label>
@@ -398,10 +416,7 @@ function DashUserModalForm_Reset(){
                             <option value="EMPLOYEE">EMPLOYEE</option>
                           </select>
                         </div>
-                        <div class="form-group col-md-6">
-                          <label for="password">Password</label>
-                          <input type="text" class="form-control form-control-sm" id="U_PASSWORD" placeholder="Password" name="U_PASSWORD">
-                        </div>
+                       
                         <div class="form-group col-md-6">
                           <label for="gender">Gender</label>
                           <select class="form-control form-control-sm custom-select" id="U_GENDER" name="U_GENDER">                           
@@ -424,8 +439,12 @@ function DashUserModalForm_Reset(){
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                            
                           </select>                           
-                        </div> 
-                        <div class="form-group col-md-6">
+                        </div>     
+                      </div>
+                  </div>
+                  <div class="col-sm-6">                                      
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
                           <label for="access">Update</label>
                           <select class="form-control form-control-sm custom-select" id="U_ACCESS_UPDATE" name="U_ACCESS_UPDATE">                            
                             <option value="Y">Enable</option>
@@ -438,15 +457,11 @@ function DashUserModalForm_Reset(){
                             <option value="Y">Enable</option>
                             <option value="N">Disable</option>                             
                           </select>                           
-                        </div>                                                  
-                      </div>
-                  </div>
-                  <div class="col-sm-6"> 
-                       <div class="form-group">
+                        </div> 
+                        <div class="form-group col-md-12">
                           <label for="Address">Address</label>
                           <input type="text" class="form-control form-control-sm" id="U_ADDRESS" name="U_ADDRESS" placeholder="1234 Main St">
-                        </div>                                         
-                        <div class="form-row">
+                        </div>  
                           <div class="form-group col-md-6">
                             <label for="country">Country</label>
                             <select class="form-control form-control-sm custom-select" id="U_COUNTRY" name="U_COUNTRY">
@@ -484,7 +499,7 @@ function DashUserModalForm_Reset(){
               </div>             
               <div class="modal-footer">
               <div class="col-md-6" id="Activedivfooter">             
-              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="U_ACTIVE_YN" autocomplete="off"/>              
+              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="U_ACTIVE_YN"/>              
               <label class="checkbox-inline text-left"> Active</label>
               <input type="hidden" name="U_ACTIVE" value="N"  id="U_ACTIVE"/>
               <input type="hidden" name="U_ID" value=""  id="U_ID"/>

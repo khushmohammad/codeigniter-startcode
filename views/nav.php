@@ -41,7 +41,7 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
- <?php if($userTypeSession=="SUPERADMIN" || "ADMIN" || "EMPLOYEE"){  ?>
+ <?php if($userTypeSession  =="SUPERADMIN" || $userTypeSession  =="ADMIN" || $userTypeSession  =="EMPLOYEE"){  ?>
 
     <ul class="sidebar navbar-nav toggled">
       <li class="nav-item">
@@ -51,9 +51,14 @@
         </a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Product</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Stock</span></a>
       </li>
     <?php } ?>
     <!--   <li class="nav-item">

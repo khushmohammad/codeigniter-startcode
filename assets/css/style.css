@@ -24,7 +24,7 @@
     height: auto;
     width: 5%;
 }
-.custom-select{   
+.form-group > .custom-select{   
     height: 30px !important;
     padding: 0px !important;
     }
