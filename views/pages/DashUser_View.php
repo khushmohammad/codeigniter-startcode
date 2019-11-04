@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $AccessDelete = $this->session->userdata('U_ACCESS_DELETE');
 $AccessInsert = $this->session->userdata('U_ACCESS_INSERT');
 $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
-$userNameSession = $this->session->userdata('U_USERNAME');
-if($userNameSession  !=="Khush@vilayat"){    
+$userTypeSession = $this->session->userdata('U_USER_TYPE');
+if($userTypeSession  !=="SUPERADMIN"){    
         redirect('Dashboard'); 
          }    
 ?>  
@@ -27,8 +27,7 @@ if($userNameSession  !=="Khush@vilayat"){
         </button>
 
         </div> 
-        <div  class="AlertMessage">
-               
+        <div  class="AlertMessage">               
         </div>
         <!-- DataTables Example -->
         <div class="card mb-3">            
@@ -396,8 +395,7 @@ function DashUserModalForm_Reset(){
                             <option value="" selected>SELECT</option>
                             <option value="SUPERADMIN">SUPER ADMIN</option>
                             <option value="ADMIN">ADMIN</option>
-                            <option value="EMPLOYEE">EMPLOYEE</option>                            
-                            <option value="CUSTOMER">CUSTOMER</option>                            
+                            <option value="EMPLOYEE">EMPLOYEE</option>
                           </select>
                         </div>
                         <div class="form-group col-md-6">

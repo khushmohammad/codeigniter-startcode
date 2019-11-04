@@ -1,4 +1,4 @@
-<?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
+<?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); ?>
 
   <nav class="navbar navbar-expand navbar-dark back-color static-top">
     <div class="col-md-6">
@@ -41,6 +41,8 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
+ <?php if($userTypeSession=="SUPERADMIN" || "ADMIN" || "EMPLOYEE"){  ?>
+
     <ul class="sidebar navbar-nav toggled">
       <li class="nav-item">
         <a class="nav-link" href="<?= site_url('Dashboard'); ?>">
@@ -53,12 +55,13 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
+    <?php } ?>
     <!--   <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li> -->  
-      <?php if($userNameSession=="Khush@vilayat"){  ?>
+      <?php if($userTypeSession=="SUPERADMIN"){  ?>
         <li class="nav-item" id="dropmenu">
              <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
               <i class="fas fa-fw fa-folder"></i>
