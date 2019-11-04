@@ -36,8 +36,8 @@ if($userTypeSession  !=="SUPERADMIN"){
             Data Table Example</div>
           <div class="card-body">
             <div class="">
-            <table class="table table-striped table-bordered nowrap" id="datatables" width="100%">
-              <thead>
+            <table class="nowrap table table-striped table-bordered  table-hover" id="datatables" width="100%">
+              <thead class="thead-light">
                 <tr>
                   <th data-class="expand">ID</th>
                   <th data-class="expand" >NAME</th>

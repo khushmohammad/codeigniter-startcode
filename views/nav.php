@@ -1,6 +1,6 @@
 <?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); ?>
 
-  <nav class="navbar navbar-expand navbar-dark back-color static-top">
+  <nav class="navbar navbar-expand navbar-light header-background static-top border border-bottom">
     <div class="col-md-6">
     <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
     <button style="display: none;" class="btn btn-link btn-sm text-white" id="sidebarToggle" href="#">

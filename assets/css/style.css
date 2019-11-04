@@ -24,14 +24,13 @@
     height: auto;
     width: 5%;
 }
-.custom-select{
-   
+.custom-select{   
     height: 30px !important;
     padding: 0px !important;
     }
 
 .modal-header{
-    background:#006666 !important;
+    background:#006600 !important;
     border-radius: 0px  !important;
     color:#fff  !important;
     padding: 10px !important
@@ -42,20 +41,24 @@
     background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
 }
 .sidebar li.active{
-background:#f66fd9  !important;    
+background:#006600  !important;    
 }
 
 .sidebar li a{
     color:#fff !important;
     font-weight: bold !important;
 }
-table.dataTable thead {background-color:#006666; color: #fff;}
+.header-background{
+background-color:#e8ebe7 !important;    
+}
+
+.back-color{
+background-color:#006600 !important;    
+}
 @media only screen and (max-width: 768px) {
     #sidebarToggle{
         display: block !important;
     }   
 } 
-.back-color{
-background-color:#006666 !important;    
-}
+
 
