@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 31, 2019 at 07:36 PM
+-- Generation Time: Nov 03, 2019 at 03:52 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -48457,9 +48457,12 @@ INSERT INTO `currency` (`iso`, `name`) VALUES
 DROP VIEW IF EXISTS `dashuser_view`;
 CREATE TABLE IF NOT EXISTS `dashuser_view` (
 `U_ID` int(4)
+,`U_NAME` varchar(300)
 ,`U_USERNAME` varchar(200)
 ,`U_GENDER` varchar(200)
 ,`U_PASSWORD` varchar(200)
+,`U_USER_TYPE` varchar(200)
+,`U_ADHAR_DOCUMENT` varchar(200)
 ,`U_EMAIL` varchar(200)
 ,`U_CONTACT` varchar(200)
 ,`U_ADDRESS` varchar(200)
@@ -48488,9 +48491,12 @@ CREATE TABLE IF NOT EXISTS `dashuser_view` (
 DROP TABLE IF EXISTS `dash_users`;
 CREATE TABLE IF NOT EXISTS `dash_users` (
   `U_ID` int(4) NOT NULL AUTO_INCREMENT,
+  `U_NAME` varchar(300) NOT NULL,
   `U_USERNAME` varchar(200) NOT NULL,
   `U_GENDER` varchar(200) NOT NULL,
   `U_PASSWORD` varchar(200) NOT NULL,
+  `U_USER_TYPE` varchar(200) NOT NULL,
+  `U_ADHAR_DOCUMENT` varchar(200) NOT NULL,
   `U_EMAIL` varchar(200) NOT NULL,
   `U_CONTACT` varchar(200) NOT NULL,
   `U_ADDRESS` varchar(200) NOT NULL,
@@ -48514,12 +48520,11 @@ CREATE TABLE IF NOT EXISTS `dash_users` (
 -- Dumping data for table `dash_users`
 --
 
-INSERT INTO `dash_users` (`U_ID`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `V_LANG_CODE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
-(4, 'admin', 'Male', '202cb962ac59075b964b07152d234b70', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'en', 'N', 'N', 'N', 'Y', 'admin', '2019/10/31 16:07:52', '2019-10-29 06:43:27'),
-(2, 'crud', 'Male', '2dc714e7e4d090ea2577a71e6147f1f8', 'khush@email.com', '76909', 'sedar', '101', '33', '3295', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'Khush@vilayat', '2019/10/31 23:07:08', '2019-10-29 04:33:29'),
-(8, 'Admin', 'Male', '21232f297a57a5a743894a0e4a801fc3', 'khushbhaijaan007@gmail.com', '7690903270', '58', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'khush', '', '2019-10-31 18:14:58'),
-(5, 'Khush', 'Male', '484e6c7c39a4fe9d6f5c7ab83433af11', 'khushbhaijaan007@gmail.com', '7690903270', 'phulia kalan', '1', '44', '5919', '311407', 'N', 'en', 'Y', 'Y', 'N', 'Y', 'khush', '2019/10/31 22:11:49', '2019-10-29 12:06:34'),
-(9, 'Khush@vilayat', 'Male', '21232f297a57a5a743894a0e4a801fc3', 'khusbhaijaan007@gmail.com', '4324354353454', '123', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'admin', '2019/10/31 22:59:21', '2019-10-31 18:32:57');
+INSERT INTO `dash_users` (`U_ID`, `U_NAME`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_USER_TYPE`, `U_ADHAR_DOCUMENT`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `V_LANG_CODE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
+(4, 'KHUSH', 'admin', 'Male', '202cb962ac59075b964b07152d234b70', '', '', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'en', 'N', 'N', 'N', 'Y', 'Khush@vilayat', '2019/11/03 10:23:58', '2019-10-29 06:43:27'),
+(8, '', 'Admin', 'Male', '21232f297a57a5a743894a0e4a801fc3', '', '', 'khushbhaijaan007@gmail.com', '7690903270', '58', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'khush', '', '2019-10-31 18:14:58'),
+(5, 'crud', 'crud', 'Male', '0dcc4dccb8815cd00fde5123a77143c3', '', '', 'khushbhaijaan007@gmail.com', '7690903270', 'phulia kalan', '1', '44', '5919', '311407', 'N', 'en', 'Y', 'Y', 'N', 'Y', 'Khush@vilayat', '2019/11/03 10:06:53', '2019-10-29 12:06:34'),
+(9, 'KHUSH MOHAMMD', 'Khush@vilayat', 'Male', '21232f297a57a5a743894a0e4a801fc3', '', '', 'khusbhaijaan007@gmail.com', '4324354353454', '123', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'admin', '2019/10/31 22:59:21', '2019-10-31 18:32:57');
 
 -- --------------------------------------------------------
 
@@ -52725,7 +52730,7 @@ CREATE TABLE IF NOT EXISTS `v_pets_pictures` (
 --
 DROP TABLE IF EXISTS `dashuser_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_NAME` AS `U_NAME`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_USER_TYPE` AS `U_USER_TYPE`,`dash_users`.`U_ADHAR_DOCUMENT` AS `U_ADHAR_DOCUMENT`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

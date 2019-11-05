@@ -1,30 +1,21 @@
-<?php $userNameSession = $this->session->userdata('U_USERNAME') ?>
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); ?>
 
-    <a class="navbar-brand mr-1" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
-
-    <!-- <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+  <nav class="navbar navbar-expand navbar-light header-background static-top border border-bottom">
+    <div class="col-md-6">
+    <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
+    <button style="display: none;" class="btn btn-link btn-sm text-white" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
-    </button> -->
-
+    </button>
     <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
+   </div>
+  <div class="col-md-6">
     <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
+    <ul class="navbar-nav" style="float: right;">
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
           <span class="badge badge-danger">9+</span>
+          <i class="fas fa-bell fa-fw"></i>
+         
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -33,86 +24,62 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+    
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
+        <div  class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#">Settings</a>          
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
     </ul>
-
+    </div>
   </nav>
 
   <div id="wrapper">
-
     <!-- Sidebar -->
+ <?php if($userTypeSession  =="SUPERADMIN" || $userTypeSession  =="ADMIN" || $userTypeSession  =="EMPLOYEE"){  ?>
+
     <ul class="sidebar navbar-nav toggled">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="<?= site_url('Dashboard'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
-      </li>
-      <?php if($userNameSession=="Khush@vilayat"){ 
-
-        echo "<li  class='nav-item'>"; 
-      }  
-      else{
-
-        echo "<li  class='nav-item' style='display: none;'  >"; 
-
-      }
-
-      ?>
-     
-        <a class="nav-link" href="<?= site_url('Dashboard/AdminUser'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Users</span>
-        </a>
-      </li>    
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
-        </div>
-      </li>
+      </li> 
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Product</span></a>
       </li>
-      <li class="nav-item">
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Stock</span></a>
+      </li>
+    <?php } ?>
+    <!--   <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
-      </li>
+      </li> -->  
+      <?php if($userTypeSession=="SUPERADMIN"){  ?>
+        <li class="nav-item" id="dropmenu">
+             <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Setting</span>
+            </a>
+        </li>  
+       <div class="collapse" id="menu1sub1">
+          <li class="nav-item">
+          <a href="<?php echo site_url('Dashboard/AdminUser'); ?>" class="nav-link" > <i class="fas fa-fw fa-folder"></i><span>Users</span></a>
+          </li>
+      </div> 
+    <?php } ?>
+      
     </ul>
 
     <div id="content-wrapper">

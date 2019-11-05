@@ -19,7 +19,6 @@ class Dashboard extends CI_Controller {
         }
         //comman function
         function Get_StateList_Ajax(){
-
         	$Country_Id = $this->input->post('id',TRUE);
 			$data = $this->LoginModel->Get_StateList($Country_Id)->result();
 			echo json_encode($data);
@@ -54,6 +53,15 @@ class Dashboard extends CI_Controller {
 	        }
 			return $optionHtml;
 		}
+		function U_USERNAME_EXISTS(){
+		       $count= $this->LoginModel->isU_USERNAME_EXISTS($this->input->post('U_USERNAME'));
+		           if ( $count == TRUE ) {
+		               echo json_encode(FALSE);
+		           } else {
+		               echo json_encode(TRUE);
+		           }
+		   }
+			
         //common function
    
 	public function index()
@@ -62,6 +70,8 @@ class Dashboard extends CI_Controller {
         $this->load->view('pages/Dashboard_View');        
 		$this->load->view('footer');
 	}
+
+	//User Details
 	public function AdminUser()
 	{
 		$this->load->view('header');	
@@ -70,14 +80,12 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	 	
 	function DashUserView_Ajax()	
 	{		
 		header('Content-Type: application/json');
-		$this->datatables->select('U_ID,U_USERNAME,U_GENDER,U_PASSWORD,U_EMAIL,U_CONTACT,U_ADDRESS,U_PINCODE,U_ACTIVE,U_ACCESS_UPDATE, U_ACCESS_INSERT ,U_ACCESS_DELETE,ST_NAME,CN_NAME,CT_NAME');
-		$this->datatables->from('dashuser_view');
-		// $this->datatables->join('countries', 'countries.CN_ID = dash_users.U_COUNTRY');
-		// $this->datatables->join('states', 'states.ST_ID = dash_users.U_STATE');
-		// $this->datatables->join('cities', 'cities.CT_ID = dash_users.U_CITY');
+		$this->datatables->select('U_ID,U_NAME,U_USERNAME,U_GENDER,U_USER_TYPE,U_EMAIL,U_CONTACT,U_ADDRESS,U_PINCODE,U_ACTIVE,U_ACCESS_UPDATE, U_ACCESS_INSERT ,U_ACCESS_DELETE,ST_NAME,CN_NAME,CT_NAME');
+		$this->datatables->from('dashuser_view');		
 		echo $this->datatables->generate();	   
 	}
 
@@ -105,5 +113,54 @@ class Dashboard extends CI_Controller {
 		header('Content-Type: application/json');
 		$this->LoginModel->DashUser_UpdateAjax($this->userId);
 	}
+	//user Details end
+
+	//ProductDetails
+	public function PetDetails()
+		{
+			$this->load->view('header');	
+			//$data['countries']	= $this->LoginModel->country_list();		
+	        $this->load->view('pages/PetDetails_AddEdit');                
+			$this->load->view('footer');
+		}
+
+	function PetDetailsView_Ajax()	
+	{		
+		header('Content-Type: application/json');
+		$this->datatables->select('P_ID,P_NAME,P_CODE_ID,P_GENDER,P_DOB,P_SECTION_AREA,P_STATUS,P_IMAGE,P_CONDITION_TYPE,P_WEIGHT,P_ACTIVE');
+		$this->datatables->from('v_pets');		
+		echo $this->datatables->generate();	   
+	}	
+
+	function PetDetailsSave_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->PetDetailsSave_Ajax($this->userId);
+	}
+	function PetDetailsDelete_Ajax(){
+	$sysId =	$this->input->post('sysId');	
+	$img =	$this->input->post('img');	
+	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
+	  if(!empty($img)){		
+		$path = './upload/PetImage/'.$img;
+		unlink($path);
+		}
+	 if($delete){
+
+	 	echo json_encode('delete seccessfully');
+	 }
+	}
+
+	function GetPetDetailsEditData_Ajax(){
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetPetDetailsEditData($sysId);
+		//$result['stateOption'] = $this->getSelectedState($result['data'][0]['U_COUNTRY']);
+		//$result['cityOption'] = $this->getSelectedCity($result['data'][0]['U_STATE']);
+		echo json_encode($result);
+	}
+	function PetDetailsUpdate_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->PetDetailsUpdate_Ajax($this->userId);
+	}
+	//ProductDetails end
 	
 }

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LoginModel extends CI_Model {
 	public function login($data){  
-		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>md5($data['U_PASSWORD']),'U_ACTIVE' => 'Y'));
+		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD'],'U_ACTIVE' => 'Y'));
 		 if($query->num_rows() == 1) {
             return $query->row();
 			} 			 
@@ -31,7 +31,19 @@ class LoginModel extends CI_Model {
 		return $query;
 
      }
-    //common function
+      public function isU_USERNAME_EXISTS($USERNAME) {
+		           $query = $this->db
+		                   ->select('U_USERNAME')
+		                   ->where('U_USERNAME', $USERNAME)
+		                   ->get('dash_users');
+		           if( $query->num_rows() > 0 ){
+		               return TRUE;                 
+		           } else { 
+		               return FALSE;                
+		           }
+
+		   }	
+    //common function end
 
      public function GetDashUserData($sysId){
 
@@ -40,7 +52,9 @@ class LoginModel extends CI_Model {
      }
 
 	public function DashUser_SaveAjax($userId){
+		$U_NAME = $this->input->post('U_NAME'); 
 		$U_USERNAME = $this->input->post('U_USERNAME'); 
+		$U_USER_TYPE = $this->input->post('U_USER_TYPE'); 
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
 		$U_EMAIL = $this->input->post('U_EMAIL'); 
@@ -56,8 +70,10 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE');	 
 		
 		$data = array(
+			'U_NAME' => $U_NAME, 
 			'U_USERNAME' => $U_USERNAME, 
-			'U_PASSWORD' => md5($U_PASSWORD), 
+			'U_USER_TYPE' => $U_USER_TYPE, 
+			'U_PASSWORD' => $U_PASSWORD, 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
 			'U_CONTACT' => $U_CONTACT, 
@@ -83,7 +99,9 @@ class LoginModel extends CI_Model {
 		}
 		function DashUser_UpdateAjax($userId){
 		$id = $this->input->post('U_ID');	
-		$U_USERNAME = $this->input->post('U_USERNAME'); 
+		$U_NAME = $this->input->post('U_NAME'); 
+		$U_USERNAME = $this->input->post('U_USERNAME');
+		$U_USER_TYPE = $this->input->post('U_USER_TYPE');
 		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
 		$U_GENDER  = $this->input->post('U_GENDER'); 
 		$U_EMAIL = $this->input->post('U_EMAIL'); 
@@ -99,8 +117,10 @@ class LoginModel extends CI_Model {
 		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
 		$V_UP_TIME = $this->date();
 		$data = array(
-			'U_USERNAME' => $U_USERNAME, 
-			'U_PASSWORD' => md5($U_PASSWORD), 
+			'U_NAME' => $U_NAME, 
+			'U_USERNAME' => $U_USERNAME,
+			'U_USER_TYPE' => $U_USER_TYPE,
+			'U_PASSWORD' => $U_PASSWORD, 
 			'U_GENDER' => $U_GENDER, 
 			'U_EMAIL' => $U_EMAIL, 
 			'U_CONTACT' => $U_CONTACT, 
@@ -124,7 +144,113 @@ class LoginModel extends CI_Model {
 				echo json_encode('error');
 			}
 		}
-	
+	//PetDetails  
+
+	public function PetDetailsSave_Ajax($userId){
+
+  		$config['upload_path']          = './upload/PetImage';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $this->load->library('upload', $config);
+        if($this->input->post('P_IMAGE')!==''){
+         $this->upload->do_upload('P_IMAGE');
+        } else{
+         	$P_IMAGE = '';
+         }       
+       if ($this->upload->data('file_name')!=='') {
+         	$P_IMAGE = $this->upload->data('file_name');
+         } 
+		$P_NAME = $this->input->post('P_NAME'); 
+		$P_CODE_ID = $this->input->post('P_CODE_ID'); 
+		$P_GENDER = $this->input->post('P_GENDER'); 
+		$P_DOB = $this->input->post('P_DOB'); 
+		$P_SECTION_AREA  = $this->input->post('P_SECTION_AREA'); 
+		$P_STATUS = $this->input->post('P_STATUS'); 		 
+		$P_CONDITION_TYPE = $this->input->post('P_CONDITION_TYPE'); 
+		$P_WEIGHT = $this->input->post('P_WEIGHT');
+		$P_ACTIVE = $this->input->post('P_ACTIVE');
+		$data = array(
+			'P_NAME' => $P_NAME, 
+			'P_CODE_ID' => $P_CODE_ID, 
+			'P_GENDER' => $P_GENDER, 
+			'P_DOB' => $P_DOB, 
+			'P_SECTION_AREA' => $P_SECTION_AREA, 
+			'P_STATUS' => $P_STATUS, 
+			'P_IMAGE' => $P_IMAGE, 
+			'P_CONDITION_TYPE' => $P_CONDITION_TYPE, 
+			'P_WEIGHT' => $P_WEIGHT, 
+			'P_ACTIVE' => $P_ACTIVE,
+			'V_USER_ID' => $userId
+		);
+		$insert =  $this->db->insert('v_pets',$data); 
+		$insertId = $this->db->insert_id();
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+
+		function PetDetailsUpdate_Ajax($userId){
+		$id = $this->input->post('P_ID');	
+		$config['upload_path']          = './upload/PetImage';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $this->load->library('upload', $config);		
+
+        if($this->input->post('P_IMAGE')!==''){
+         $this->upload->do_upload('P_IMAGE');
+        }        
+       if ($this->upload->data('file_name')!=='') {
+         	$P_IMAGE = $this->upload->data('file_name');
+         	$P_IMAGE_OLD =  $this->input->post('P_IMAGE_OLD');
+         	if(!empty($P_IMAGE_OLD)){
+         		$path = './upload/PetImage/'.$P_IMAGE_OLD;
+				unlink($path);	
+         	}
+         	
+         } 
+         else{
+         	$P_IMAGE =  $this->input->post('P_IMAGE_OLD');
+
+         }
+		$P_NAME = $this->input->post('P_NAME'); 
+		$P_CODE_ID = $this->input->post('P_CODE_ID'); 
+		$P_GENDER = $this->input->post('P_GENDER'); 
+		$P_DOB = $this->input->post('P_DOB'); 
+		$P_SECTION_AREA  = $this->input->post('P_SECTION_AREA'); 
+		$P_STATUS = $this->input->post('P_STATUS'); 		 
+		$P_CONDITION_TYPE = $this->input->post('P_CONDITION_TYPE'); 
+		$P_WEIGHT = $this->input->post('P_WEIGHT');
+		$P_ACTIVE = $this->input->post('P_ACTIVE');	 
+		$V_UP_TIME = $this->date();
+		$data = array(
+			'P_NAME' => $P_NAME, 
+			'P_CODE_ID' => $P_CODE_ID, 
+			'P_GENDER' => $P_GENDER, 
+			'P_DOB' => $P_DOB, 
+			'P_SECTION_AREA' => $P_SECTION_AREA, 
+			'P_STATUS' => $P_STATUS, 
+			'P_IMAGE' => $P_IMAGE, 
+			'P_CONDITION_TYPE' => $P_CONDITION_TYPE, 
+			'P_WEIGHT' => $P_WEIGHT, 
+			'P_ACTIVE' => $P_ACTIVE,
+			'V_USER_ID' => $userId ,			
+			'V_UP_TIME' => $V_UP_TIME,
+		);
+		$update = $this->db->update('v_pets', $data, array('P_ID' => $id));		
+			if($update){
+				echo json_encode($id);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+	public function GetPetDetailsEditData($sysId){
+
+     	$sql = 'SELECT * FROM v_pets WHERE P_ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
+	//PetDetails end	
 	
 }
 

@@ -24,30 +24,49 @@
     height: auto;
     width: 5%;
 }
-.custom-select{
-   
+.form-group > .custom-select{   
     height: 30px !important;
     padding: 0px !important;
     }
 
 .modal-header{
-    background:#343a40 !important;
+    background:#006600 !important;
     border-radius: 0px  !important;
     color:#fff  !important;
-    padding: 10px !important
+    padding: 10px !important;
+    height: 50px !important;
 }
 
 .sidebar{
     
     background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
 }
+<<<<<<< HEAD
 li .active{
     background: yellowgreen;
     color:#fff !important;
     font-weight: bold !important;
 }
-.sidebar li a{
+.sidebar li.active{
+background:#006600  !important;    
+}
 
-    
+.sidebar li a{
+    color:#fff !important;
+
     font-weight: bold !important;
 }
+.header-background{
+background-color:#e8ebe7 !important;    
+}
+
+.back-color{
+background-color:#006600 !important;    
+}
+@media only screen and (max-width: 768px) {
+    #sidebarToggle{
+        display: block !important;
+    }   
+} 
+
+

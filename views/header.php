@@ -20,13 +20,18 @@
     <link href="<?= site_url('assets/vendor/datatables/responsive.dataTables.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/rowGroup.dataTables.min.css');?>" rel="stylesheet">
     <!-- plugin  -->
+
     <link href="<?= site_url('assets/plugins/bootstrap-select.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/lc_switch.css');?>" rel="stylesheet">
+    <link href="<?= site_url('assets/plugins/gijgo/css/gijgo.min.css');?>" rel="stylesheet">
+    <link href="<?= site_url('assets/plugins/inputflag/build/css/intlTelInput.css');?>" rel="stylesheet">
     <!-- plugin  -->
   <!-- Custom styles for this template-->
     <link href="<?= site_url('assets/vendor/css/sb-admin.css');?>" rel="stylesheet">
      <!-- Bootstrap core JavaScript-->
-    <script src="<?= site_url('assets/vendor/jquery/jquery.min.js');?>"></script>  
+    <script src="<?= site_url('assets/vendor/jquery/jquery.min.js');?>"></script> 
+     <script src="<?= site_url('assets/plugins/inputflag/build/js/intlTelInput-jquery.js');?>"></script>   
+    <script src="<?= site_url('assets/plugins/inputflag/build/js/intlTelInput.js');?>"></script> 
     <script src="<?= site_url('assets/vendor/datatables/jquery.dataTables.js');?>"></script>
     
     <script src="<?= site_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js');?>"></script>
@@ -44,6 +49,9 @@
     <script src="<?= site_url('assets/plugins/jquery.validate.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
+    <script src="<?= site_url('assets/plugins/gijgo/js/gijgo.min.js'); ?>"></script>
+    
+        
   <!-- plugin  -->
   <style>
  
