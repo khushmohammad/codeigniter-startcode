@@ -115,11 +115,25 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           });
           linesSwitchery(); 
         //free Zone area
-        
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
 
         //free Zone area           
       });
       // functions
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function(e) {
+            $('#P_IMAGE_PREVIEW').attr('src', e.target.result);
+          }
+          
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
      function linesSwitchery() {
           $('.lcs_check').lc_switch('Y', 'N');
 	    		$('.lcs_wrap').delegate('#P_ACTIVE_YN', 'lcs-on', function() {
@@ -147,6 +161,13 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       $('#P_ID').val(obj.P_ID);
                       $('#P_NAME').val(obj.P_NAME);
                       $('#P_CODE_ID').val(obj.P_CODE_ID);
+                      $('#P_IMAGE_OLD').val(obj.P_IMAGE);
+                      if(obj.P_IMAGE ==''){
+                        $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');
+                      }else{
+                        $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./upload/PetImage/');?>'+obj.P_IMAGE+'');
+                      }
+                      
                       $('#P_GENDER').val(obj.P_GENDER).trigger('change');
                       $('#P_DOB').val(obj.P_DOB);
                       $('#P_SECTION_AREA').val(obj.P_SECTION_AREA).trigger('change');
@@ -188,7 +209,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       }else{
                         $('#P_ACTIVE_YN').lcs_off();
                       }
-
+            $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');          
        }
        else{        
        var sysId =  $(this).attr('data-id');
@@ -346,13 +367,7 @@ function PetDetailsModalForm_Reset(){
                 <div class="row">
                   <div class="col-sm-6">
                       <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="Name">Image</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE">
-                              <label class="custom-file-label" for="image">Choose file</label>
-                            </div>
-                        </div>
+                       
                         <div class="form-group col-md-6">
                           <label for="Name">Name</label>
                           <input type="text" class="form-control form-control-sm" id="P_NAME" placeholder="name" name="P_NAME">
@@ -371,7 +386,18 @@ function PetDetailsModalForm_Reset(){
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>                            
                           </select>                          
-                        </div>                         
+                        </div>  
+                         <div class="form-group col-md-6">
+                          <label for="Name">Image</label>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE" onchange="readURL(this);">
+                              <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                        </div>
+                         <div class="form-group col-md-6">
+                          <label for="Image">Image Preview</label>
+                          <img src="" id="P_IMAGE_PREVIEW" height="auto" width="100%" >
+                        </div>                      
                       </div>
                   </div>
                   <div class="col-sm-6"> 
@@ -412,6 +438,7 @@ function PetDetailsModalForm_Reset(){
               <label class="checkbox-inline text-left"> Active</label>
               <input type="hidden" name="P_ACTIVE" value="N"  id="P_ACTIVE"/>
               <input type="hidden" name="P_ID" value=""  id="P_ID"/>
+              <input type="hidden" name="P_IMAGE_OLD" value=""  id="P_IMAGE_OLD"/>
               </div>
               <div class="col-md-6 text-right">   
                 <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="PetDetailsModalForm_Reset();">Close</button>

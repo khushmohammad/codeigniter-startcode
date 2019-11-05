@@ -155,20 +155,16 @@ class LoginModel extends CI_Model {
          $this->upload->do_upload('P_IMAGE');
         } else{
          	$P_IMAGE = '';
-         }
-       
+         }       
        if ($this->upload->data('file_name')!=='') {
          	$P_IMAGE = $this->upload->data('file_name');
          } 
-         
-
 		$P_NAME = $this->input->post('P_NAME'); 
 		$P_CODE_ID = $this->input->post('P_CODE_ID'); 
 		$P_GENDER = $this->input->post('P_GENDER'); 
 		$P_DOB = $this->input->post('P_DOB'); 
 		$P_SECTION_AREA  = $this->input->post('P_SECTION_AREA'); 
-		$P_STATUS = $this->input->post('P_STATUS'); 
-		 
+		$P_STATUS = $this->input->post('P_STATUS'); 		 
 		$P_CONDITION_TYPE = $this->input->post('P_CONDITION_TYPE'); 
 		$P_WEIGHT = $this->input->post('P_WEIGHT');
 		$P_ACTIVE = $this->input->post('P_ACTIVE');
@@ -196,45 +192,52 @@ class LoginModel extends CI_Model {
 		}
 
 		function PetDetailsUpdate_Ajax($userId){
-		$id = $this->input->post('U_ID');	
-		$U_NAME = $this->input->post('U_NAME'); 
-		$U_USERNAME = $this->input->post('U_USERNAME');
-		$U_USER_TYPE = $this->input->post('U_USER_TYPE');
-		$U_PASSWORD = $this->input->post('U_PASSWORD'); 
-		$U_GENDER  = $this->input->post('U_GENDER'); 
-		$U_EMAIL = $this->input->post('U_EMAIL'); 
-		$U_CONTACT = $this->input->post('U_CONTACT'); 
-		$U_ADDRESS = $this->input->post('U_ADDRESS'); 
-		$U_COUNTRY = $this->input->post('U_COUNTRY'); 
-		$U_STATE = $this->input->post('U_STATE'); 
-		$U_CITY = $this->input->post('U_CITY'); 
-		$U_PINCODE = $this->input->post('U_PINCODE'); 
-		$U_ACTIVE = $this->input->post('U_ACTIVE'); 
-		$U_ACCESS_UPDATE = $this->input->post('U_ACCESS_UPDATE'); 
-		$U_ACCESS_INSERT = $this->input->post('U_ACCESS_INSERT'); 
-		$U_ACCESS_DELETE = $this->input->post('U_ACCESS_DELETE'); 	 
+		$id = $this->input->post('P_ID');	
+		$config['upload_path']          = './upload/PetImage';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $this->load->library('upload', $config);		
+
+        if($this->input->post('P_IMAGE')!==''){
+         $this->upload->do_upload('P_IMAGE');
+        }        
+       if ($this->upload->data('file_name')!=='') {
+         	$P_IMAGE = $this->upload->data('file_name');
+         	$P_IMAGE_OLD =  $this->input->post('P_IMAGE_OLD');
+         	if(!empty($P_IMAGE_OLD)){
+         		$path = './upload/PetImage/'.$P_IMAGE_OLD;
+				unlink($path);	
+         	}
+         	
+         } 
+         else{
+         	$P_IMAGE =  $this->input->post('P_IMAGE_OLD');
+
+         }
+		$P_NAME = $this->input->post('P_NAME'); 
+		$P_CODE_ID = $this->input->post('P_CODE_ID'); 
+		$P_GENDER = $this->input->post('P_GENDER'); 
+		$P_DOB = $this->input->post('P_DOB'); 
+		$P_SECTION_AREA  = $this->input->post('P_SECTION_AREA'); 
+		$P_STATUS = $this->input->post('P_STATUS'); 		 
+		$P_CONDITION_TYPE = $this->input->post('P_CONDITION_TYPE'); 
+		$P_WEIGHT = $this->input->post('P_WEIGHT');
+		$P_ACTIVE = $this->input->post('P_ACTIVE');	 
 		$V_UP_TIME = $this->date();
 		$data = array(
-			'U_NAME' => $U_NAME, 
-			'U_USERNAME' => $U_USERNAME,
-			'U_USER_TYPE' => $U_USER_TYPE,
-			'U_PASSWORD' => $U_PASSWORD, 
-			'U_GENDER' => $U_GENDER, 
-			'U_EMAIL' => $U_EMAIL, 
-			'U_CONTACT' => $U_CONTACT, 
-			'U_ADDRESS' => $U_ADDRESS, 
-			'U_COUNTRY' => $U_COUNTRY, 
-			'U_STATE' => $U_STATE, 
-			'U_CITY' => $U_CITY, 
-			'U_PINCODE' => $U_PINCODE, 
-			'U_ACTIVE' => $U_ACTIVE,
-			'U_ACCESS_UPDATE' => $U_ACCESS_UPDATE, 
-			'U_ACCESS_INSERT' => $U_ACCESS_INSERT, 
-			'U_ACCESS_DELETE' => $U_ACCESS_DELETE, 
-			'V_USER_ID' => $userId,
+			'P_NAME' => $P_NAME, 
+			'P_CODE_ID' => $P_CODE_ID, 
+			'P_GENDER' => $P_GENDER, 
+			'P_DOB' => $P_DOB, 
+			'P_SECTION_AREA' => $P_SECTION_AREA, 
+			'P_STATUS' => $P_STATUS, 
+			'P_IMAGE' => $P_IMAGE, 
+			'P_CONDITION_TYPE' => $P_CONDITION_TYPE, 
+			'P_WEIGHT' => $P_WEIGHT, 
+			'P_ACTIVE' => $P_ACTIVE,
+			'V_USER_ID' => $userId ,			
 			'V_UP_TIME' => $V_UP_TIME,
 		);
-		$update = $this->db->update('dash_users', $data, array('U_ID' => $id));		
+		$update = $this->db->update('v_pets', $data, array('P_ID' => $id));		
 			if($update){
 				echo json_encode($id);
 			} 
