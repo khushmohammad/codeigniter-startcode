@@ -113,7 +113,11 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
             
           
           });
-          linesSwitchery();          
+          linesSwitchery(); 
+        //free Zone area
+        
+
+        //free Zone area           
       });
       // functions
      function linesSwitchery() {
@@ -420,3 +424,8 @@ function PetDetailsModalForm_Reset(){
         </div>
       </div>
       <!-- modal end for add edit -->
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#P_DOB').datepicker();
+});
+</script>
