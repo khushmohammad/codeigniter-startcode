@@ -20,9 +20,10 @@
     <link href="<?= site_url('assets/vendor/datatables/responsive.dataTables.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/rowGroup.dataTables.min.css');?>" rel="stylesheet">
     <!-- plugin  -->
+
     <link href="<?= site_url('assets/plugins/bootstrap-select.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/lc_switch.css');?>" rel="stylesheet">
-    <link href="<?= site_url('assets/plugins/datepicker/css/datepicker.css');?>" rel="stylesheet">
+    <link href="<?= site_url('assets/plugins/gijgo/css/gijgo.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/inputflag/build/css/intlTelInput.css');?>" rel="stylesheet">
     <!-- plugin  -->
   <!-- Custom styles for this template-->
@@ -48,7 +49,7 @@
     <script src="<?= site_url('assets/plugins/jquery.validate.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
-    <script src="<?= site_url('assets/plugins/datepicker/js/datepicker.min.js'); ?>"></script>
+    <script src="<?= site_url('assets/plugins/gijgo/js/gijgo.min.js'); ?>"></script>
     
         
   <!-- plugin  -->

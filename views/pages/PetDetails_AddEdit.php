@@ -378,7 +378,7 @@ function PetDetailsModalForm_Reset(){
                         </div>
                          <div class="form-group col-md-6">
                           <label for="DOB">Pet DOB</label>
-                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="name" name="P_DOB">
+                          <input type="text" class="form-control form-control-sm " id="P_DOB" placeholder="name" name="P_DOB">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Pet Gender</label>
@@ -452,7 +452,5 @@ function PetDetailsModalForm_Reset(){
       </div>
       <!-- modal end for add edit -->
 <script type="text/javascript">
-  $(document).ready(function() {
-  $('#P_DOB').datepicker();
-});
+
 </script>

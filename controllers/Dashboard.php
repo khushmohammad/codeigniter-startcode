@@ -140,8 +140,10 @@ class Dashboard extends CI_Controller {
 	$sysId =	$this->input->post('sysId');	
 	$img =	$this->input->post('img');	
 	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
+	  if(!empty($img)){		
 		$path = './upload/PetImage/'.$img;
 		unlink($path);
+		}
 	 if($delete){
 
 	 	echo json_encode('delete seccessfully');
