@@ -319,22 +319,28 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           P_WEIGHT: "Enter wieght",
                 				
 				},
-				    errorElement: "label",
-            errorClass: 'is-invalid',
-            validClass: 'is-valid',           
-            errorPlacement: function (error, element) {
-                // Add the `invalid-feedback` class to the error element
-                error.addClass("invalid-feedback");
-                //console.log(element);
-                if (element.prop("type") === "checkbox") {
-                    error.insertAfter(element.siblings("label"));
-                }                 
-                else {
-                    error.insertAfter(element);
-                }
-              },
-             
-			});
+				   errorClass: 'is-invalid',
+            validClass: 'is-valid',
+            errorPlacement: function(error, element) {
+                    var lastError = $(element).data('lastError'),
+                        newError = $(error).text();
+                        error.addClass("invalid-feedback");
+                    $(element).data('lastError', newError);
+                    if (newError !== '') {
+                      $(element).tooltip({
+                        placement: "bottom",
+                        trigger: "manual"
+                      }).attr('data-original-title', newError).tooltip('show');                     
+                    }
+                  },
+                  success: function(label, element) {
+                    $(element).tooltip('hide');
+                  }
+                });
+                $("input").blur(function() {
+                  if (!this.value.trim().length)
+                    $(this).tooltip("hide");
+               });
 		});
   //validation
 
