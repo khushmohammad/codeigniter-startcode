@@ -2,7 +2,7 @@
 
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){
-         $('#'+cityId).html('<option value="" selected> select </option>'); 
+         $('#'+cityId).html('<option value="" selected> select </option>');
          var id=$(this).val();
                 $.ajax({
                     url : "<?php echo site_url('Dashboard/Get_StateList_Ajax');?>",
@@ -13,10 +13,16 @@
                     success: function(data){                        
                         var html = '';
                         var i;
+                        if(!data.length == ''){ 
                         for(i=0; i<data.length; i++){
                             html += '<option value='+data[i].ST_ID+'>'+data[i].ST_NAME+'</option>';
                         }
+                      }else{
+                            html += '<option value="">Select</option>';
+
+                      }
                         $('#'+stateId).html(html);
+                      
                     }
                 });
                 return false;
