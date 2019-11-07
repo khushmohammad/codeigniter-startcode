@@ -15,7 +15,7 @@ if($userTypeSession  !=="SUPERADMIN"){
   <!-- Breadcrumbs-->       
     
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn back-color AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -513,7 +513,7 @@ function DashUserModalForm_Reset(){
               </div>
               <div class="col-md-6 text-right">   
                 <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
-                <button type="submit" class="btn back-color btn-sm" id="SaveButton">Save</button>
+                <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
               </div>
               </div>
             </form> 

@@ -30,7 +30,7 @@
     }
 
 .modal-header{
-    background:#006600 !important;
+    background:#6c757d  !important;
     border-radius: 0px  !important;
     color:#fff  !important;
     padding: 10px !important;
@@ -41,14 +41,14 @@
     
     background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
 }
-<<<<<<< HEAD
+
 li .active{
     background: yellowgreen;
     color:#fff !important;
     font-weight: bold !important;
 }
 .sidebar li.active{
-background:#006600  !important;    
+background:#28a745  !important;    
 }
 
 .sidebar li a{
@@ -56,10 +56,6 @@ background:#006600  !important;
 
     font-weight: bold !important;
 }
-.header-background{
-background-color:#e8ebe7 !important;    
-}
-
 .back-color{
 background-color:#006600 !important;    
 }

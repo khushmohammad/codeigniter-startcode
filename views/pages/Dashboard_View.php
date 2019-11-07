@@ -10,14 +10,12 @@ if($userTypeSession  !=="SUPERADMIN"){
          }    
 ?>  
 <style type="text/css">
-.iti__selected-flag{
-  display: block ruby !important;
-}
+
 </style>
   <!-- Breadcrumbs-->       
     
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn back-color AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -49,7 +47,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                   <th data-hide="phone,tablet">ACTION</th>
                 </tr>
               </thead>
-              <tbody>			
+              <tbody>     
               </tbody>
             </table>             
             </div>
@@ -88,14 +86,14 @@ if($userTypeSession  !=="SUPERADMIN"){
             { data: 'U_ACCESS_DELETE'},
             { data: null, "orderable": false, 'searchable': false, className:"all text-center", 
               render: function( data, type, row) {
-                sysid=data['U_ID'];				
+                sysid=data['U_ID'];       
                 return   '<div class="dropdown" >'
-                      +'	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">'
-                      +	'</button>'
-                      +	'<div class="dropdown-menu">'
-                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
-                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'"  href="#">Delete</button>'								
-                      +	'</div>'
+                      +'  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">'
+                      + '</button>'
+                      + '<div class="dropdown-menu">'
+                      +   '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
+                      +   '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'"  href="#">Delete</button>'                
+                      + '</div>'
                       +' </div>';          
               }
             }
@@ -104,12 +102,12 @@ if($userTypeSession  !=="SUPERADMIN"){
           var table = $('#datatables').DataTable( {  
           "processing": true,
           "serverSide": true,
-          'responsive': true,		
+          'responsive': true,   
           'scrollX':true,
           'scrollY':'320px',
-          'scrollCollapse': true,		
-          'dataType': 'json',				
-          columns: DataTableObject,		
+          'scrollCollapse': true,   
+          'dataType': 'json',       
+          columns: DataTableObject,   
               "ajax": {
                   "url": "<?= base_url(); ?>Dashboard/DashUserView_Ajax",
                   "type": "POST"
@@ -122,12 +120,12 @@ if($userTypeSession  !=="SUPERADMIN"){
       // functions
      function linesSwitchery() {
           $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#U_ACTIVE').val('Y');
-	    		});
-					$('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-off', function() {
-            $('#U_ACTIVE').val('N');						
-					});
+          $('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-on', function() {
+          $('#U_ACTIVE').val('Y');
+          });
+          $('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-off', function() {
+            $('#U_ACTIVE').val('N');            
+          });
           } 
 
      
@@ -198,6 +196,12 @@ if($userTypeSession  !=="SUPERADMIN"){
         $('#U_ID').val('');
          $('#U_USERNAME').prop('readonly', false);
          $('#SaveButton').text('Save');
+          var $ActiveYn = $('#U_ACTIVE_YN').val();
+                      if($ActiveYn == 'Y'){
+                        $('#U_ACTIVE_YN').lcs_on();
+                      }else{
+                        $('#U_ACTIVE_YN').lcs_off();
+                      }
 
        }
        else{        
@@ -243,7 +247,7 @@ if($userTypeSession  !=="SUPERADMIN"){
   //validation
   $.validator.setDefaults( {
 
-			submitHandler: function (form) {
+      submitHandler: function (form) {
        // debug: true       
        var sysId = $('#U_ID').val();
        var url = "<?php echo site_url('Dashboard/DashUser_UpdateAjax') ?>";
@@ -271,10 +275,11 @@ if($userTypeSession  !=="SUPERADMIN"){
            }); 
            $("#datatables").DataTable().draw();
            //$('#datatables').DataTable().ajax.reload();
-			}     
-		});     
-		$(document).ready( function () {
-			$( "#DashUserAddEdit_Form" ).validate( {
+      }     
+    });     
+    $(document).ready( function () {      
+     
+      $( "#DashUserAddEdit_Form" ).validate( {
         onkeyup: function(element) {
             $(element).valid();           
           }, 
@@ -282,8 +287,8 @@ if($userTypeSession  !=="SUPERADMIN"){
           $(element).valid();
         },  
 
-				rules: {
-          U_NAME: "required",				
+        rules: {
+          U_NAME: "required",       
           U_USERNAME:{                
                 required: true,
                 remote: 
@@ -307,36 +312,36 @@ if($userTypeSession  !=="SUPERADMIN"){
               equalTo : "#U_PASSWORD"
           },
           U_USER_TYPE: "required",
-					U_GENDER: "required",
-					U_EMAIL: "required",         	
+          U_GENDER: "required",
+          U_EMAIL: "required",          
           U_CONTACT: {
                   required:true,                 
                   number:true  
                },                
-					U_ADDRESS: "required",
-					U_COUNTRY: "required", 
-					U_STATE: "required",
+          U_ADDRESS: "required",
+          U_COUNTRY: "required", 
+          U_STATE: "required",
           U_ACCESS_INSERT: "required",
           U_ACCESS_UPDATE: "required",
-					U_ACCESS_DELETE: "required",
-					U_PINCODE: "required"
-				},
-				messages: {
+          U_ACCESS_DELETE: "required",
+          U_PINCODE: "required"
+        },
+        messages: {
           U_USERNAME: "Please enter your name",
-					U_USERNAME: "This username in not available",
-					U_PASSWORD: "Please enter your password",
+          U_USERNAME: "This username in not available",
+          U_PASSWORD: "Please enter your password",
           U_GENDER: "Please enter your gender",
           U_USER_TYPE: "Please enter uers type",
-					U_EMAIL: "Please enter your email",
-					U_CONTACT: "Please enter your contact",
-					U_ADDRESS: "Please enter your address",
-					U_COUNTRY: "Please enter your country",
-					U_STATE: "Please enter your state",					
-					U_PINCODE: "Please enter your pincode",         				
-				},
+          U_EMAIL: "Please enter your email",
+          U_CONTACT: "Please enter your contact",
+          U_ADDRESS: "Please enter your address",
+          U_COUNTRY: "Please enter your country",
+          U_STATE: "Please enter your state",         
+          U_PINCODE: "Please enter your pincode",                 
+        },
             errorClass: 'is-invalid',
             validClass: 'is-valid',
-				    errorPlacement: function(error, element) {
+            errorPlacement: function(error, element) {
                     var lastError = $(element).data('lastError'),
                         newError = $(error).text();
                         error.addClass("invalid-feedback");
@@ -355,10 +360,11 @@ if($userTypeSession  !=="SUPERADMIN"){
                 $("input").blur(function() {
                   if (!this.value.trim().length)
                     $(this).tooltip("hide");
-               
-             });
-			
-		});
+               });
+             
+             
+      
+    });
   //validation
 
 function DashUserModalForm_Reset(){
@@ -393,11 +399,11 @@ function DashUserModalForm_Reset(){
                   <div class="col-sm-6">
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="Name">NAME</label>
+                          <label for="Name">Name</label>
                           <input type="text" class="form-control form-control-sm" id="U_NAME" placeholder="name" name="U_NAME">
                         </div>
                          <div class="form-group col-md-6">
-                          <label for="USERNAME">LOGIN USERNAME</label>
+                          <label for="USERNAME">Login Username</label>
                           <input type="text" class="form-control form-control-sm" id="U_USERNAME" placeholder="Username" name="U_USERNAME">
                         </div>
                          <div class="form-group col-md-6">
@@ -500,14 +506,14 @@ function DashUserModalForm_Reset(){
               </div>             
               <div class="modal-footer">
               <div class="col-md-6" id="Activedivfooter">             
-              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="U_ACTIVE_YN" autocomplete="off"/>              
+              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="U_ACTIVE_YN"/>              
               <label class="checkbox-inline text-left"> Active</label>
               <input type="hidden" name="U_ACTIVE" value="N"  id="U_ACTIVE"/>
               <input type="hidden" name="U_ID" value=""  id="U_ID"/>
               </div>
               <div class="col-md-6 text-right">   
                 <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="DashUserModalForm_Reset();">Close</button>
-                <button type="submit" class="btn back-color btn-sm" id="SaveButton">Save</button>
+                <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
               </div>
               </div>
             </form> 
