@@ -16,6 +16,7 @@
     <link href="<?= site_url('assets/css/style.css');?>" rel="stylesheet">
       
   <!-- Page level plugin CSS-->
+     <link href="<?= site_url('assets/vendor/css/sb-admin.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/dataTables.bootstrap4.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/responsive.dataTables.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/rowGroup.dataTables.min.css');?>" rel="stylesheet">
@@ -27,7 +28,7 @@
     <link href="<?= site_url('assets/plugins/inputflag/build/css/intlTelInput.css');?>" rel="stylesheet">
     <!-- plugin  -->
   <!-- Custom styles for this template-->
-    <link href="<?= site_url('assets/vendor/css/sb-admin.css');?>" rel="stylesheet">
+   
      <!-- Bootstrap core JavaScript-->
     <script src="<?= site_url('assets/vendor/jquery/jquery.min.js');?>"></script>    
     <script src="<?= site_url('assets/vendor/bootstrap/js/popper.min.js');?>"></script> 
