@@ -1,5 +1,6 @@
 <script type="text/javascript"> 
-
+function datepicker(id){ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4' });
+}
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){
          $('#'+cityId).html('<option value="" selected> select </option>');

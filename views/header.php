@@ -12,19 +12,19 @@
   <title>Dashboard</title>
 
   <!-- Custom fonts for this template-->
-    <link href="<?= site_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
-    <link href="<?= site_url('assets/css/style.css');?>" rel="stylesheet">
-      
+   
   <!-- Page level plugin CSS-->
      <link href="<?= site_url('assets/vendor/css/sb-admin.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/dataTables.bootstrap4.css');?>" rel="stylesheet">
+      <link href="<?= site_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
+    <link href="<?= site_url('assets/css/style.css');?>" rel="stylesheet">     
     <link href="<?= site_url('assets/vendor/datatables/responsive.dataTables.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/vendor/datatables/rowGroup.dataTables.min.css');?>" rel="stylesheet">
     <!-- plugin  -->
 
     <link href="<?= site_url('assets/plugins/bootstrap-select.min.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/lc_switch.css');?>" rel="stylesheet">
-    <link href="<?= site_url('assets/plugins/gijgo/css/gijgo.min.css');?>" rel="stylesheet">
+    <link href="<?= site_url('assets/plugins/datepicker/css/datepicker.css');?>" rel="stylesheet">
     <link href="<?= site_url('assets/plugins/inputflag/build/css/intlTelInput.css');?>" rel="stylesheet">
     <!-- plugin  -->
   <!-- Custom styles for this template-->
@@ -52,7 +52,7 @@
     <script src="<?= site_url('assets/plugins/jquery.validate.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
-    <script src="<?= site_url('assets/plugins/gijgo/js/gijgo.min.js'); ?>"></script>
+    <script src="<?= site_url('assets/plugins/datepicker/js/datepicker.js'); ?>"></script>
     
         
   <!-- plugin  -->

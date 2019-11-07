@@ -113,6 +113,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           });
           linesSwitchery(); 
         //free Zone area
+        datepicker('P_DOB');
         $(".custom-file-input").on("change", function() {
           var fileName = $(this).val().split("\\").pop();
           $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -382,7 +383,7 @@ function PetDetailsModalForm_Reset(){
                         </div>
                          <div class="form-group col-md-6">
                           <label for="DOB">Pet DOB</label>
-                          <input type="text" class="form-control form-control-sm " id="P_DOB" placeholder="name" name="P_DOB">
+                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="name" name="DOB" aria-labelledby="P_DOB-label">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Pet Gender</label>
@@ -455,6 +456,3 @@ function PetDetailsModalForm_Reset(){
         </div>
       </div>
       <!-- modal end for add edit -->
-<script type="text/javascript">
-
-</script>
