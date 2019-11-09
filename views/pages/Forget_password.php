@@ -49,7 +49,7 @@
 
       }  
       else  {       
-          $('.alertMessage').append('<div class="alert alert-danger" role="alert">Wrong user email </div>');
+          $('.alertMessage').append('<div class="alert alert-danger" role="alert">Wrong user email and Something wrong </div>');
         setTimeout(function(){ 
           $('.alertMessage').empty();
          }, 2000);

@@ -71,17 +71,19 @@ class Welcome extends CI_Controller {
 			
 			$user_email=$row['U_EMAIL'];			
 			if((!strcmp($email, $user_email))){
-			//$pass=$row['U_PASSWORD'];
-				/*Mail Code*/
-			//	$to = $user_email;
-			//	$subject = "Password";
-			//	$txt = "Your password is $pass .";
-			//	$headers = "From: khushbhaijaan007@gmail.com" . "\r\n";
+			$pass=$row['U_PASSWORD'];
+			$this->email->from('khushbhaijaan007@gmail.com', 'khush mohammad');
+			$this->email->to($user_email);
+			$this->email->subject('Password');
+			$this->email->message("Your password is '".$pass ."'");
 
-				//if(mail($to,$subject,$txt,$headers)){
-					echo base_url()."Welcome/"; 
+			if($this->email->send()){
+				echo base_url()."Welcome/"; 
 
-				//}
+			}else{
+
+				echo "0";
+			}
 
 				}
 	}	
