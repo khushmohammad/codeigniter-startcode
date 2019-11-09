@@ -53,6 +53,42 @@ class Welcome extends CI_Controller {
 		header('location:'.base_url()."Welcome/".$this->index());
 	}
 
+	public function ForgetPass()
+	{
+		
+		$this->load->view('nonavheader');				
+        $this->load->view('pages/Forget_password');       
+		
+	}
+	public function Forget_password(){
+
+	$email = $this->input->post('U_EMAIL');
+
+	if(!empty($email)){
+
+		$que=$this->db->query("select U_PASSWORD,U_USERNAME,U_EMAIL from dash_users where U_EMAIL='".$email."'");
+			$row =$que->row_array();
+			
+			$user_email=$row['U_EMAIL'];			
+			if((!strcmp($email, $user_email))){
+			//$pass=$row['U_PASSWORD'];
+				/*Mail Code*/
+			//	$to = $user_email;
+			//	$subject = "Password";
+			//	$txt = "Your password is $pass .";
+			//	$headers = "From: khushbhaijaan007@gmail.com" . "\r\n";
+
+				//if(mail($to,$subject,$txt,$headers)){
+					echo base_url()."Welcome/"; 
+
+				//}
+
+				}
+	}	
+
+
+	}
+
 }
 
 

@@ -26,8 +26,8 @@
           <input type="submit" value="Login" class="btn btn-primary btn-block" id="submit" />
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          
+          <a class="d-block small" href="<?php echo site_url("Welcome/ForgetPass") ?>">Forgot Password?</a>
         </div>
       </div>
     </div>
