@@ -11,6 +11,10 @@
           </div>
           <input type="submit" value="Send Password" class="btn btn-primary btn-block" id="submit" />
         </form>
+        <div class="text-center">
+          
+          <a class="d-block small" href="<?php echo site_url("Welcome") ?>">Login page</a>
+        </div>
       </div>
     </div>
   </div>
