@@ -37,9 +37,8 @@
     height: 50px !important;
 }
 
-.sidebar{
-    
-    background: url('http://localhost/startcode/assets/img/sidebar-back.jpg');
+.sidebar{    
+    background: url('../../assets/img/sidebar-back.jpg');
 }
 
 li .active{

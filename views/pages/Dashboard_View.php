@@ -7,7 +7,8 @@ $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
 $userTypeSession = $this->session->userdata('U_USER_TYPE');
 if($userTypeSession  !=="SUPERADMIN"){    
         redirect('Dashboard'); 
-         }    
+         }  
+		 
 ?>  
 <style type="text/css">
 
