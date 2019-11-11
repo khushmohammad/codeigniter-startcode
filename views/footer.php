@@ -1,5 +1,7 @@
 <script type="text/javascript"> 
-function datepicker(id){ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4' });
+function datepicker(id){ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4', 
+  outputFormat: 'dd/MM/yyyy',
+  });
 }
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){

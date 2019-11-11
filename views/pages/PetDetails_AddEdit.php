@@ -299,13 +299,23 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 
 				rules: {
           P_NAME: "required",
-          P_CODE_ID: "required",
+          P_CODE_ID: {
+                    required: true,
+                    digits: true
+                  },
 					P_GENDER: "required",
-          P_DOB: "required",
+          P_DOB:{
+                  required: true,
+                   date: true
+
+          },
           P_SECTION_AREA: "required",
           P_STATUS: "required",
           P_CONDITION_TYPE: "required",
-          P_WEIGHT: "required",
+          P_WEIGHT:  {
+                    required: true,
+                    digits: true
+                  },
 				},
 				messages: {
           P_NAME: "Enter name",
@@ -383,7 +393,7 @@ function PetDetailsModalForm_Reset(){
                         </div>
                          <div class="form-group col-md-6">
                           <label for="DOB">Pet DOB</label>
-                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="name" name="DOB" aria-labelledby="P_DOB-label">
+                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="name" name="P_DOB" aria-labelledby="P_DOB-label">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="gender">Pet Gender</label>

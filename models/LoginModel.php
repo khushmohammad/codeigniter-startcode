@@ -215,7 +215,7 @@ class LoginModel extends CI_Model {
          }
 		$P_NAME = $this->input->post('P_NAME'); 
 		$P_CODE_ID = $this->input->post('P_CODE_ID'); 
-		$P_GENDER = $this->input->post('P_GENDER'); 
+		$P_GENDER = $this->input->post('P_GENDER');		
 		$P_DOB = $this->input->post('P_DOB'); 
 		$P_SECTION_AREA  = $this->input->post('P_SECTION_AREA'); 
 		$P_STATUS = $this->input->post('P_STATUS'); 		 

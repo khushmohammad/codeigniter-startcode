@@ -225,7 +225,7 @@ if($userTypeSession  !=="SUPERADMIN"){
              success: function(data)
              {
                  //alert(data); // show response from the php script.
-                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> Record successfully deleted</div>') ;
                  setTimeout(function(){ 
                   $('.AlertMessage').html('') ;
                  }, 2000);
@@ -261,12 +261,24 @@ if($userTypeSession  !=="SUPERADMIN"){
              data: $(form).serialize(), // serializes the form's elements.
              success: function(data)
              {
-                $('#U_ID').val(data)
+               if(sysId ==''){
+                 $('#U_ID').val(data)
                  //alert(data); // show response from the php script.
-                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> Data seccessfully inserted</div>') ;
                  setTimeout(function(){ 
                   $('.AlertMessageModal').html('') ;
                  }, 2000);
+
+               }
+               else{
+                 $('#U_ID').val(data)
+                 //alert(data); // show response from the php script.
+                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> Data seccessfully Updated</div>') ;
+                 setTimeout(function(){ 
+                  $('.AlertMessageModal').html('') ;
+                 }, 2000);               
+               }
+               
             
                  GetDashUserData_Ajax(); 
                   unloader();                 
@@ -300,8 +312,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                           U_USERNAME: function(){ return $("#U_USERNAME").val(); }
                         }
                   }                         
-            },
-         // U_PASSWORD: "required",
+            },         
           U_PASSWORD : 
                 {
                     required:true,
@@ -313,7 +324,11 @@ if($userTypeSession  !=="SUPERADMIN"){
           },
           U_USER_TYPE: "required",
 					U_GENDER: "required",
-					U_EMAIL: "required",         	
+					U_EMAIL:  {
+                  required: true,
+                   email: true
+
+          },         	
           U_CONTACT: {
                   required:true,                 
                   number:true  
@@ -324,7 +339,11 @@ if($userTypeSession  !=="SUPERADMIN"){
           U_ACCESS_INSERT: "required",
           U_ACCESS_UPDATE: "required",
 					U_ACCESS_DELETE: "required",
-					U_PINCODE: "required"
+					U_PINCODE: {
+                  required: true,
+                   digits: true
+
+          },
 				},
 				messages: {
           U_USERNAME: "Please enter your name",
