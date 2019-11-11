@@ -1,8 +1,25 @@
 <script type="text/javascript"> 
-function datepicker(id){ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4', 
+//today date
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    } 
+    if (mm < 10) {
+      mm = '0' + mm;
+    } 
+ var today = dd + '/' + mm + '/' + yyyy;  
+///
+function datepicker(id){
+
+ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4', 
   outputFormat: 'dd/MM/yyyy',
+  max: today,
   });
 }
+
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){
          $('#'+cityId).html('<option value="" selected> select </option>');

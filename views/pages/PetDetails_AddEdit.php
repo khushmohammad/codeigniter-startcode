@@ -57,14 +57,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 <script type="text/javascript">  
     
           //datatable view data
-        $(document).ready(function() {
-             //FOOTER FUNCTION
-          //changeCountryFlag('contactInputMasking','RM_CONTACT_NUMBER_HIDDEN','RM_CONTACT_NUMBER');
-      //    InputContact_flag('U_CONTACT');
-        //  State_List('U_COUNTRY','U_STATE','U_CITY');
-       //   City_List('U_STATE','U_CITY');
-          //FOOTER FUNCTION
-           //$.fn.dataTable.ext.errMode = 'throw';
+        $(document).ready(function() {            
 
           var DataTableObject=[
             { data: 'P_ID' ,className:"all text-center"},
@@ -116,7 +109,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
         datepicker('P_DOB');
         $(".custom-file-input").on("change", function() {
           var fileName = $(this).val().split("\\").pop();
-          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          $(this).siblings(".custom-file-label").addClass("selected").text(fileName).css('overflow','hidden');
         });
 
         //free Zone area           
@@ -404,7 +397,7 @@ function PetDetailsModalForm_Reset(){
                         </div>  
                          <div class="form-group col-md-6">
                           <label for="Name">Image</label>
-                            <div class="custom-file">
+                            <div class="form-control form-control-sm custom-file">
                               <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE" onchange="readURL(this);">
                               <label class="custom-file-label" for="image">Choose file</label>
                             </div>

@@ -25,6 +25,7 @@ class Welcome extends CI_Controller {
 		
 	}
 	function login(){
+		header('Content-Type: application/json');
 		if($this->session->userdata('U_USERNAME')){
             redirect('Dashboard');
         }
@@ -61,7 +62,7 @@ class Welcome extends CI_Controller {
 		
 	}
 	public function Forget_password(){
-
+	 header('Content-Type: application/json');
 	$email = $this->input->post('U_EMAIL');
 
 	if(!empty($email)){
