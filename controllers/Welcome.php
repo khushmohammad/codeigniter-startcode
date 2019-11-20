@@ -25,7 +25,7 @@ class Welcome extends CI_Controller {
 		
 	}
 	function login(){
-		
+		   
 		if($this->session->userdata('U_USERNAME')){
             redirect('Dashboard');
         }

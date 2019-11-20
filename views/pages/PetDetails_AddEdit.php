@@ -298,8 +298,8 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                   },
 					P_GENDER: "required",
           P_DOB:{
-                  required: true,
-                   date: true
+                  required: true
+                   
 
           },
           P_SECTION_AREA: "required",
