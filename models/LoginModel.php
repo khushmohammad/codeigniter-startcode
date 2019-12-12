@@ -8,8 +8,18 @@ class LoginModel extends CI_Model {
             return $query->row();
 			} 			 
 	}
+    
 	
 	 //common function
+   function SettingMenu(){
+                $this->db->select('*');
+                return $this->db->get_where('menudetail',array('M_LOCATION'=>'Setting'))->result_array();
+   }
+    function DashboardMenu(){                    
+        $sqlQry = "SELECT *	FROM menudetail	WHERE M_LOCATION != 'Setting'";
+		return $this->db->query($sqlQry)->result_array();
+   }
+        
 	function date(){
 		date_default_timezone_set('Asia/Dubai');
 		return  date('Y/m/d H:i:s');
@@ -251,6 +261,64 @@ class LoginModel extends CI_Model {
 		return  $this->db->query($sql)->result_array();
      }
 	//PetDetails end	
+    //menu Details
+    public function menuDetailsSave($userId){       
+		$M_SNO = $this->input->post('M_SNO'); 
+		$M_NAME = $this->input->post('M_NAME'); 
+		$M_LINK = $this->input->post('M_LINK'); 
+		$M_ICON = $this->input->post('M_ICON'); 
+		$M_LOCATION  = $this->input->post('M_LOCATION'); 
+		$M_ACTIVE = $this->input->post('M_ACTIVE'); 
+		$data = array(
+			'M_SNO' => $M_SNO, 
+			'M_NAME' => $M_NAME, 
+			'M_LINK' => $M_LINK, 
+			'M_ICON' => $M_ICON,			
+            'M_LOCATION' => $M_LOCATION,
+			'M_ACTIVE' => $M_ACTIVE,
+			'V_USER_ID' => $userId
+		);
+		$insert =  $this->db->insert('menudetail',$data); 
+		$insertId = $this->db->insert_id();
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+
+		function menuDetailsUpdate($userId){
+		$id = $this->input->post('M_ID');	
+		$M_SNO = $this->input->post('M_SNO'); 
+		$M_NAME = $this->input->post('M_NAME'); 
+		$M_LINK = $this->input->post('M_LINK'); 
+		$M_ICON = $this->input->post('M_ICON'); 
+		$M_LOCATION  = $this->input->post('M_LOCATION'); 
+		$M_ACTIVE = $this->input->post('M_ACTIVE'); 
+		$data = array(
+			'M_SNO' => $M_SNO, 
+			'M_NAME' => $M_NAME, 
+			'M_LINK' => $M_LINK, 
+			'M_ICON' => $M_ICON,			
+            'M_LOCATION' => $M_LOCATION,
+			'M_ACTIVE' => $M_ACTIVE,
+			'V_USER_ID' => $userId
+		);
+		$update = $this->db->update('menudetail', $data, array('M_ID' => $id));		
+			if($update){
+				echo json_encode($id);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+	public function GetmenuDetailsEditData($sysId){
+
+     	$sql = 'SELECT * FROM menudetail WHERE M_ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
+    //menu Details
 	
 }
 

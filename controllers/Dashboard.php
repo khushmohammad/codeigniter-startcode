@@ -5,9 +5,10 @@ class Dashboard extends CI_Controller {
 	function __construct(){
             parent::__construct();                  
             $this->load->model('LoginModel'); 
-            $this->logged_in();
+            $this->logged_in();            
             $this->userId = $this->session->userdata('U_USERNAME');
-			$userId = $this->session->userdata('U_USERNAME');				
+			$userId = $this->session->userdata('U_USERNAME'); 
+            //$this->Menu['menudata'] = $this->LoginModel->MenuData();         
           }
         // check log in  function  
         private function logged_in()
@@ -15,7 +16,6 @@ class Dashboard extends CI_Controller {
             if( ! $this->session->userdata('U_USERNAME')){
                 redirect('Welcome');			
             }
-            
         }
         //comman function
         function Get_StateList_Ajax(){
@@ -66,7 +66,7 @@ class Dashboard extends CI_Controller {
    
 	public function index()
 	{
-		$this->load->view('header');				
+		$this->load->view('header');        
         $this->load->view('pages/Dashboard_View');        
 		$this->load->view('footer');
 	}
@@ -118,8 +118,7 @@ class Dashboard extends CI_Controller {
 	//ProductDetails
 	public function PetDetails()
 		{
-			$this->load->view('header');	
-			//$data['countries']	= $this->LoginModel->country_list();		
+			$this->load->view('header');			
 	        $this->load->view('pages/PetDetails_AddEdit');                
 			$this->load->view('footer');
 		}
@@ -152,9 +151,7 @@ class Dashboard extends CI_Controller {
 
 	function GetPetDetailsEditData_Ajax(){
 		$sysId = 	$this->input->post('sysId');		
-		$result['data'] = $this->LoginModel->GetPetDetailsEditData($sysId);
-		//$result['stateOption'] = $this->getSelectedState($result['data'][0]['U_COUNTRY']);
-		//$result['cityOption'] = $this->getSelectedCity($result['data'][0]['U_STATE']);
+		$result['data'] = $this->LoginModel->GetPetDetailsEditData($sysId);		
 		echo json_encode($result);
 	}
 	function PetDetailsUpdate_Ajax(){
@@ -162,5 +159,93 @@ class Dashboard extends CI_Controller {
 		$this->LoginModel->PetDetailsUpdate_Ajax($this->userId);
 	}
 	//ProductDetails end
+	//StockDetails
+	public function StockDetails()
+		{
+			$this->load->view('header');				
+	        $this->load->view('pages/StockDetail_AddEdit');                
+			$this->load->view('footer');
+		}
+
+	function StockDetailsView_Ajax()	
+	{		
+		header('Content-Type: application/json');
+		$this->datatables->select('P_ID,P_NAME,P_CODE_ID,P_GENDER,P_DOB,P_SECTION_AREA,P_STATUS,P_IMAGE,P_CONDITION_TYPE,P_WEIGHT,P_ACTIVE');
+		$this->datatables->from('v_pets');		
+		echo $this->datatables->generate();	   
+	}	
+
+	function StockDetailsSave_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->PetDetailsSave_Ajax($this->userId);
+	}
+	function StockDetailsDelete_Ajax(){
+	$sysId =	$this->input->post('sysId');	
+	$img =	$this->input->post('img');	
+	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
+	  if(!empty($img)){		
+		$path = './upload/PetImage/'.$img;
+		unlink($path);
+		}
+	 if($delete){
+
+	 	echo json_encode('delete seccessfully');
+	 }
+	}
+
+	function GetStockDetailsEditData_Ajax(){
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetPetDetailsEditData($sysId);		
+		echo json_encode($result);
+	}
+	function StockDetailsUpdate_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->PetDetailsUpdate_Ajax($this->userId);
+	}
+	//StockDetails end
 	
+	//MenuDetails
+	public function MenuDetails()
+		{
+			$this->load->view('header');					
+	        $this->load->view('pages/MenuDetails_AddEdit');                
+			$this->load->view('footer');
+		}
+	function menuDetailsView_Ajax()	
+	{		
+		header('Content-Type: application/json');
+		$this->datatables->select('M_ID ,M_SNO ,M_NAME ,M_LINK ,M_ICON ,M_LOCATION ,M_ACTIVE ,	V_LANG_CODE ,V_USER_ID ,V_CR_TIME ,V_UP_TIME');
+		$this->datatables->from('menudetail');		
+		echo $this->datatables->generate();	   
+	}	
+
+	function menuDetailsSave_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->menuDetailsSave($this->userId);
+	}
+	function MenuDetailsDelete_Ajax(){
+	$sysId =	$this->input->post('sysId');	
+	$img =	$this->input->post('img');	
+	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
+	  if(!empty($img)){		
+		$path = './upload/PetImage/'.$img;
+		unlink($path);
+		}
+	 if($delete){
+
+	 	echo json_encode('delete seccessfully');
+	 }
+	}
+
+	function GetmenuDetailEditData_Ajax(){
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetmenuDetailsEditData($sysId);		
+		echo json_encode($result);
+	}
+	function menuDetailsUpdate_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->menuDetailsUpdate($this->userId);
+	}
+		
+	//MenuDetails end	
 }

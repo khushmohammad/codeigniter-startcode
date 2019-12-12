@@ -1,5 +1,12 @@
-<?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); ?>
+<?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); 
+ $SettingMenu =  $this->LoginModel->SettingMenu(); 
+$DashboardMenu =  $this->LoginModel->DashboardMenu();
 
+
+
+//echo '<pre>'; print_r($SettingMenu); echo '</pre>';
+        ?>
+    
   <nav class="navbar navbar-expand navbar-dark bg-secondary static-top ">
     <div class="col-md-6">
     <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
@@ -41,42 +48,29 @@
 
   <div id="wrapper">
     <!-- Sidebar -->
- <?php if($userTypeSession  =="SUPERADMIN" || $userTypeSession  =="ADMIN" || $userTypeSession  =="EMPLOYEE"){  ?>
-
-    <ul class="sidebar navbar-nav toggled">
-      <li class="nav-item">
-        <a class="nav-link" href="<?= site_url('Dashboard'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Product</span></a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Stock</span></a>
-      </li>
-    <?php } ?>
-    <!--   <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li> -->  
-      <?php if($userTypeSession=="SUPERADMIN"){  ?>
+    <ul class="sidebar navbar-nav toggled">      
+     <?php foreach($DashboardMenu as $Dashboard){ ?>
+            <li class="nav-item">
+                 <a href="<?php echo site_url($Dashboard['M_LINK']); ?>" class="nav-link" > 
+			     <i class="<?php echo $Dashboard['M_ICON'] ?>"></i>
+			     <span><?php echo $Dashboard['M_NAME'] ?></span></a>
+            </li>
+      <?php  }if($userTypeSession=="SUPERADMIN"){  ?>
         <li class="nav-item" id="dropmenu">
              <a href="#menu1sub1" class="nav-link dropdown-toggle" data-toggle="collapse" aria-expanded="false">
-              <i class="fas fa-fw fa-folder"></i>
+              <i class="fas fa-cogs"></i>
               <span>Setting</span>
             </a>
         </li>  
        <div class="collapse" id="menu1sub1">
-          <li class="nav-item">
-          <a href="<?php echo site_url('Dashboard/AdminUser'); ?>" class="nav-link" > <i class="fas fa-fw fa-folder"></i><span>Users</span></a>
-          </li>
+           <?php foreach($SettingMenu as $Setting){ ?>
+            <li class="nav-item">
+                 <a href="<?php echo site_url($Setting['M_LINK']); ?>" class="nav-link" > 
+			     <i class="<?php echo $Setting['M_ICON'] ?>"></i>
+			     <span><?php echo $Setting['M_NAME'] ?></span></a>
+            </li>
+           
+           <?php }  ?>
       </div> 
     <?php } ?>
       

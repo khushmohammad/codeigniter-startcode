@@ -54,6 +54,7 @@
     <script src="<?= site_url('assets/plugins/bootbox.locales.min.js');?>"></script>
     <script src="<?= site_url('assets/plugins/datepicker/js/datepicker.js'); ?>"></script>
     <script src="<?= site_url('assets/plugins/easy-number-separator.js'); ?>"></script>
+
     
         
   <!-- plugin  -->

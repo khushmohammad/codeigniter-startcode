@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 ?>    
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
