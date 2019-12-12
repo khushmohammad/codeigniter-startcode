@@ -88,7 +88,7 @@ if($userTypeSession  !=="SUPERADMIN"){
               render: function( data, type, row) {
                 sysid=data['U_ID'];				
                 return   '<div class="dropdown" >'
-                      +'	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">'
+                      +'	<button type="button" class="btn"  data-toggle="dropdown"><i class="fas fa-edit"></i>'
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
                       +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'

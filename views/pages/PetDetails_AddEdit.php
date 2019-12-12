@@ -61,7 +61,11 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           var DataTableObject=[
             { data: 'P_ID' ,className:"all text-center"},
             { data: 'P_CODE_ID' ,className:"all"},
-            { data: 'P_IMAGE'}, 
+            { data: null , 'searchable': false ,
+            render : function (data, type, dataToSet) {
+            return '<img src="<?php echo site_url('./upload/PetImage/');?>'+data.P_IMAGE+'" height="auto" width="50px">';
+            }},
+            //{ data: 'P_IMAGE'}, 
             { data: 'P_NAME' ,className:"all"},
             { data: 'P_GENDER' ,className:"all"},
             { data: 'P_DOB' ,className:"all"},
@@ -76,7 +80,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                 img=data['P_IMAGE'];
 
                 return   '<div class="dropdown" >'
-                      +'	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">'
+                      +'	<button type="button" class="btn" data-toggle="dropdown"><i class="fas fa-edit"></i>'
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
                       +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
