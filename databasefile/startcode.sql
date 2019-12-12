@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 31, 2019 at 07:36 PM
+-- Generation Time: Dec 12, 2019 at 02:41 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `startcode`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allitem`
+--
+
+DROP TABLE IF EXISTS `allitem`;
+CREATE TABLE IF NOT EXISTS `allitem` (
+  `I_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `I_NAME` varchar(200) NOT NULL,
+  `I_PURCHASEDATE` varchar(200) NOT NULL,
+  `I_PURCHASEBY` varchar(200) NOT NULL,
+  `I_AMOUNT` varchar(200) NOT NULL,
+  `I_IMAGE` varchar(200) NOT NULL,
+  `I_BILL` varchar(200) NOT NULL,
+  `I_EXPIRYDATE` varchar(200) NOT NULL,
+  `V_LANG_CODE` varchar(200) NOT NULL DEFAULT 'en',
+  `V_USER_ID` varchar(200) NOT NULL,
+  `V_UP_TIME` varchar(200) NOT NULL,
+  `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `I_ACTIVE` varchar(200) NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`I_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -48457,9 +48481,12 @@ INSERT INTO `currency` (`iso`, `name`) VALUES
 DROP VIEW IF EXISTS `dashuser_view`;
 CREATE TABLE IF NOT EXISTS `dashuser_view` (
 `U_ID` int(4)
+,`U_NAME` varchar(300)
 ,`U_USERNAME` varchar(200)
 ,`U_GENDER` varchar(200)
 ,`U_PASSWORD` varchar(200)
+,`U_USER_TYPE` varchar(200)
+,`U_ADHAR_DOCUMENT` varchar(200)
 ,`U_EMAIL` varchar(200)
 ,`U_CONTACT` varchar(200)
 ,`U_ADDRESS` varchar(200)
@@ -48488,9 +48515,12 @@ CREATE TABLE IF NOT EXISTS `dashuser_view` (
 DROP TABLE IF EXISTS `dash_users`;
 CREATE TABLE IF NOT EXISTS `dash_users` (
   `U_ID` int(4) NOT NULL AUTO_INCREMENT,
+  `U_NAME` varchar(300) NOT NULL,
   `U_USERNAME` varchar(200) NOT NULL,
   `U_GENDER` varchar(200) NOT NULL,
   `U_PASSWORD` varchar(200) NOT NULL,
+  `U_USER_TYPE` varchar(200) NOT NULL,
+  `U_ADHAR_DOCUMENT` varchar(200) NOT NULL,
   `U_EMAIL` varchar(200) NOT NULL,
   `U_CONTACT` varchar(200) NOT NULL,
   `U_ADDRESS` varchar(200) NOT NULL,
@@ -48499,27 +48529,58 @@ CREATE TABLE IF NOT EXISTS `dash_users` (
   `U_CITY` varchar(200) NOT NULL,
   `U_PINCODE` varchar(200) NOT NULL,
   `U_ACTIVE` varchar(200) NOT NULL DEFAULT 'Y',
-  `V_LANG_CODE` varchar(200) NOT NULL DEFAULT 'en',
   `U_ACCESS_UPDATE` varchar(200) NOT NULL,
   `U_ACCESS_INSERT` varchar(200) NOT NULL,
   `U_ACCESS_DELETE` varchar(200) NOT NULL,
   `U_ACCESS_VIEW` varchar(200) NOT NULL DEFAULT 'Y',
+  `V_LANG_CODE` varchar(200) NOT NULL DEFAULT 'en',
   `V_USER_ID` varchar(200) NOT NULL,
   `V_UP_TIME` varchar(200) NOT NULL,
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`U_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dash_users`
 --
 
-INSERT INTO `dash_users` (`U_ID`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `V_LANG_CODE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
-(4, 'admin', 'Male', '202cb962ac59075b964b07152d234b70', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'en', 'N', 'N', 'N', 'Y', 'admin', '2019/10/31 16:07:52', '2019-10-29 06:43:27'),
-(2, 'crud', 'Male', '2dc714e7e4d090ea2577a71e6147f1f8', 'khush@email.com', '76909', 'sedar', '101', '33', '3295', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'Khush@vilayat', '2019/10/31 23:07:08', '2019-10-29 04:33:29'),
-(8, 'Admin', 'Male', '21232f297a57a5a743894a0e4a801fc3', 'khushbhaijaan007@gmail.com', '7690903270', '58', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'khush', '', '2019-10-31 18:14:58'),
-(5, 'Khush', 'Male', '484e6c7c39a4fe9d6f5c7ab83433af11', 'khushbhaijaan007@gmail.com', '7690903270', 'phulia kalan', '1', '44', '5919', '311407', 'N', 'en', 'Y', 'Y', 'N', 'Y', 'khush', '2019/10/31 22:11:49', '2019-10-29 12:06:34'),
-(9, 'Khush@vilayat', 'Male', '21232f297a57a5a743894a0e4a801fc3', 'khusbhaijaan007@gmail.com', '4324354353454', '123', '101', '33', '3327', '311407', 'Y', 'en', 'Y', 'Y', 'Y', 'Y', 'admin', '2019/10/31 22:59:21', '2019-10-31 18:32:57');
+INSERT INTO `dash_users` (`U_ID`, `U_NAME`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_USER_TYPE`, `U_ADHAR_DOCUMENT`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_LANG_CODE`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
+(4, 'KHUSH', 'admin', 'Male', 'admin', 'ADMIN', '', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/12/11 11:02:02', '2019-10-29 06:43:27'),
+(11, 'crud', 'crud', 'Male', 'admin', 'ADMIN', '', 'crud@gmail.com', '45454', 'fsdf', '1', '43', '5914', '123', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/11/10 18:31:29', '2019-11-10 14:31:03'),
+(9, 'KHUSH MOHAMMD', 'Khush@vilayat', 'Male', 'admin', 'SUPERADMIN', '', 'khusbhaijaan007@gmail.com', '4324354353454', '123', '101', '33', '3327', '311407', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/11/04 10:44:17', '2019-10-31 18:32:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menudetail`
+--
+
+DROP TABLE IF EXISTS `menudetail`;
+CREATE TABLE IF NOT EXISTS `menudetail` (
+  `M_ID` int(4) NOT NULL AUTO_INCREMENT,
+  `M_SNO` varchar(200) NOT NULL,
+  `M_NAME` varchar(200) NOT NULL,
+  `M_LINK` varchar(200) NOT NULL,
+  `M_ICON` text NOT NULL,
+  `M_LOCATION` varchar(200) NOT NULL,
+  `M_ACTIVE` varchar(200) NOT NULL DEFAULT 'Y',
+  `V_LANG_CODE` varchar(200) NOT NULL DEFAULT 'en',
+  `V_USER_ID` varchar(200) NOT NULL,
+  `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `V_UP_TIME` varchar(200) NOT NULL,
+  PRIMARY KEY (`M_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menudetail`
+--
+
+INSERT INTO `menudetail` (`M_ID`, `M_SNO`, `M_NAME`, `M_LINK`, `M_ICON`, `M_LOCATION`, `M_ACTIVE`, `V_LANG_CODE`, `V_USER_ID`, `V_CR_TIME`, `V_UP_TIME`) VALUES
+(1, '01', 'stock', '/Dashboard/StockDetails', 'fas fa-fw fa-chart-area', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 08:52:03', ''),
+(2, '2', 'Users', 'Dashboard/AdminUser', 'fas fa-user-friends', 'Setting', 'N', 'en', 'Khush@vilayat', '2019-12-12 12:45:16', ''),
+(3, '03', 'Menu', 'Dashboard/MenuDetails', 'fas fa-bars', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:17:45', ''),
+(4, '04', 'Dashboard', 'Dashboard', 'fas fa-fw fa-tachometer-alt', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:29:17', ''),
+(5, '05', 'Pet Info', 'Dashboard/PetDetails', 'fas fa-info-circle', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:31:44', '');
 
 -- --------------------------------------------------------
 
@@ -52690,13 +52751,21 @@ CREATE TABLE IF NOT EXISTS `v_pets` (
   `P_STATUS` varchar(200) NOT NULL,
   `P_IMAGE` varchar(200) NOT NULL,
   `P_CONDITION_TYPE` varchar(200) NOT NULL,
-  `P_ACTIVIE` varchar(200) NOT NULL,
+  `P_WEIGHT` varchar(200) NOT NULL,
+  `P_ACTIVE` varchar(200) NOT NULL,
   `V_LANG_CODE` varchar(200) NOT NULL,
   `V_USER_ID` varchar(200) NOT NULL,
   `V_UP_TIME` varchar(200) NOT NULL,
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`P_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `v_pets`
+--
+
+INSERT INTO `v_pets` (`P_ID`, `P_NAME`, `P_CODE_ID`, `P_GENDER`, `P_DOB`, `P_SECTION_AREA`, `P_STATUS`, `P_IMAGE`, `P_CONDITION_TYPE`, `P_WEIGHT`, `P_ACTIVE`, `V_LANG_CODE`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
+(9, 'sher', '011', 'Male', '01/12/2019', 'Child', 'Process', 'picturemessage_ze013hdh_fio.png', 'good', '10', 'Y', '', 'Khush@vilayat', '', '2019-12-12 06:37:35');
 
 -- --------------------------------------------------------
 
@@ -52725,7 +52794,7 @@ CREATE TABLE IF NOT EXISTS `v_pets_pictures` (
 --
 DROP TABLE IF EXISTS `dashuser_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_NAME` AS `U_NAME`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_USER_TYPE` AS `U_USER_TYPE`,`dash_users`.`U_ADHAR_DOCUMENT` AS `U_ADHAR_DOCUMENT`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
