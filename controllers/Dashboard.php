@@ -5,6 +5,7 @@ class Dashboard extends CI_Controller {
 	function __construct(){
             parent::__construct();                  
             $this->load->model('LoginModel'); 
+            $this->load->model('DashbaordModal');
             $this->logged_in();            
             $this->userId = $this->session->userdata('U_USERNAME');
 			$userId = $this->session->userdata('U_USERNAME'); 
@@ -170,37 +171,36 @@ class Dashboard extends CI_Controller {
 	function StockDetailsView_Ajax()	
 	{		
 		header('Content-Type: application/json');
-		$this->datatables->select('P_ID,P_NAME,P_CODE_ID,P_GENDER,P_DOB,P_SECTION_AREA,P_STATUS,P_IMAGE,P_CONDITION_TYPE,P_WEIGHT,P_ACTIVE');
-		$this->datatables->from('v_pets');		
+		$this->datatables->select('I_ID ,I_NAME,I_PURCHASEDATE ,I_PURCHASEBY ,	I_AMOUNT,I_BILL,	I_EXPIRYDATE ,V_LANG_CODE ,V_USER_ID ,V_UP_TIME,	V_CR_TIME,I_ACTIVE');
+		$this->datatables->from('allitem');		
 		echo $this->datatables->generate();	   
 	}	
 
-	function StockDetailsSave_Ajax(){
+	function StockItemSave_Ajax(){
 		header('Content-Type: application/json');
-		$this->LoginModel->PetDetailsSave_Ajax($this->userId);
+		$this->LoginModel->StockItemSave($this->userId);
 	}
 	function StockDetailsDelete_Ajax(){
 	$sysId =	$this->input->post('sysId');	
 	$img =	$this->input->post('img');	
-	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
+	$delete = $this->db->delete('allitem',"I_ID = '".$sysId."'");		
 	  if(!empty($img)){		
-		$path = './upload/PetImage/'.$img;
+		$path = './upload/BillImage/'.$img;
 		unlink($path);
 		}
 	 if($delete){
-
 	 	echo json_encode('delete seccessfully');
 	 }
 	}
 
 	function GetStockDetailsEditData_Ajax(){
 		$sysId = 	$this->input->post('sysId');		
-		$result['data'] = $this->LoginModel->GetPetDetailsEditData($sysId);		
+		$result['data'] = $this->LoginModel->GetStockDetailsEditData($sysId);		
 		echo json_encode($result);
 	}
-	function StockDetailsUpdate_Ajax(){
+	function StockItemUpdate_Ajax(){
 		header('Content-Type: application/json');
-		$this->LoginModel->PetDetailsUpdate_Ajax($this->userId);
+		$this->LoginModel->StockItemUpdate($this->userId);
 	}
 	//StockDetails end
 	
@@ -225,14 +225,8 @@ class Dashboard extends CI_Controller {
 	}
 	function MenuDetailsDelete_Ajax(){
 	$sysId =	$this->input->post('sysId');	
-	$img =	$this->input->post('img');	
-	$delete = $this->db->delete('v_pets',"P_ID = '".$sysId."'");		
-	  if(!empty($img)){		
-		$path = './upload/PetImage/'.$img;
-		unlink($path);
-		}
+	$delete = $this->db->delete('menudetail',"M_ID = '".$sysId."'");		  
 	 if($delete){
-
 	 	echo json_encode('delete seccessfully');
 	 }
 	}

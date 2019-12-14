@@ -70,7 +70,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
                       +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#menuDetailModal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
-                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'"   href="#">Delete</button>'								
+                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="menuDelete" data-id="'+sysid+'"   href="#">Delete</button>'								
                       +	'</div>'
                       +' </div>';          
               }
@@ -171,7 +171,7 @@ if($userTypeSession  !=="SUPERADMIN"){
 
        }
   });  
-    $(document).on("click", "#DashUser_Delete", function(e) {
+    $(document).on("click", "#menuDelete", function(e) {
          var sysId = $(this).attr('data-id');
         bootbox.confirm("Are you sure you want to delete?", function(result) {
           if(result){ 
@@ -183,7 +183,7 @@ if($userTypeSession  !=="SUPERADMIN"){
              success: function(data)
              {
                  //alert(data); // show response from the php script.
-                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong>A Record  Seccessfully Deleted.</div>') ;
+                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success! </strong> A Record  Seccessfully Deleted.</div>') ;
                  setTimeout(function(){ 
                   $('.AlertMessage').html('') ;
                  }, 2000);
@@ -193,7 +193,6 @@ if($userTypeSession  !=="SUPERADMIN"){
               console.log(jqXHR);
                 // Your error handling logic here..
               }  
-
            });
            $("#datatables").DataTable().draw();
            $('#datatables').DataTable().ajax.reload();
@@ -234,11 +233,12 @@ submitHandler: function (form) {
                  }, 2000);
             
                  GetmenuDetailData_Ajax(); 
-                  unloader();                 
+                  unloader(); 
+                  $("#datatables").DataTable().draw();                
              }
-            
+             
            }); 
-           $("#datatables").DataTable().draw();
+          
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		});     

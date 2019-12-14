@@ -7,16 +7,15 @@ class LoginModel extends CI_Model {
 		 if($query->num_rows() == 1) {
             return $query->row();
 			} 			 
-	}
-    
+	}    
 	
 	 //common function
    function SettingMenu(){
-                $this->db->select('*');
-                return $this->db->get_where('menudetail',array('M_LOCATION'=>'Setting'))->result_array();
+        $sqlQry = "SELECT *	FROM menudetail	WHERE M_LOCATION = 'Setting' ORDER BY M_SNO ASC";
+		return $this->db->query($sqlQry)->result_array();
    }
     function DashboardMenu(){                    
-        $sqlQry = "SELECT *	FROM menudetail	WHERE M_LOCATION != 'Setting'";
+        $sqlQry = "SELECT *	FROM menudetail WHERE M_LOCATION != 'Setting' ORDER BY M_SNO ASC" ;
 		return $this->db->query($sqlQry)->result_array();
    }
         
@@ -42,15 +41,14 @@ class LoginModel extends CI_Model {
 
      }
       public function isU_USERNAME_EXISTS($USERNAME) {
-		           $query = $this->db
-		                   ->select('U_USERNAME')
-		                   ->where('U_USERNAME', $USERNAME)
-		                   ->get('dash_users');
-		           if( $query->num_rows() > 0 ){
-		               return TRUE;                 
-		           } else { 
-		               return FALSE;                
-		           }
+      	$sysId = $this->input->post('sysId');
+      	$sqlQry = "SELECT *	FROM dash_users WHERE U_USERNAME = '".$USERNAME."' AND NOT U_ID  = '".$sysId."'" ;
+		$query = $this->db->query($sqlQry)->num_rows();		                  
+           if( $query > 0 ){
+               return TRUE;                 
+           } else { 
+               return FALSE;                
+           }
 
 		   }	
     //common function end
@@ -157,15 +155,13 @@ class LoginModel extends CI_Model {
 	//PetDetails  
 
 	public function PetDetailsSave_Ajax($userId){
-
+		$P_IMAGE = '';
   		$config['upload_path']          = './upload/PetImage';
         $config['allowed_types']        = 'gif|jpg|png';
         $this->load->library('upload', $config);
         if($this->input->post('P_IMAGE')!==''){
          $this->upload->do_upload('P_IMAGE');
-        } else{
-         	$P_IMAGE = '';
-         }       
+        }    
        if ($this->upload->data('file_name')!=='') {
          	$P_IMAGE = $this->upload->data('file_name');
          } 
@@ -319,6 +315,103 @@ class LoginModel extends CI_Model {
 		return  $this->db->query($sql)->result_array();
      }
     //menu Details
+     //stock
+     //PetDetails 
+
+	public function StockItemSave($userId){
+		$I_BILL = '';
+  		$config['upload_path']          = './upload/BillImage';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $this->load->library('upload', $config);
+        if($this->input->post('I_BILL')!==''){
+         $this->upload->do_upload('I_BILL');
+        }
+
+       if ($this->upload->data('file_name')!=='') {
+         	$I_BILL = $this->upload->data('file_name');
+         } 
+		$I_NAME = $this->input->post('I_NAME'); 
+		$I_PURCHASEDATE = $this->input->post('I_PURCHASEDATE'); 
+		$I_PURCHASEBY = $this->input->post('I_PURCHASEBY'); 
+		$I_AMOUNT = $this->input->post('I_AMOUNT'); 		
+		$I_EXPIRYDATE = $this->input->post('I_EXPIRYDATE');
+		$I_ACTIVE = $this->input->post('I_ACTIVE');
+		$data = array(
+			'I_NAME' => $I_NAME, 
+			'I_PURCHASEDATE' => $I_PURCHASEDATE, 
+			'I_PURCHASEBY' => $I_PURCHASEBY, 
+			'I_AMOUNT' => $I_AMOUNT, 		
+			'I_EXPIRYDATE' => $I_EXPIRYDATE, 
+			'I_BILL' => $I_BILL,			
+			'I_ACTIVE' => $I_ACTIVE,
+			'V_USER_ID' => $userId
+		);
+		$insert =  $this->db->insert('allitem',$data); 
+		$insertId = $this->db->insert_id();
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+
+		function StockItemUpdate($userId){
+		$id = $this->input->post('I_ID');	
+		$config['upload_path']          = './upload/BillImage';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $this->load->library('upload', $config);		
+
+        if($this->input->post('I_BILL')!==''){
+         $this->upload->do_upload('I_BILL');
+        }        
+       if ($this->upload->data('file_name')!=='') {
+         	$I_BILL = $this->upload->data('file_name');
+         	$I_BILL_OLD =  $this->input->post('I_BILL_OLD');
+         	if(!empty($I_BILL_OLD)){
+         		$path = './upload/BillImage/'.$I_BILL_OLD;
+				unlink($path);	
+         	}
+         	
+         } 
+         else{
+         	$I_BILL =  $this->input->post('I_BILL_OLD');
+
+         }
+        $I_NAME = $this->input->post('I_NAME'); 
+		$I_PURCHASEDATE = $this->input->post('I_PURCHASEDATE'); 
+		$I_PURCHASEBY = $this->input->post('I_PURCHASEBY'); 
+		$I_AMOUNT = $this->input->post('I_AMOUNT'); 		
+		$I_EXPIRYDATE = $this->input->post('I_EXPIRYDATE');
+		$I_ACTIVE = $this->input->post('I_ACTIVE');
+		$V_UP_TIME = $this->date();
+		$data = array(
+			'I_NAME' => $I_NAME, 
+			'I_PURCHASEDATE' => $I_PURCHASEDATE, 
+			'I_PURCHASEBY' => $I_PURCHASEBY, 
+			'I_AMOUNT' => $I_AMOUNT, 		
+			'I_EXPIRYDATE' => $I_EXPIRYDATE, 
+			'I_BILL' => $I_BILL,			
+			'I_ACTIVE' => $I_ACTIVE,
+			'V_USER_ID' => $userId,
+			'V_UP_TIME' => $V_UP_TIME,
+		);		
+		$update = $this->db->update('allitem', $data, array('I_ID' => $id));		
+			if($update){
+				echo json_encode($id);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+	public function GetStockDetailsEditData($sysId){
+
+     	$sql = 'SELECT * FROM allitem WHERE I_ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
+
+
+     //stock
 	
 }
 

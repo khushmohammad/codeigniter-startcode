@@ -61,10 +61,15 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           var DataTableObject=[
             { data: 'P_ID' ,className:"all text-center"},
             { data: 'P_CODE_ID' ,className:"all"},
-            { data: null , 'searchable': false ,
-            render : function (data, type, dataToSet) {
-            return '<img src="<?php echo site_url('./upload/PetImage/');?>'+data.P_IMAGE+'" height="auto" width="50px">';
-            }},
+            { data: null ,'searchable': false, render: function (data, type, dataToSet) {
+            var image =    data.P_IMAGE;          
+             if( image != ''){               
+                 return '<img src="<?php echo site_url('./upload/PetImage/');?>'+image+'" height="auto" width="50px">';
+                }else{                 
+                  return '<img src="<?php echo site_url('/assets/img/noimage.png');?>" height="auto" width="50px">';
+                } 
+              },     
+            },
             //{ data: 'P_IMAGE'}, 
             { data: 'P_NAME' ,className:"all"},
             { data: 'P_GENDER' ,className:"all"},
@@ -169,7 +174,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       $('#P_STATUS').val(obj.P_STATUS).trigger('change');
                       $('#P_CONDITION_TYPE').val(obj.P_CONDITION_TYPE).trigger('change');
                       $('#P_WEIGHT').val(obj.P_WEIGHT);
-                     
+                                           
                       var $ActiveYn = obj.P_ACTIVE;
                       if($ActiveYn == 'Y'){
                         $('#P_ACTIVE_YN').lcs_on();

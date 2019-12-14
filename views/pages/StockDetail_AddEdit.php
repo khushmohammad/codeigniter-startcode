@@ -14,7 +14,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
   <!-- Breadcrumbs-->       
     
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#StockItemModal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -32,15 +32,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
               <thead class="thead-light">
                 <tr>
                   <th data-class="expand">ID</th>
-                  <th data-class="expand" >PET CODE</th>
-                  <th data-class="expand" >IMAGE</th>
-                  <th data-class="expand" >NAME</th>
-                  <th data-class="expand" >GENDER</th>
-                  <th data-class="expand" >DOB</th>                  
-                  <th data-class="expand">LOCATION</th>
-                  <th data-class="expand">STATUS</th>
-                  <th data-class="expand">CONDITION</th>
-                  <th data-class="expand">WEIGHT</th>                  
+                  <th data-class="expand" >Name</th>
+                  <th data-class="expand" >Purchase Date</th>
+                  <th data-class="expand" >Purchase By</th>
+                  <th data-class="expand" >Amount</th>
+                  <th data-class="expand" >Bill</th>                  
+                  <th data-class="expand">Expriy Date</th>
                   <th data-class="expand">ACTIVE</th>                                 
                   <th data-hide="phone,tablet">ACTION</th>
                 </tr>
@@ -49,37 +46,39 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
               </tbody>
             </table>             
             </div>
-          </div>
-         
+          </div>         
         </div>
      
-<script type="text/javascript">  
-    
+<script type="text/javascript">    
           //datatable view data
         $(document).ready(function() {
           var DataTableObject=[
-            { data: 'P_ID' ,className:"all text-center"},
-            { data: 'P_CODE_ID' ,className:"all"},
-            { data: 'P_IMAGE'}, 
-            { data: 'P_NAME' ,className:"all"},
-            { data: 'P_GENDER' ,className:"all"},
-            { data: 'P_DOB' ,className:"all"},
-            { data: 'P_SECTION_AREA'},
-            { data: 'P_STATUS'},                   
-            { data: 'P_CONDITION_TYPE'},            
-            { data: 'P_WEIGHT'},
-            { data: 'P_ACTIVE'},           
+            { data: 'I_ID' ,className:"all text-center"},
+            { data: 'I_NAME' ,className:"all"},
+            { data: 'I_PURCHASEDATE'}, 
+            { data: 'I_PURCHASEBY' ,className:"all"},
+            { data: 'I_AMOUNT' ,className:"all"},
+            { data:  function (data, type, dataToSet) {
+            var bill =    data.I_BILL;          
+             if( bill != ''){               
+                 return '<img src="<?php echo site_url('/upload/BillImage/');?>'+bill+'" height="auto" width="50px">';
+                }else{                 
+                  return '<img src="<?php echo site_url('/assets/img/noimage.png');?>" height="auto" width="50px">';
+                } 
+              }, 'searchable': false       
+            },           
+            { data: 'I_EXPIRYDATE'},
+            { data: 'I_ACTIVE'},
             { data: null, "orderable": false, 'searchable': false, className:"all text-center", 
               render: function( data, type, row) {
-                sysid=data['P_ID'];
-                img=data['P_IMAGE'];
-
+                sysid=data['I_ID'];
+                img=data['I_BILL'];
                 return   '<div class="dropdown" >'
                       +'	<button type="button" class="btn" data-toggle="dropdown"><i class="fas fa-edit"></i>'
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
-                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#DashUser_Modal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
-                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="DashUser_Delete" data-id="'+sysid+'" data-img="'+img+'"  href="#">Delete</button>'								
+                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#StockItemModal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
+                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="StockItemDelete" data-id="'+sysid+'" data-img="'+img+'"  href="#">Delete</button>'								
                       +	'</div>'
                       +' </div>';          
               }
@@ -96,7 +95,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           'dataType': 'json',				
           columns: DataTableObject,		
               "ajax": {
-                  "url": "<?= base_url(); ?>Dashboard/PetDetailsView_Ajax",
+                  "url": "<?= base_url(); ?>Dashboard/StockDetailsView_Ajax",
                   "type": "POST"
               },
             
@@ -104,7 +103,8 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           });
           linesSwitchery(); 
         //free Zone area
-        datepicker('P_DOB');
+        datepicker('I_PURCHASEDATE');
+        datepicker('I_EXPIRYDATE');
         $(".custom-file-input").on("change", function() {
           var fileName = $(this).val().split("\\").pop();
           $(this).siblings(".custom-file-label").addClass("selected").text(fileName).css('overflow','hidden');
@@ -115,65 +115,59 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
       // functions
       function readURL(input) {
         if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          
+          var reader = new FileReader();          
           reader.onload = function(e) {
-            $('#P_IMAGE_PREVIEW').attr('src', e.target.result);
-          }
-          
+            $('#I_BILL_PREVIEW').attr('src', e.target.result);
+          }          
           reader.readAsDataURL(input.files[0]);
         }
       }
      function linesSwitchery() {
           $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#P_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#P_ACTIVE').val('Y');
+	    		$('.lcs_wrap').delegate('#I_ACTIVE_YN', 'lcs-on', function() {
+	    		$('#I_ACTIVE').val('Y');
 	    		});
-					$('.lcs_wrap').delegate('#P_ACTIVE_YN', 'lcs-off', function() {
-            $('#P_ACTIVE').val('N');						
+					$('.lcs_wrap').delegate('#I_ACTIVE_YN', 'lcs-off', function() {
+            $('#I_ACTIVE').val('N');						
 					});
           } 
 
      
-     function GetDashUserData_Ajax(){
-         
+     function GetStockItemData_Ajax(){         
         $('#SaveButton').text('Update');
          loader();
-         var sysId = $('#P_ID').val();   
+         var sysId = $('#I_ID').val();   
          $.ajax({
                    type: "POST",
-                   url: "<?= site_url('Dashboard/GetPetDetailsEditData_Ajax'); ?>",
+                   url: "<?= site_url('Dashboard/GetStockDetailsEditData_Ajax'); ?>",
                    data: {sysId : sysId} ,
                    dataType:'json',
                    success: function(json)
                    {
                      var obj = json['data'][0];
-                      $('#P_ID').val(obj.P_ID);
-                      $('#P_NAME').val(obj.P_NAME);
-                      $('#P_CODE_ID').val(obj.P_CODE_ID);
-                      $('#P_IMAGE_OLD').val(obj.P_IMAGE);
-                      if(obj.P_IMAGE ==''){
-                        $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');
+                      $('#I_ID').val(obj.I_ID);
+                      $('#I_NAME').val(obj.I_NAME);
+                      $('#I_PURCHASEDATE').val(obj.I_PURCHASEDATE);
+                      $('#I_BILL_OLD').val(obj.I_BILL);
+                    
+                      if(obj.I_BILL ==''){
+                        $('#I_BILL_PREVIEW').attr('src','<?php echo site_url('/assets/img/noimage.png');?>');
                       }else{
-                        $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./upload/PetImage/');?>'+obj.P_IMAGE+'');
+                        $('#I_BILL_PREVIEW').attr('src','<?php echo site_url('/upload/BillImage/');?>'+obj.I_BILL+'');
                       }
                       
-                      $('#P_GENDER').val(obj.P_GENDER).trigger('change');
-                      $('#P_DOB').val(obj.P_DOB);
-                      $('#P_SECTION_AREA').val(obj.P_SECTION_AREA).trigger('change');
-                      $('#P_STATUS').val(obj.P_STATUS).trigger('change');
-                      $('#P_CONDITION_TYPE').val(obj.P_CONDITION_TYPE).trigger('change');
-                      $('#P_WEIGHT').val(obj.P_WEIGHT);
-                     
-                      var $ActiveYn = obj.P_ACTIVE;
+                      $('#I_PURCHASEBY').val(obj.I_PURCHASEBY);
+                      $('#I_AMOUNT').val(obj.I_AMOUNT);
+                      $('#I_EXPIRYDATE').val(obj.I_EXPIRYDATE);                      
+                      var $ActiveYn = obj.I_ACTIVE;
                       if($ActiveYn == 'Y'){
-                        $('#P_ACTIVE_YN').lcs_on();
+                        $('#I_ACTIVE_YN').lcs_on();
                       }else{
-                        $('#P_ACTIVE_YN').lcs_off();
+                        $('#I_ACTIVE_YN').lcs_off();
                       }
                      //$(".selectpicker").selectpicker('refresh');
 
-                      $('#PetDetailsAddEdit_Form').valid(); 
+                      $('#StockItemAddEdit_Form').valid(); 
                    },
                    error: function (jqXHR, exception) {
                     console.log(jqXHR);
@@ -190,27 +184,24 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
       e.preventDefault();
        var buttonid =  $(this).attr('id');
        if(buttonid == 'Add'){
-        $('#P_ID').val('');
-         $('#U_USERNAME').prop('readonly', false);
+        $('#I_ID').val('');       
          $('#SaveButton').text('Save');
-          var $ActiveYn = $('#P_ACTIVE_YN').val();
+          var $ActiveYn = $('#I_ACTIVE_YN').val();
                       if($ActiveYn == 'Y'){
-                        $('#P_ACTIVE_YN').lcs_on();
+                        $('#I_ACTIVE_YN').lcs_on();
                       }else{
-                        $('#P_ACTIVE_YN').lcs_off();
+                        $('#I_ACTIVE_YN').lcs_off();
                       }
-            $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');          
+            $('#I_BILL_PREVIEW').attr('src','<?php echo site_url('assets/img/noimage.png');?>');          
        }
        else{        
        var sysId =  $(this).attr('data-id');
-        $('#P_ID').val(sysId);
-         $('#U_USERNAME').rules('remove');
-         $('#U_USERNAME').prop('readonly', true);
-        GetDashUserData_Ajax();
+        $('#I_ID').val(sysId);
+        GetStockItemData_Ajax();
 
        }
   });  
-    $(document).on("click", "#DashUser_Delete", function(e) {
+    $(document).on("click", "#StockItemDelete", function(e) {
          var sysId = $(this).attr('data-id');
          var img = $(this).attr('data-img');
         bootbox.confirm("Are you sure you want to delete?", function(result) {
@@ -218,12 +209,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
            loader();          
            $.ajax({
              type: "POST",
-             url: "<?= site_url('Dashboard/PetDetailsDelete_Ajax'); ?>",
+             url: "<?= site_url('Dashboard/StockDetailsDelete_Ajax'); ?>",
              data: {sysId : sysId ,img : img} ,// serializes the form's elements.
              success: function(data)
              {
                  //alert(data); // show response from the php script.
-                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                  $('.AlertMessage').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> A record successfully deleted</div>') ;
                  setTimeout(function(){ 
                   $('.AlertMessage').html('') ;
                  }, 2000);
@@ -247,13 +238,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 
 			submitHandler: function (form) {
        // debug: true       
-       var sysId = $('#P_ID').val();
-       var url = "<?php echo site_url('Dashboard/PetDetailsUpdate_Ajax') ?>";
+       var sysId = $('#I_ID').val();
+       var url = "<?php echo site_url('Dashboard/StockItemUpdate_Ajax') ?>";
        if(sysId == ''){
-       var url = "<?php echo site_url('Dashboard/PetDetailsSave_Ajax') ?>";
+       var url = "<?php echo site_url('Dashboard/StockItemSave_Ajax') ?>";
        } 
-       loader();
-      
+       loader();      
       $.ajax({
              type: "POST",
              url: url,
@@ -262,25 +252,30 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
              contentType: false,// serializes the form's elements.
              success: function(data)
              {
-                $('#P_ID').val(data)
-                 //alert(data); // show response from the php script.
-                  $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong> This alert box could indicate a successful or positive action.</div>') ;
+                if(sysId == ''){
+                   $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong>A Record Seccessfully Inserted.</div>') ;
+               }
+             else{
+                 $('.AlertMessageModal').html('<div  class="AlertMessage alert alert-success"><strong>Success!</strong>A Record Seccessfully Updated.</div>') ;
+             }
+                  $('#I_ID').val(data)
                  setTimeout(function(){ 
                   $('.AlertMessageModal').html('') ;
                  }, 2000);
             
-                 GetDashUserData_Ajax(); 
-                  unloader();                 
-             }
+                 GetStockItemData_Ajax(); 
+                  unloader();
+                  $("#datatables").DataTable().draw();                 
+             }              
             
            }); 
-           $("#datatables").DataTable().draw();
+         //  $("#datatables").DataTable().draw();
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		});     
 		$(document).ready( function () {      
      
-			$( "#PetDetailsAddEdit_Form" ).validate( {
+			$( "#StockItemAddEdit_Form" ).validate( {
         onkeyup: function(element) {
             $(element).valid();           
           }, 
@@ -289,35 +284,20 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
         },  
 
 				rules: {
-          P_NAME: "required",
-          P_CODE_ID: {
-                    required: true,
-                    digits: true
-                  },
-					P_GENDER: "required",
-          P_DOB:{
-                  required: true
-                   
-
-          },
-          P_SECTION_AREA: "required",
-          P_STATUS: "required",
-          P_CONDITION_TYPE: "required",
-          P_WEIGHT:  {
-                    required: true,
-                    digits: true
-                  },
+          I_NAME: "required",
+          I_PURCHASEDATE: { required: true, },
+					I_PURCHASEBY: "required",
+          I_AMOUNT:{ required: true  },
+         
+          I_EXPIRYDATE: "required",        
 				},
 				messages: {
-          P_NAME: "Enter name",
-          P_CODE_ID: "Enter Unique code",
-          P_GENDER: "Enter gender",
-          P_DOB: "Enter Date of Birth",
-          P_SECTION_AREA: "Select Locaion",
-          P_STATUS: "Select status",
-          P_CONDITION_TYPE: "Select condition",
-          P_WEIGHT: "Enter wieght",
-                				
+          I_NAME: "Enter name",
+          I_PURCHASEDATE: "Enter purchase date",
+          I_PURCHASEBY: "Enter Purchase by",
+          I_AMOUNT: "Enter price",
+          
+          I_EXPIRYDATE: "Item Expiry Date",
 				},
 				   errorClass: 'is-invalid',
             validClass: 'is-valid',
@@ -344,15 +324,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 		});
   //validation
 
-function PetDetailsModalForm_Reset(){
-
-     $("#PetDetailsAddEdit_Form")[0].reset();
-     $('#U_COUNTRY option:selected').removeAttr('selected');     
-     $('#U_CITY,#U_STATE').html("<option value=''> Select </option>"); 
-     $('#PetDetailsAddEdit_Form').valid(); 
-     var validator = $( "#PetDetailsAddEdit_Form" ).validate();
+function StockModalForm_Reset(){
+     $("#StockItemAddEdit_Form")[0].reset();
+     $('#StockItemAddEdit_Form').valid(); 
+     var validator = $( "#StockItemAddEdit_Form" ).validate();
      validator.resetForm();
-     $("#PetDetailsAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
+     $("#StockItemAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
     // $(".selectpicker").selectpicker('refresh');
 
 }
@@ -360,98 +337,69 @@ function PetDetailsModalForm_Reset(){
 
 </script>
 <!-- modal for add and edit -->
-<div class="modal" id="DashUser_Modal">
+<div class="modal" id="StockItemModal">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">Add User</h4>
-                <button type="button" onclick="PetDetailsModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Item</h4>
+                <button type="button" onclick="StockModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
               </div>
              <div class="AlertMessageModal"></div> 
-              <form mathod="POST" id="PetDetailsAddEdit_Form">            
+              <form mathod="POST" id="StockItemAddEdit_Form">            
               <div class="modal-body">              
                 <div class="row">
                   <div class="col-sm-6">
                       <div class="form-row">                       
                         <div class="form-group col-md-6">
                           <label for="Name">Name</label>
-                          <input type="text" class="form-control form-control-sm" id="P_NAME" placeholder="Name" name="P_NAME">
-                        </div>
-                       <div class="form-group col-md-6">
-                          <label for="code">Pet Code</label>
-                          <input type="text" class="form-control form-control-sm" id="P_CODE_ID" placeholder="Pet Code" name="P_CODE_ID">
-                        </div>
-                         <div class="form-group col-md-6">
-                          <label for="DOB">Pet DOB</label>
-                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="DOB" name="P_DOB" aria-labelledby="P_DOB-label">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="gender">Pet Gender</label>
-                          <select class="form-control form-control-sm custom-select" id="P_GENDER" name="P_GENDER">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>                            
-                          </select>                          
+                          <input type="text" class="form-control form-control-sm" id="I_NAME" placeholder="Name" name="I_NAME">
                         </div>  
                          <div class="form-group col-md-6">
-                          <label for="Name">Image</label>
+                          <label for="Name">Purchse by</label>
+                          <input type="text" class="form-control form-control-sm" id="I_PURCHASEBY" placeholder="purchase by" name="I_PURCHASEBY">
+                        </div>
+                         <div class="form-group col-md-6">
+                          <label for="">Bill</label>
                             <div class="form-control form-control-sm custom-file">
-                              <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE" onchange="readURL(this);">
+                              <input type="file" class="custom-file-input" id="I_BILL" name="I_BILL" onchange="readURL(this);">
                               <label class="custom-file-label" for="image">Choose file</label>
                             </div>
                         </div>
                          <div class="form-group col-md-6">
-                          <label for="Image">Image Preview</label>
-                          <img src="" id="P_IMAGE_PREVIEW" height="auto" width="100%" >
+                          <label for="">Bill Preview</label>
+                          <img src="" id="I_BILL_PREVIEW" height="auto" width="100%" >
                         </div>                      
                       </div>
                   </div>
                   <div class="col-sm-6"> 
-
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                          <label for="gender">Location</label>
-                          <select class="form-control form-control-sm custom-select" id="P_SECTION_AREA" name="P_SECTION_AREA">
-                            <option value="Young">Young</option>
-							<option value="Child">Child</option>
-							<option value="Pgnt">pgnt</option>
-							<option value="Bigmale">Big male</option>
-                          </select>                          
+                      <div class="form-row">
+                     
+                      <div class="form-group col-md-6">
+                          <label for="">Purchase Date</label>
+                          <input type="text" class="form-control form-control-sm" id="I_PURCHASEDATE" placeholder="purchase date" name="I_PURCHASEDATE" aria-labelledby="I_PURCHASEDATE-label">
                         </div>
                         <div class="form-group col-md-6">
-                          <label for="gender">Pet Status</label>
-                          <select class="form-control form-control-sm custom-select" id="P_STATUS" name="P_STATUS">
-                            <option value="Process">Process</option>
-                            <option value="Sold">Sold</option> 
-							<option value="Sick">Sick</option>
-							<option value="Dead">Dead</option> 							
-                          </select>                          
-                        </div>
-                         <div class="form-group col-md-6">
-                          <label for="Weight">Weight</label>
-                          <input type="text" class="form-control form-control-sm" id="P_WEIGHT" placeholder="Weight" name="P_WEIGHT">
+                          <label for="">Expiry Date</label>
+                          <input type="text" class="form-control form-control-sm" id="I_EXPIRYDATE" placeholder="Expiry date" name="I_EXPIRYDATE" aria-labelledby="I_EXPIRYDATE-label">
                         </div>
                         <div class="form-group col-md-6">
-                          <label for="Condition">Condition</label>
-                          <select class="form-control form-control-sm custom-select" id="P_CONDITION_TYPE" name="P_CONDITION_TYPE">
-							<option value="Weak">Weak</option>
-                            <option value="good">good</option>
-                            <option value="excellent">excellent</option>                            
-                          </select>                          
-                        </div> 
-                        </div>                        
+                         <label for="">Amount</label>
+                         <input type="text" class="form-control form-control-sm" id="I_AMOUNT" placeholder="Amount" name="I_AMOUNT">
+                        </div>
+                      </div>                        
                   </div>
                 </div>
               </div>             
               <div class="modal-footer">
               <div class="col-md-6" id="Activedivfooter">             
-              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="P_ACTIVE_YN"/>    
+              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="I_ACTIVE_YN"/>    
               <label class="checkbox-inline text-left"> Active</label>
-              <input type="hidden" name="P_ACTIVE" value="N"  id="P_ACTIVE"/>
-              <input type="hidden" name="P_ID" value=""  id="P_ID"/>
-              <input type="hidden" name="P_IMAGE_OLD" value=""  id="P_IMAGE_OLD"/>
+              <input type="hidden" name="I_ACTIVE" value="N"  id="I_ACTIVE"/>
+              <input type="hidden" name="I_ID" value=""  id="I_ID"/>
+              <input type="hidden" name="I_BILL_OLD" value=""  id="I_BILL_OLD"/>
               </div>
               <div class="col-md-6 text-right">   
-                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="PetDetailsModalForm_Reset();">Close</button>
+                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="StockModalForm_Reset();">Close</button>
                 <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
               </div>
               </div>

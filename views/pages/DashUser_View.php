@@ -194,7 +194,7 @@ if($userTypeSession  !=="SUPERADMIN"){
        var buttonid =  $(this).attr('id');
        if(buttonid == 'Add'){
         $('#U_ID').val('');
-         $('#U_USERNAME').prop('readonly', false);
+        // $('#U_USERNAME').prop('readonly', false);
          $('#SaveButton').text('Save');
           var $ActiveYn = $('#U_ACTIVE_YN').val();
                       if($ActiveYn == 'Y'){
@@ -207,8 +207,8 @@ if($userTypeSession  !=="SUPERADMIN"){
        else{        
        var sysId =  $(this).attr('data-id');
         $('#U_ID').val(sysId);
-         $('#U_USERNAME').rules('remove');
-         $('#U_USERNAME').prop('readonly', true);
+         //$('#U_USERNAME').rules('remove');
+        // $('#U_USERNAME').prop('readonly', true);
         GetDashUserData_Ajax();
 
        }
@@ -281,11 +281,12 @@ if($userTypeSession  !=="SUPERADMIN"){
                
             
                  GetDashUserData_Ajax(); 
-                  unloader();                 
+                  unloader(); 
+                  $("#datatables").DataTable().draw();                
              }
             
            }); 
-           $("#datatables").DataTable().draw();
+           
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		});     
@@ -304,12 +305,13 @@ if($userTypeSession  !=="SUPERADMIN"){
           U_USERNAME:{                
                 required: true,
                 remote: 
-                  {
-                        url: "<?php echo site_url("Dashboard/U_USERNAME_EXISTS"); ?>",
+                  {                         
+                        url: "<?php echo site_url("Dashboard/U_USERNAME_EXISTS/"); ?>",
                         type: "post",
                         data: 
                         {
-                          U_USERNAME: function(){ return $("#U_USERNAME").val(); }
+                          U_USERNAME: function(){ return $("#U_USERNAME").val(); },
+                          sysId: function(){ return $('#U_ID').val(); }
                         }
                   }                         
             },         

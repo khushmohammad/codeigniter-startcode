@@ -1,15 +1,10 @@
 <?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); 
  $SettingMenu =  $this->LoginModel->SettingMenu(); 
 $DashboardMenu =  $this->LoginModel->DashboardMenu();
-
-
-
-//echo '<pre>'; print_r($SettingMenu); echo '</pre>';
-        ?>
-    
-  <nav class="navbar navbar-expand navbar-dark bg-secondary static-top ">
+//echo '<pre>'; print_r($SettingMenu); echo '</pre>';  ?>    
+  <nav class="navbar navbar-expand bg-light static-top ">
     <div class="col-md-6">
-    <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Dashboard</a>
+    <a class="navbar-brand" href="<?= site_url('Dashboard'); ?>">Vilayat</a>
     <button style="display: none;" class="btn btn-link btn-sm text-white" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
@@ -75,7 +70,6 @@ $DashboardMenu =  $this->LoginModel->DashboardMenu();
     <?php } ?>
       
     </ul>
-
     <div id="content-wrapper">
          <!-- /.container-fluid -->
         <div class="container-fluid">
