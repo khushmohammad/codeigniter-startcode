@@ -162,6 +162,8 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       $('#P_NAME').val(obj.P_NAME);
                       $('#P_CODE_ID').val(obj.P_CODE_ID);
                       $('#P_IMAGE_OLD').val(obj.P_IMAGE);
+                      //var img = obj.P_IMAGE;
+                      //$('#P_IMAGE').val(img);
                       if(obj.P_IMAGE ==''){
                         $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');
                       }else{
@@ -317,6 +319,9 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                     required: true,
                     digits: true
                   },
+          // P_IMAGE: {
+          //           required: true,                   
+          //         },
 				},
 				messages: {
           P_NAME: "Enter name",
