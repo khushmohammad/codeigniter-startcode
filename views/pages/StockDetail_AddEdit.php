@@ -56,8 +56,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 <script type="text/javascript">  
     
           //datatable view data
-        $(document).ready(function() {            
-
+        $(document).ready(function() {
           var DataTableObject=[
             { data: 'P_ID' ,className:"all text-center"},
             { data: 'P_CODE_ID' ,className:"all"},
