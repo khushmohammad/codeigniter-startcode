@@ -9,15 +9,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
          }   
 ?>  
 <style type="text/css">
-
 </style>
-  <!-- Breadcrumbs-->       
-    
+  <!-- Breadcrumbs--> 
         <div class="addButton" style="padding: 10px 0 10px 0;">
           <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
-
         </div> 
         <div  class="AlertMessage">               
         </div>
@@ -49,15 +46,11 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
               </tbody>
             </table>             
             </div>
-          </div>
-         
-        </div>
-     
-<script type="text/javascript">  
-    
+          </div>         
+        </div>     
+<script type="text/javascript">
           //datatable view data
-        $(document).ready(function() {            
-
+        $(document).ready(function() {
           var DataTableObject=[
             { data: 'P_ID' ,className:"all text-center"},
             { data: 'P_CODE_ID' ,className:"all"},
@@ -83,7 +76,6 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
               render: function( data, type, row) {
                 sysid=data['P_ID'];
                 img=data['P_IMAGE'];
-
                 return   '<div class="dropdown" >'
                       +'	<button type="button" class="btn" data-toggle="dropdown"><i class="fas fa-edit"></i>'
                       +	'</button>'
@@ -94,8 +86,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       +' </div>';          
               }
             }
-            ];
-          
+            ];          
           var table = $('#datatables').DataTable( {  
           "processing": true,
           "serverSide": true,
@@ -108,9 +99,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
               "ajax": {
                   "url": "<?= base_url(); ?>Dashboard/PetDetailsView_Ajax",
                   "type": "POST"
-              },
-            
-          
+              }, 
           });
           linesSwitchery('P_ACTIVE_YN','P_ACTIVE'); 
         //free Zone area
@@ -119,7 +108,6 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           var fileName = $(this).val().split("\\").pop();
           $(this).siblings(".custom-file-label").addClass("selected").text(fileName).css('overflow','hidden');
         });
-
         //free Zone area           
       });
       // functions
@@ -129,16 +117,11 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           
           reader.onload = function(e) {
             $('#P_IMAGE_PREVIEW').attr('src', e.target.result);
-          }
-          
+          }          
           reader.readAsDataURL(input.files[0]);
         }
       }
-    
-
-     
-     function GetDashUserData_Ajax(){
-         
+     function GetDashUserData_Ajax(){         
         $('#SaveButton').text('Update');
          loader();
          var sysId = $('#P_ID').val();   
@@ -160,15 +143,13 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                         $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./assets/img/noimage.png');?>');
                       }else{
                         $('#P_IMAGE_PREVIEW').attr('src','<?php echo site_url('./upload/PetImage/');?>'+obj.P_IMAGE+'');
-                      }
-                      
+                      }                      
                       $('#P_GENDER').val(obj.P_GENDER).trigger('change');
                       $('#P_DOB').val(obj.P_DOB);
                       $('#P_SECTION_AREA').val(obj.P_SECTION_AREA).trigger('change');
                       $('#P_STATUS').val(obj.P_STATUS).trigger('change');
                       $('#P_CONDITION_TYPE').val(obj.P_CONDITION_TYPE).trigger('change');
-                      $('#P_WEIGHT').val(obj.P_WEIGHT);
-                                           
+                      $('#P_WEIGHT').val(obj.P_WEIGHT);          
                       var $ActiveYn = obj.P_ACTIVE;
                       if($ActiveYn == 'Y'){
                         $('#P_ACTIVE_YN').lcs_on();
@@ -176,7 +157,6 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                         $('#P_ACTIVE_YN').lcs_off();
                       }
                      //$(".selectpicker").selectpicker('refresh');
-
                       $('#PetDetailsAddEdit_Form').valid(); 
                    },
                    error: function (jqXHR, exception) {
@@ -184,10 +164,8 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                       // Your error handling logic here..
                     }
                  }); 
-                   unloader();    
-
+                   unloader();
              }
-
       //functions
     //script 
     $(document).on('click' , '.AddEditButton' , function(e){ 
@@ -282,8 +260,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		});     
-		$(document).ready( function () {      
-     
+		$(document).ready( function () {
 			$( "#PetDetailsAddEdit_Form" ).validate( {
         onkeyup: function(element) {
             $(element).valid();           
@@ -295,25 +272,18 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
 				rules: {
           P_NAME: "required",
           P_CODE_ID: {
-                    required: true,
-                    digits: true
+                    required: true,                   
                   },
 					P_GENDER: "required",
           P_DOB:{
-                  required: true
-                   
-
+                  required: true 
           },
           P_SECTION_AREA: "required",
           P_STATUS: "required",
           P_CONDITION_TYPE: "required",
           P_WEIGHT:  {
-                    required: true,
-                    digits: true
-                  },
-          // P_IMAGE: {
-          //           required: true,                   
-          //         },
+                    required: true,                   
+                  },          
 				},
 				messages: {
           P_NAME: "Enter name",
@@ -323,8 +293,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           P_SECTION_AREA: "Select Locaion",
           P_STATUS: "Select status",
           P_CONDITION_TYPE: "Select condition",
-          P_WEIGHT: "Enter wieght",
-                				
+          P_WEIGHT: "Enter wieght",             				
 				},
 				   errorClass: 'is-invalid',
             validClass: 'is-valid',
@@ -361,110 +330,109 @@ function PetDetailsModalForm_Reset(){
      validator.resetForm();
      $("#PetDetailsAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
     // $(".selectpicker").selectpicker('refresh');
-
 }
 // jQuery
 
 </script>
 <!-- modal for add and edit -->
 <div class="modal" id="DashUser_Modal">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h4 class="modal-title">Add User</h4>
                 <button type="button" onclick="PetDetailsModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
-              </div>
-             <div class="AlertMessageModal"></div> 
-              <form mathod="POST" id="PetDetailsAddEdit_Form">            
-              <div class="modal-body">              
-                <div class="row">
-                  <div class="col-sm-6">
-                      <div class="form-row">                       
-                        <div class="form-group col-md-6">
-                          <label for="Name">Name</label>
-                          <input type="text" class="form-control form-control-sm" id="P_NAME" placeholder="Name" name="P_NAME">
-                        </div>
-                       <div class="form-group col-md-6">
-                          <label for="code">Pet Code</label>
-                          <input type="text" class="form-control form-control-sm" id="P_CODE_ID" placeholder="Pet Code" name="P_CODE_ID">
-                        </div>
-                         <div class="form-group col-md-6">
-                          <label for="DOB">Pet DOB</label>
-                          <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="DOB" name="P_DOB" aria-labelledby="P_DOB-label">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="gender">Pet Gender</label>
-                          <select class="form-control form-control-sm custom-select" id="P_GENDER" name="P_GENDER">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>                            
-                          </select>                          
-                        </div>  
-                         <div class="form-group col-md-6">
-                          <label for="Name">Image</label>
-                            <div class="form-control form-control-sm custom-file">
-                              <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE" onchange="readURL(this);">
-                              <label class="custom-file-label" for="image">Choose file</label>
+            </div>
+            <div class="AlertMessageModal"></div>
+            <form mathod="POST" id="PetDetailsAddEdit_Form">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Name">Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="P_NAME" placeholder="Name" name="P_NAME">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="code">Pet Code</label>
+                                    <input type="text" class="form-control form-control-sm" id="P_CODE_ID" placeholder="Pet Code" name="P_CODE_ID">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="DOB">Pet DOB</label>
+                                    <input type="text" class="form-control form-control-sm" id="P_DOB" placeholder="DOB" name="P_DOB" aria-labelledby="P_DOB-label">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="gender">Pet Gender</label>
+                                    <select class="form-control form-control-sm custom-select" id="P_GENDER" name="P_GENDER">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Name">Image</label>
+                                    <div class="form-control form-control-sm custom-file">
+                                        <input type="file" class="custom-file-input" id="P_IMAGE" name="P_IMAGE" onchange="readURL(this);">
+                                        <label class="custom-file-label" for="image">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Image">Image Preview</label>
+                                    <img src="" id="P_IMAGE_PREVIEW" height="auto" width="100%">
+                                </div>
                             </div>
                         </div>
-                         <div class="form-group col-md-6">
-                          <label for="Image">Image Preview</label>
-                          <img src="" id="P_IMAGE_PREVIEW" height="auto" width="100%" >
-                        </div>                      
-                      </div>
-                  </div>
-                  <div class="col-sm-6"> 
+                        <div class="col-sm-6">
 
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                          <label for="gender">Location</label>
-                          <select class="form-control form-control-sm custom-select" id="P_SECTION_AREA" name="P_SECTION_AREA">
-                            <option value="Young">Young</option>
-							<option value="Child">Child</option>
-							<option value="Pgnt">pgnt</option>
-							<option value="Bigmale">Big male</option>
-                          </select>                          
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="gender">Location</label>
+                                    <select class="form-control form-control-sm custom-select" id="P_SECTION_AREA" name="P_SECTION_AREA">
+                                        <option value="Young">Young</option>
+                                        <option value="Child">Child</option>
+                                        <option value="Pgnt">pgnt</option>
+                                        <option value="Bigmale">Big male</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="gender">Pet Status</label>
+                                    <select class="form-control form-control-sm custom-select" id="P_STATUS" name="P_STATUS">
+                                        <option value="Process">Process</option>
+                                        <option value="Sold">Sold</option>
+                                        <option value="Sick">Sick</option>
+                                        <option value="Dead">Dead</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Weight">Weight</label>
+                                    <input type="text" class="form-control form-control-sm" id="P_WEIGHT" placeholder="Weight" name="P_WEIGHT">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Condition">Condition</label>
+                                    <select class="form-control form-control-sm custom-select" id="P_CONDITION_TYPE" name="P_CONDITION_TYPE">
+                                        <option value="Weak">Weak</option>
+                                        <option value="good">good</option>
+                                        <option value="excellent">excellent</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                          <label for="gender">Pet Status</label>
-                          <select class="form-control form-control-sm custom-select" id="P_STATUS" name="P_STATUS">
-                            <option value="Process">Process</option>
-                            <option value="Sold">Sold</option> 
-							<option value="Sick">Sick</option>
-							<option value="Dead">Dead</option> 							
-                          </select>                          
-                        </div>
-                         <div class="form-group col-md-6">
-                          <label for="Weight">Weight</label>
-                          <input type="text" class="form-control form-control-sm" id="P_WEIGHT" placeholder="Weight" name="P_WEIGHT">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="Condition">Condition</label>
-                          <select class="form-control form-control-sm custom-select" id="P_CONDITION_TYPE" name="P_CONDITION_TYPE">
-							<option value="Weak">Weak</option>
-                            <option value="good">good</option>
-                            <option value="excellent">excellent</option>                            
-                          </select>                          
-                        </div> 
-                        </div>                        
-                  </div>
+                    </div>
                 </div>
-              </div>             
-              <div class="modal-footer">
-              <div class="col-md-6" id="Activedivfooter">             
-              <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="P_ACTIVE_YN"/>    
-              <label class="checkbox-inline text-left"> Active</label>
-              <input type="hidden" name="P_ACTIVE" value="N"  id="P_ACTIVE"/>
-              <input type="hidden" name="P_ID" value=""  id="P_ID"/>
-              <input type="hidden" name="P_IMAGE_OLD" value=""  id="P_IMAGE_OLD"/>
-              </div>
-              <div class="col-md-6 text-right">   
-                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="PetDetailsModalForm_Reset();">Close</button>
-                <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
-              </div>
-              </div>
-            </form> 
-            </div>
-          </div>
+                <div class="modal-footer">
+                    <div class="col-md-6" id="Activedivfooter">
+                        <input type="checkbox" value="Y" class="lcs_check form-control form-control-sm" id="P_ACTIVE_YN" />
+                        <label class="checkbox-inline text-left"> Active</label>
+                        <input type="hidden" name="P_ACTIVE" value="N" id="P_ACTIVE" />
+                        <input type="hidden" name="P_ID" value="" id="P_ID" />
+                        <input type="hidden" name="P_IMAGE_OLD" value="" id="P_IMAGE_OLD" />
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="PetDetailsModalForm_Reset();">Close</button>
+                        <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
+                    </div>
+                </div>
+            </form>
         </div>
-      </div>
-      <!-- modal end for add edit -->
+    </div>
+</div>
+</div>
+<!-- modal end for add edit -->

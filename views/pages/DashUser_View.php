@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 $AccessDelete = $this->session->userdata('U_ACCESS_DELETE');
 $AccessInsert = $this->session->userdata('U_ACCESS_INSERT');
 $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
@@ -12,13 +11,11 @@ if($userTypeSession  !=="SUPERADMIN"){
 <style type="text/css">
 
 </style>
-  <!-- Breadcrumbs-->       
-    
+  <!-- Breadcrumbs--> 
         <div class="addButton" style="padding: 10px 0 10px 0;">
           <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#DashUser_Modal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
-
         </div> 
         <div  class="AlertMessage">               
         </div>
@@ -51,12 +48,10 @@ if($userTypeSession  !=="SUPERADMIN"){
               </tbody>
             </table>             
             </div>
-          </div>
-         
+          </div>         
         </div>
      
-<script type="text/javascript">  
-    
+<script type="text/javascript">      
           //datatable view data
         $(document).ready(function() {
              //FOOTER FUNCTION
@@ -97,8 +92,7 @@ if($userTypeSession  !=="SUPERADMIN"){
                       +' </div>';          
               }
             }
-            ];
-          
+            ];          
           var table = $('#datatables').DataTable( {  
           "processing": true,
           "serverSide": true,
@@ -112,8 +106,6 @@ if($userTypeSession  !=="SUPERADMIN"){
                   "url": "<?= base_url(); ?>Dashboard/DashUserView_Ajax",
                   "type": "POST"
               },
-            
-          
           });
           linesSwitchery('U_ACTIVE_YN','U_ACTIVE');          
       });
@@ -147,11 +139,9 @@ if($userTypeSession  !=="SUPERADMIN"){
                       $('#U_STATE').html(json.stateOption);                
                       $('#U_STATE option[value='+obj.U_STATE+']').attr('selected','selected');
                      // $('#U_STATE').val(obj.U_STATE).trigger('change');
-
                       $('#U_CITY').html(json.cityOption);               
                       $('#U_CITY option[value='+obj.U_CITY+']').attr('selected','selected');
-                    //  $('#U_CITY').val(obj.U_CITY).trigger('change');
-                      
+                    //  $('#U_CITY').val(obj.U_CITY).trigger('change');                      
                       $('#U_PINCODE').val(obj.U_PINCODE);                
                       $('#U_ACTIVE').val(obj.U_ACTIVE);
                       $('#U_ACCESS_INSERT').val(obj.U_ACCESS_INSERT).trigger('change');
