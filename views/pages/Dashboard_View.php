@@ -16,9 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">26 New Messages!</div>
+                <div class="mr-5"><?php echo $totalPet .' Total Pet'; ?></div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -32,9 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 New Tasks!</div>
+                <div class="mr-5"><?php echo $totalMale .' Total Male'; ?></div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -48,9 +48,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 New Orders!</div>
+                <div class="mr-5"><?php echo $totalFemale .' Total Female'; ?></div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -64,9 +64,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5">13 New Tickets!</div>
+                <div class="mr-5"><?php echo $totalSold .' Total Sold'; ?></div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
                 <span class="float-left">View Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>

@@ -11,11 +11,11 @@ class LoginModel extends CI_Model {
 	
 	 //common function
    function SettingMenu(){
-        $sqlQry = "SELECT *	FROM menudetail	WHERE M_LOCATION = 'Setting' ORDER BY M_SNO ASC";
+        $sqlQry = "SELECT *	FROM menudetail	WHERE M_LOCATION = 'Setting' AND M_ACTIVE = 'Y' ORDER BY M_SNO ASC";
 		return $this->db->query($sqlQry)->result_array();
    }
     function DashboardMenu(){                    
-        $sqlQry = "SELECT *	FROM menudetail WHERE M_LOCATION != 'Setting' ORDER BY M_SNO ASC" ;
+        $sqlQry = "SELECT *	FROM menudetail WHERE M_LOCATION != 'Setting' AND M_ACTIVE = 'Y' ORDER BY M_SNO ASC" ;
 		return $this->db->query($sqlQry)->result_array();
    }
         

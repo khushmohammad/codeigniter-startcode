@@ -252,11 +252,12 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
                  }, 2000);
             
                  GetDashUserData_Ajax(); 
-                  unloader();                 
+                  unloader();     
+                   $("#datatables").DataTable().draw();            
              }
-            
+           
            }); 
-           $("#datatables").DataTable().draw();
+           
            //$('#datatables').DataTable().ajax.reload();
 			}     
 		});     

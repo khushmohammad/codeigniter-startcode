@@ -67,8 +67,12 @@ class Dashboard extends CI_Controller {
    
 	public function index()
 	{
-		$this->load->view('header');        
-        $this->load->view('pages/Dashboard_View');        
+		$this->load->view('header'); 
+		$data['totalPet'] = $this->DashbaordModal->totalPet();		       
+		$data['totalMale'] = $this->DashbaordModal->totalMale();		       
+		$data['totalFemale'] = $this->DashbaordModal->totalFemale();		       
+		$data['totalSold'] = $this->DashbaordModal->totalSold();		       
+        $this->load->view('pages/Dashboard_View',$data);        
 		$this->load->view('footer');
 	}
 
@@ -241,5 +245,6 @@ class Dashboard extends CI_Controller {
 		$this->LoginModel->menuDetailsUpdate($this->userId);
 	}
 		
-	//MenuDetails end	
+	//MenuDetails end
+	
 }
