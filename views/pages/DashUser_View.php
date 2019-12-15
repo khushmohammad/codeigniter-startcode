@@ -115,20 +115,9 @@ if($userTypeSession  !=="SUPERADMIN"){
             
           
           });
-          linesSwitchery();          
+          linesSwitchery('U_ACTIVE_YN','U_ACTIVE');          
       });
       // functions
-     function linesSwitchery() {
-          $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#U_ACTIVE').val('Y');
-	    		});
-					$('.lcs_wrap').delegate('#U_ACTIVE_YN', 'lcs-off', function() {
-            $('#U_ACTIVE').val('N');						
-					});
-          } 
-
-     
      function GetDashUserData_Ajax(){
          
         $('#SaveButton').text('Update');

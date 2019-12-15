@@ -101,7 +101,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
             
           
           });
-          linesSwitchery(); 
+          linesSwitchery('I_ACTIVE_YN','I_ACTIVE'); 
         //free Zone area
         datepicker('I_PURCHASEDATE');
         datepicker('I_EXPIRYDATE');
@@ -122,17 +122,6 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           reader.readAsDataURL(input.files[0]);
         }
       }
-     function linesSwitchery() {
-          $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#I_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#I_ACTIVE').val('Y');
-	    		});
-					$('.lcs_wrap').delegate('#I_ACTIVE_YN', 'lcs-off', function() {
-            $('#I_ACTIVE').val('N');						
-					});
-          } 
-
-     
      function GetStockItemData_Ajax(){         
         $('#SaveButton').text('Update');
          loader();

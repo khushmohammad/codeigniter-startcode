@@ -1,4 +1,6 @@
 <script type="text/javascript"> 
+
+
 //today date
     var today = new Date();
     var dd = today.getDate();
@@ -12,13 +14,31 @@
     } 
  var today = dd + '/' + mm + '/' + yyyy;  
 ///
-function datepicker(id){
+function datepickerDob(id){
 
  $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4', 
   outputFormat: 'dd/MM/yyyy',
   max: today,
   });
 }
+function datepicker(id){
+
+ $('#'+id).datepicker({ gainFocusOnConstruction: false, markup: 'bootstrap4', 
+  outputFormat: 'dd/MM/yyyy' 
+  });
+}
+
+
+
+ function linesSwitchery(activeYn,activeId) {
+          $('.lcs_check').lc_switch('Y', 'N');
+          $('.lcs_wrap').delegate('#'+activeYn, 'lcs-on', function() {
+          $('#'+activeId).val('Y');
+          });
+          $('.lcs_wrap').delegate('#'+activeYn, 'lcs-off', function() {
+            $('#'+activeId).val('N');            
+          });
+        } 
 
  function State_List(countryId,stateId,cityId){
      $('#'+countryId).change(function(){

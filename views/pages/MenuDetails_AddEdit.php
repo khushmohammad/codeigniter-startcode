@@ -93,20 +93,12 @@ if($userTypeSession  !=="SUPERADMIN"){
           });
           
         //free Zone area
-        linesSwitchery();
+     linesSwitchery('M_ACTIVE_YN','M_ACTIVE');
 
         //free Zone area           
       });
       // functions     
-     function linesSwitchery() {
-          $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#M_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#M_ACTIVE').val('Y');
-	    		});
-					$('.lcs_wrap').delegate('#M_ACTIVE_YN', 'lcs-off', function() {
-            $('#M_ACTIVE').val('N');						
-					});
-          } 
+    
 
      
      function GetmenuDetailData_Ajax(){

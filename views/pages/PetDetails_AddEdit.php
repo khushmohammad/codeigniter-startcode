@@ -112,9 +112,9 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
             
           
           });
-          linesSwitchery(); 
+          linesSwitchery('P_ACTIVE_YN','P_ACTIVE'); 
         //free Zone area
-        datepicker('P_DOB');
+        datepickerDob('P_DOB');
         $(".custom-file-input").on("change", function() {
           var fileName = $(this).val().split("\\").pop();
           $(this).siblings(".custom-file-label").addClass("selected").text(fileName).css('overflow','hidden');
@@ -134,15 +134,7 @@ if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userT
           reader.readAsDataURL(input.files[0]);
         }
       }
-     function linesSwitchery() {
-          $('.lcs_check').lc_switch('Y', 'N');
-	    		$('.lcs_wrap').delegate('#P_ACTIVE_YN', 'lcs-on', function() {
-	    		$('#P_ACTIVE').val('Y');
-	    		});
-					$('.lcs_wrap').delegate('#P_ACTIVE_YN', 'lcs-off', function() {
-            $('#P_ACTIVE').val('N');						
-					});
-          } 
+    
 
      
      function GetDashUserData_Ajax(){
