@@ -71,7 +71,7 @@ class Dashboard extends CI_Controller {
 		$data['totalPet'] = $this->DashbaordModal->totalPet();		       
 		$data['totalMale'] = $this->DashbaordModal->totalMale();		       
 		$data['totalFemale'] = $this->DashbaordModal->totalFemale();		       
-		$data['totalSold'] = $this->DashbaordModal->totalSold();		       
+		$data['totalReady'] = $this->DashbaordModal->totalReady();		       
         $this->load->view('pages/Dashboard_View',$data);        
 		$this->load->view('footer');
 	}

@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-life-ring"></i>
                 </div>
-                <div class="mr-5"><?php echo $totalSold .' Total Sold'; ?></div>
+                <div class="mr-5"><?php echo $totalReady .' Total Sold'; ?></div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Dashboard/PetDetails'); ?>">
                 <span class="float-left">View Details</span>

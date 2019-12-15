@@ -15,8 +15,8 @@ class DashbaordModal extends CI_Model {
         $sqlQry = "SELECT *	FROM v_pets WHERE P_GENDER = 'FEMALE'";
 		return $this->db->query($sqlQry)->num_rows();
    }
-    function totalSold(){
-        $sqlQry = "SELECT *	FROM v_pets WHERE P_STATUS = 'SOLD'";
+    function totalReady(){
+        $sqlQry = "SELECT *	FROM v_pets WHERE P_STATUS = 'READY'";
 		return $this->db->query($sqlQry)->num_rows();
    }
 		 

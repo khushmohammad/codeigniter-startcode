@@ -397,7 +397,7 @@ function PetDetailsModalForm_Reset(){
                                     <label for="gender">Pet Status</label>
                                     <select class="form-control form-control-sm custom-select" id="P_STATUS" name="P_STATUS">
                                         <option value="Process">Process</option>
-                                        <option value="Sold">Sold</option>
+                                        <option value="Ready">Ready for Sale</option>
                                         <option value="Sick">Sick</option>
                                         <option value="Dead">Dead</option>
                                     </select>
