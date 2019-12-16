@@ -26,7 +26,7 @@
 }
 .form-group > .custom-select{   
     height: 30px !important;
-    padding: 0px !important;
+    padding: 0px 0px 0 10px !important;
     }
 
 .modal-header{

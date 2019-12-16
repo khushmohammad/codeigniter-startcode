@@ -122,7 +122,9 @@ if($userTypeSession  !=="SUPERADMIN"){
                    dataType:'json',
                    success: function(json)
                    {
+
                      var obj = json['data'][0];
+                   
                       $('#U_ID').val(obj.U_ID);
                       $('#U_NAME').val(obj.U_NAME);
                       $('#U_USERNAME').val(obj.U_USERNAME);

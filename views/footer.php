@@ -54,6 +54,7 @@ function datepicker(id){
                         var html = '';
                         var i;
                         if(!data.length == ''){ 
+                           html += '<option value="">Select</option>';
                         for(i=0; i<data.length; i++){
                             html += '<option value='+data[i].ST_ID+'>'+data[i].ST_NAME+'</option>';
                         }
@@ -83,6 +84,7 @@ function City_List(stateId,cityId){
                         var html = '';
                         var i;
                         if(!data.length == ''){
+                           html += '<option value="">Select</option>';
                         for(i=0; i<data.length; i++){
 
                             html += '<option value='+data[i].CT_ID+'>'+data[i].CT_NAME+'</option>';
