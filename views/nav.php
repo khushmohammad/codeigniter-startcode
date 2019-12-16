@@ -42,8 +42,12 @@ $DashboardMenu =  $this->LoginModel->DashboardMenu();
   </nav>
 
   <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="sidebar navbar-nav toggled">      
+    <!-- Sidebar
+    .sidebar{    
+   /* background: url('http://www.vilayat.online/dash/assets/img/sidebar-back.jpg');*/
+} -->
+    <ul class="sidebar navbar-nav toggled" style="background: url('<?php echo site_url("/assets/img/sidebar-back.jpg")?>')"> 
+
      <?php foreach($DashboardMenu as $Dashboard){ ?>
             <li class="nav-item">
                  <a href="<?php echo site_url($Dashboard['M_LINK']); ?>" class="nav-link" > 
