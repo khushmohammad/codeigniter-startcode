@@ -61,8 +61,7 @@ class Dashboard extends CI_Controller {
 		           } else {
 		               echo json_encode(TRUE);
 		           }
-		   }
-			
+		   }			
         //common function
    
 	public function index()
@@ -84,10 +83,6 @@ class Dashboard extends CI_Controller {
         $this->load->view('pages/DashUser_View',$data);                
 		$this->load->view('footer');
 	}
-	
-	 	
-
-
 
 	function DashUserView_Ajax()	
 	{		
@@ -120,15 +115,13 @@ class Dashboard extends CI_Controller {
 	 	echo json_encode('delete seccessfully');
 	 }
 	}
-
 	function GetDashUserData_Ajax(){
 		$sysId = 	$this->input->post('sysId');		
 		$result['data'] = $this->LoginModel->GetDashUserData($sysId);
 		$result['stateOption'] = $this->getSelectedState($result['data'][0]['U_COUNTRY']);
 		$result['cityOption'] = $this->getSelectedCity($result['data'][0]['U_STATE']);
 		echo json_encode($result);
-	}
-	
+	}	
 	function DashUser_UpdateAjax(){
 		header('Content-Type: application/json');
 		$this->LoginModel->DashUser_UpdateAjax($this->userId);
@@ -258,8 +251,6 @@ class Dashboard extends CI_Controller {
 	function menuDetailsUpdate_Ajax(){
 		header('Content-Type: application/json');
 		$this->LoginModel->menuDetailsUpdate($this->userId);
-	}
-		
-	//MenuDetails end
-	
+	}		
+	//MenuDetails end	
 }
