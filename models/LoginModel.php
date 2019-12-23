@@ -2,8 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LoginModel extends CI_Model {
-	public function login($data){  
+	public function Login($data){  
 		$query=$this->db->get_where('dash_users',array('U_USERNAME'=>$data['U_USERNAME'],'U_PASSWORD'=>$data['U_PASSWORD'],'U_ACTIVE' => 'Y'));
+//        if($query->num_rows() > 0)  
+//           {  
+//                return true;  
+//           }  
+//           else  
+//           {  
+//                return false;       
+//           }  
 		 if($query->num_rows() == 1) {
             return $query->row();
 			} 			 

@@ -83,7 +83,7 @@ if($userTypeSession  !=="SUPERADMIN"){
           'responsive': true,		
           'scrollX':true,
           'scrollY':'320px',
-          'scrollCollapse': true,		
+          'scrollCollapse': false,		
           'dataType': 'json',				
           columns: DataTableObject,		
               "ajax": {

@@ -5,7 +5,8 @@ class Welcome extends CI_Controller {
 	function __construct()  
 		{  
 			parent::__construct();    
-			$this->load->model('LoginModel');    
+			$this->load->model('LoginModel');  
+            $this->load->library('form_validation'); 
 		} 
 	
 
@@ -24,7 +25,7 @@ class Welcome extends CI_Controller {
         $this->load->view('Login');       
 		
 	}
-	function login(){
+	function Login(){
 		   
 		if($this->session->userdata('U_USERNAME')){
             redirect('Dashboard');
@@ -49,8 +50,14 @@ class Welcome extends CI_Controller {
                     'authenticated' => TRUE
                 );			
 		$this->session->set_userdata($userdata);   
-		  echo base_url()."Dashboard/"; 		 
+		 // echo base_url()."Dashboard/"; 	
+            redirect(base_url() . 'Dashboard');
 		}
+        else  
+                {  
+                     $this->session->set_flashdata('error', 'Invalid Username and Password');  
+                     redirect(base_url() . 'Welcome');  
+                }  
 	}
 	public function logout(){
 		$userdata= 	array("U_NAME", "U_ID", "U_USERNAME","U_USER_TYPE", "U_PASSWORD", "U_ACCESS_UPDATE", "U_ACCESS_INSERT", "U_ACCESS_DELETE");		
