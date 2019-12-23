@@ -21,7 +21,8 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata('U_USERNAME')){
             redirect('Dashboard');
         }
-		$this->load->view('nonavheader');				
+        $data['title'] = 'Login Vilayat';
+		$this->load->view('nonavheader',$data);				
         $this->load->view('Login');       
 		
 	}
