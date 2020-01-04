@@ -67,11 +67,9 @@ class Welcome extends CI_Controller {
 	}
 
 	public function ForgetPass()
-	{
-		
+	{	
 		$this->load->view('nonavheader');				
-        $this->load->view('pages/Forget_password');       
-		
+        $this->load->view('pages/Forget_password');
 	}
 	public function Forget_password(){
 	 header('Content-Type: application/json');
