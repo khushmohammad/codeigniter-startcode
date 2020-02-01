@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 12, 2019 at 02:41 PM
+-- Generation Time: Feb 01, 2020 at 05:10 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `allitem` (
   `I_PURCHASEDATE` varchar(200) NOT NULL,
   `I_PURCHASEBY` varchar(200) NOT NULL,
   `I_AMOUNT` varchar(200) NOT NULL,
-  `I_IMAGE` varchar(200) NOT NULL,
   `I_BILL` varchar(200) NOT NULL,
   `I_EXPIRYDATE` varchar(200) NOT NULL,
   `V_LANG_CODE` varchar(200) NOT NULL DEFAULT 'en',
@@ -44,7 +43,14 @@ CREATE TABLE IF NOT EXISTS `allitem` (
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `I_ACTIVE` varchar(200) NOT NULL DEFAULT 'Y',
   PRIMARY KEY (`I_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `allitem`
+--
+
+INSERT INTO `allitem` (`I_ID`, `I_NAME`, `I_PURCHASEDATE`, `I_PURCHASEBY`, `I_AMOUNT`, `I_BILL`, `I_EXPIRYDATE`, `V_LANG_CODE`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`, `I_ACTIVE`) VALUES
+(11, 'grass', '01/12/2019', 'jaffar', '15800', 'picturemessage_ze013hdh_fio.png', '17/12/2019', 'en', 'superadmin', '2019/12/21 09:48:00', '2019-12-16 14:57:58', 'Y');
 
 -- --------------------------------------------------------
 
@@ -48300,6 +48306,31 @@ INSERT INTO `countries` (`CN_ID`, `CN_CODE`, `CN_NAME`, `CN_PHONECODE`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `crud`
+--
+
+DROP TABLE IF EXISTS `crud`;
+CREATE TABLE IF NOT EXISTS `crud` (
+  `ID` int(4) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(200) NOT NULL,
+  `CONTACT` varchar(200) NOT NULL,
+  `EMAIL` varchar(200) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `crud`
+--
+
+INSERT INTO `crud` (`ID`, `NAME`, `CONTACT`, `EMAIL`) VALUES
+(9, 'sdf', 'sdf', 'sdf'),
+(11, 'ghj', 'ghj', 'ghj'),
+(12, 'ghjjj', 'grjfgjh', 'fjfgj'),
+(13, 'wertwer', 'wetwetwetw', 'werwert');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `currency`
 --
 
@@ -48475,40 +48506,6 @@ INSERT INTO `currency` (`iso`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `dashuser_view`
--- (See below for the actual view)
---
-DROP VIEW IF EXISTS `dashuser_view`;
-CREATE TABLE IF NOT EXISTS `dashuser_view` (
-`U_ID` int(4)
-,`U_NAME` varchar(300)
-,`U_USERNAME` varchar(200)
-,`U_GENDER` varchar(200)
-,`U_PASSWORD` varchar(200)
-,`U_USER_TYPE` varchar(200)
-,`U_ADHAR_DOCUMENT` varchar(200)
-,`U_EMAIL` varchar(200)
-,`U_CONTACT` varchar(200)
-,`U_ADDRESS` varchar(200)
-,`U_COUNTRY` varchar(200)
-,`U_STATE` varchar(200)
-,`U_CITY` varchar(200)
-,`U_PINCODE` varchar(200)
-,`U_ACTIVE` varchar(200)
-,`U_ACCESS_UPDATE` varchar(200)
-,`U_ACCESS_INSERT` varchar(200)
-,`U_ACCESS_DELETE` varchar(200)
-,`ST_ID` int(11)
-,`ST_NAME` varchar(30)
-,`CN_ID` int(11)
-,`CN_NAME` varchar(150)
-,`CT_ID` int(11)
-,`CT_NAME` varchar(30)
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `dash_users`
 --
 
@@ -48538,16 +48535,15 @@ CREATE TABLE IF NOT EXISTS `dash_users` (
   `V_UP_TIME` varchar(200) NOT NULL,
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`U_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dash_users`
 --
 
 INSERT INTO `dash_users` (`U_ID`, `U_NAME`, `U_USERNAME`, `U_GENDER`, `U_PASSWORD`, `U_USER_TYPE`, `U_ADHAR_DOCUMENT`, `U_EMAIL`, `U_CONTACT`, `U_ADDRESS`, `U_COUNTRY`, `U_STATE`, `U_CITY`, `U_PINCODE`, `U_ACTIVE`, `U_ACCESS_UPDATE`, `U_ACCESS_INSERT`, `U_ACCESS_DELETE`, `U_ACCESS_VIEW`, `V_LANG_CODE`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
-(4, 'KHUSH', 'admin', 'Male', 'admin', 'ADMIN', '', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '33', '3295', '3', 'N', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/12/11 11:02:02', '2019-10-29 06:43:27'),
-(11, 'crud', 'crud', 'Male', 'admin', 'ADMIN', '', 'crud@gmail.com', '45454', 'fsdf', '1', '43', '5914', '123', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/11/10 18:31:29', '2019-11-10 14:31:03'),
-(9, 'KHUSH MOHAMMD', 'Khush@vilayat', 'Male', 'admin', 'SUPERADMIN', '', 'khusbhaijaan007@gmail.com', '4324354353454', '123', '101', '33', '3327', '311407', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'Khush@vilayat', '2019/11/04 10:44:17', '2019-10-31 18:32:57');
+(4, 'khush', 'admin', 'Male', 'admin', 'EMPLOYEE', '', 'khushbhaijaan007@gmail.com', '7687464654', '1234', '101', '2', '6', '3', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'superadmin', '2019/12/16 09:32:06', '2019-10-29 06:43:27'),
+(11, 'khush', 'superadmin', 'Male', 'admin', 'SUPERADMIN', '', 'crud@gmail.com', '45454', 'fsdf', '1', '43', '5914', '123', 'Y', 'Y', 'Y', 'Y', 'Y', 'en', 'admin', '2019/12/14 12:27:19', '2019-11-10 14:31:03');
 
 -- --------------------------------------------------------
 
@@ -48569,18 +48565,19 @@ CREATE TABLE IF NOT EXISTS `menudetail` (
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `V_UP_TIME` varchar(200) NOT NULL,
   PRIMARY KEY (`M_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menudetail`
 --
 
 INSERT INTO `menudetail` (`M_ID`, `M_SNO`, `M_NAME`, `M_LINK`, `M_ICON`, `M_LOCATION`, `M_ACTIVE`, `V_LANG_CODE`, `V_USER_ID`, `V_CR_TIME`, `V_UP_TIME`) VALUES
-(1, '01', 'stock', '/Dashboard/StockDetails', 'fas fa-fw fa-chart-area', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 08:52:03', ''),
-(2, '2', 'Users', 'Dashboard/AdminUser', 'fas fa-user-friends', 'Setting', 'N', 'en', 'Khush@vilayat', '2019-12-12 12:45:16', ''),
-(3, '03', 'Menu', 'Dashboard/MenuDetails', 'fas fa-bars', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:17:45', ''),
-(4, '04', 'Dashboard', 'Dashboard', 'fas fa-fw fa-tachometer-alt', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:29:17', ''),
-(5, '05', 'Pet Info', 'Dashboard/PetDetails', 'fas fa-info-circle', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:31:44', '');
+(1, '4', 'Item', 'Dashboard/StockDetails', 'fas fa-fw fa-chart-area', 'Dashboard', 'Y', 'en', 'superadmin', '2019-12-12 08:52:03', ''),
+(2, '2', 'Users', 'Dashboard/AdminUser', 'fas fa-user-friends', 'Setting', 'Y', 'en', 'superadmin', '2019-12-12 12:45:16', ''),
+(3, '5', 'Menu', 'Dashboard/MenuDetails', 'fas fa-bars', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:17:45', ''),
+(4, '1', 'Dashboard', 'Dashboard', 'fas fa-fw fa-tachometer-alt', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:29:17', ''),
+(5, '3', 'Pet Info', 'Dashboard/PetDetails', 'fas fa-info-circle', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:31:44', ''),
+(8, '6', 'crud', 'Dashboard/crud', 'fas fa-bars', 'Dashboard', 'Y', 'en', 'superadmin', '2020-02-01 04:52:45', '');
 
 -- --------------------------------------------------------
 
@@ -52753,19 +52750,16 @@ CREATE TABLE IF NOT EXISTS `v_pets` (
   `P_CONDITION_TYPE` varchar(200) NOT NULL,
   `P_WEIGHT` varchar(200) NOT NULL,
   `P_ACTIVE` varchar(200) NOT NULL,
+  `P_PURCHASEAMOUNT` varchar(200) NOT NULL,
+  `P_SALEAMOUNT` varchar(200) NOT NULL,
+  `P_DIFFRENTOFAMOUNT` varchar(200) NOT NULL,
+  `P_COST` varchar(200) NOT NULL,
   `V_LANG_CODE` varchar(200) NOT NULL,
   `V_USER_ID` varchar(200) NOT NULL,
   `V_UP_TIME` varchar(200) NOT NULL,
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`P_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `v_pets`
---
-
-INSERT INTO `v_pets` (`P_ID`, `P_NAME`, `P_CODE_ID`, `P_GENDER`, `P_DOB`, `P_SECTION_AREA`, `P_STATUS`, `P_IMAGE`, `P_CONDITION_TYPE`, `P_WEIGHT`, `P_ACTIVE`, `V_LANG_CODE`, `V_USER_ID`, `V_UP_TIME`, `V_CR_TIME`) VALUES
-(9, 'sher', '011', 'Male', '01/12/2019', 'Child', 'Process', 'picturemessage_ze013hdh_fio.png', 'good', '10', 'Y', '', 'Khush@vilayat', '', '2019-12-12 06:37:35');
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -52786,15 +52780,6 @@ CREATE TABLE IF NOT EXISTS `v_pets_pictures` (
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`PP_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure for view `dashuser_view`
---
-DROP TABLE IF EXISTS `dashuser_view`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dashuser_view`  AS  select `dash_users`.`U_ID` AS `U_ID`,`dash_users`.`U_NAME` AS `U_NAME`,`dash_users`.`U_USERNAME` AS `U_USERNAME`,`dash_users`.`U_GENDER` AS `U_GENDER`,`dash_users`.`U_PASSWORD` AS `U_PASSWORD`,`dash_users`.`U_USER_TYPE` AS `U_USER_TYPE`,`dash_users`.`U_ADHAR_DOCUMENT` AS `U_ADHAR_DOCUMENT`,`dash_users`.`U_EMAIL` AS `U_EMAIL`,`dash_users`.`U_CONTACT` AS `U_CONTACT`,`dash_users`.`U_ADDRESS` AS `U_ADDRESS`,`dash_users`.`U_COUNTRY` AS `U_COUNTRY`,`dash_users`.`U_STATE` AS `U_STATE`,`dash_users`.`U_CITY` AS `U_CITY`,`dash_users`.`U_PINCODE` AS `U_PINCODE`,`dash_users`.`U_ACTIVE` AS `U_ACTIVE`,`dash_users`.`U_ACCESS_UPDATE` AS `U_ACCESS_UPDATE`,`dash_users`.`U_ACCESS_INSERT` AS `U_ACCESS_INSERT`,`dash_users`.`U_ACCESS_DELETE` AS `U_ACCESS_DELETE`,`states`.`ST_ID` AS `ST_ID`,`states`.`ST_NAME` AS `ST_NAME`,`countries`.`CN_ID` AS `CN_ID`,`countries`.`CN_NAME` AS `CN_NAME`,`cities`.`CT_ID` AS `CT_ID`,`cities`.`CT_NAME` AS `CT_NAME` from (((`dash_users` join `countries` on((`dash_users`.`U_COUNTRY` = `countries`.`CN_ID`))) join `states` on((`dash_users`.`U_STATE` = `states`.`ST_ID`))) join `cities` on((`dash_users`.`U_CITY` = `cities`.`CT_ID`))) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
