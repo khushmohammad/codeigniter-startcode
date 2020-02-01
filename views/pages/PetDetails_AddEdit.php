@@ -3,10 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $AccessDelete = $this->session->userdata('U_ACCESS_DELETE');
 $AccessInsert = $this->session->userdata('U_ACCESS_INSERT');
 $AccessUpdate = $this->session->userdata('U_ACCESS_UPDATE');
-$userTypeSession = $this->session->userdata('U_USER_TYPE');
-if($userTypeSession  !=="SUPERADMIN" AND $userTypeSession  !=="ADMIN" AND $userTypeSession  !=="EMPLOYEE"){    
-           redirect('Dashboard');
-         }   
+$userTypeSession = $this->session->userdata('U_USER_TYPE');   
 ?>  
 <style type="text/css">
 </style>

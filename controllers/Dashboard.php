@@ -253,4 +253,44 @@ class Dashboard extends CI_Controller {
 		$this->LoginModel->menuDetailsUpdate($this->userId);
 	}		
 	//MenuDetails end	
+
+	//////CRUD START
+	public function crud()
+		{
+			$this->load->view('header');				
+	        $this->load->view('pages/crud');                
+			$this->load->view('footer');
+		}
+
+	function CrudDetailsView_Ajax()	
+	{		
+		header('Content-Type: application/json');
+		$this->datatables->select('ID,NAME,CONTACT,EMAIL');
+		$this->datatables->from('crud');		
+		echo $this->datatables->generate();	   
+	}	
+
+	function GetCrudDetailsEditData_Ajax(){
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetCrudDetailsEditData($sysId);		
+		echo json_encode($result);
+	}
+
+	function CrudDetailsDelete_Ajax(){
+	$sysId =	$this->input->post('sysId');	
+	$delete = $this->db->delete('crud',"ID = '".$sysId."'");		 
+	 if($delete){
+	 	echo json_encode('delete seccessfully');
+	 }
+	}
+
+	function CrudItemUpdate_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->CrudItemUpdate($this->userId);
+	}
+
+	function CrudItemSave_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->CrudItemSave($this->userId);
+	}
 }

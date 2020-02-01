@@ -420,6 +420,52 @@ class LoginModel extends CI_Model {
 
 
      //stock
+
+     //crud start
+     public function GetCrudDetailsEditData($sysId){
+     	$sql = 'SELECT * FROM crud WHERE ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
+
+	 public function CrudItemSave($userId){		
+		//$ID = $this->input->post('ID');
+        $NAME = $this->input->post('NAME'); 
+		$EMAIL = $this->input->post('EMAIL'); 
+		$CONTACT = $this->input->post('CONTACT');
+		$data = array(
+			'NAME' => $NAME, 
+			'EMAIL' => $EMAIL, 
+			'CONTACT' => $CONTACT
+		);
+		$insert =  $this->db->insert('crud',$data); 
+		$insertId = $this->db->insert_id();
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+     function CrudItemUpdate($userId){
+		$ID = $this->input->post('ID');
+        $NAME = $this->input->post('NAME'); 
+		$EMAIL = $this->input->post('EMAIL'); 
+		$CONTACT = $this->input->post('CONTACT'); 		
+		$data = array(
+			'NAME' => $NAME, 
+			'EMAIL' => $EMAIL, 
+			'CONTACT' => $CONTACT
+		);		
+		$update = $this->db->update('crud', $data, array('ID' => $ID));		
+			if($update){
+				echo json_encode($ID);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+
+		
 	
 }
 
