@@ -11,7 +11,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
   <!-- Breadcrumbs-->       
     
         <div class="addButton" style="padding: 10px 0 10px 0;">
-          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#crudItemModal" data-backdrop="static" data-keyboard="false" >
+          <button <?php if($AccessInsert!=='Y'){echo 'disabled'; } ?> id="Add" type="button" class="btn bg-success AddEditButton" data-toggle="modal" data-target="#crud2ItemModal" data-backdrop="static" data-keyboard="false" >
           Add
         </button>
 
@@ -57,8 +57,8 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
                       +'	<button type="button" class="btn" data-toggle="dropdown"><i class="fas fa-edit"></i>'
                       +	'</button>'
                       +	'<div class="dropdown-menu">'
-                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#crudItemModal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
-                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="crudItemDelete" data-id="'+sysid+'"  href="#">Delete</button>'								
+                      +	  '<button <?php if($AccessUpdate!=="Y"){echo "disabled"; } ?> id="Edit" class="dropdown-item AddEditButton" data-id="'+sysid+'" data-toggle="modal" data-target="#crud2ItemModal" href="#" data-backdrop="static" data-keyboard="false">Edit</button>'
+                      +	  '<button <?php if($AccessDelete!=="Y"){echo "disabled"; } ?> class="dropdown-item" id="crud2ItemDelete" data-id="'+sysid+'"  href="#">Delete</button>'								
                       +	'</div>'
                       +' </div>';          
               }
@@ -75,7 +75,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
           'dataType': 'json',				
           columns: DataTableObject,		
               "ajax": {
-                  "url": "<?= base_url(); ?>Dashboard/CrudDetailsView_Ajax",
+                  "url": "<?= base_url(); ?>Dashboard/crud2DetailsView_Ajax",
                   "type": "POST"
               },
             
@@ -102,13 +102,13 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
       //     reader.readAsDataURL(input.files[0]);
       //   }
       // }
-     function GetCrudItemData_Ajax(){         
+     function Getcrud2ItemData_Ajax(){         
         $('#SaveButton').text('Update');
          loader();
          var sysId = $('#ID').val();   
          $.ajax({
                    type: "POST",
-                   url: "<?= site_url('Dashboard/GetCrudDetailsEditData_Ajax'); ?>",
+                   url: "<?= site_url('Dashboard/Getcrud2DetailsEditData_Ajax'); ?>",
                    data: {sysId : sysId} ,
                    dataType:'json',
                    success: function(json)
@@ -118,7 +118,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
                       $('#NAME').val(obj.NAME);
                       $('#EMAIL').val(obj.EMAIL);
                       $('#CONTACT').val(obj.CONTACT);
-                      $('#crudItemAddEdit_Form').valid(); 
+                      $('#crud2ItemAddEdit_Form').valid(); 
                    },
                    error: function (jqXHR, exception) {
                     console.log(jqXHR);
@@ -141,18 +141,18 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
        else{        
        var sysId =  $(this).attr('data-id');
         $('#ID').val(sysId);
-        GetCrudItemData_Ajax();
+        Getcrud2ItemData_Ajax();
 
        }
   });  
-    $(document).on("click", "#crudItemDelete", function(e) {
+    $(document).on("click", "#crud2ItemDelete", function(e) {
          var sysId = $(this).attr('data-id');        
         bootbox.confirm("Are you sure you want to delete?", function(result) {
           if(result){ 
            loader();          
            $.ajax({
              type: "POST",
-             url: "<?= site_url('Dashboard/CrudDetailsDelete_Ajax'); ?>",
+             url: "<?= site_url('Dashboard/Crud2DetailsDelete_Ajax'); ?>",
              data: {sysId : sysId} ,// serializes the form's elements.
              success: function(data)
              {
@@ -180,9 +180,9 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
 			submitHandler: function (form) {
        // debug: true       
        var sysId = $('#ID').val();
-       var url = "<?php echo site_url('Dashboard/CrudItemUpdate_Ajax') ?>";
+       var url = "<?php echo site_url('Dashboard/Crud2ItemUpdate_Ajax') ?>";
        if(sysId == ''){
-       var url = "<?php echo site_url('Dashboard/CrudItemSave_Ajax') ?>";
+       var url = "<?php echo site_url('Dashboard/Crud2ItemSave_Ajax') ?>";
        } 
        loader();      
       $.ajax({
@@ -204,7 +204,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
                   $('.AlertMessageModal').html('') ;
                  }, 2000);
             
-                 GetCrudItemData_Ajax(); 
+                 Getcrud2ItemData_Ajax(); 
                   unloader();
                   $("#datatables").DataTable().draw();                 
              }              
@@ -216,7 +216,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
 		});     
 		$(document).ready( function () {      
      
-			$( "#crudItemAddEdit_Form" ).validate( {
+			$( "#crud2ItemAddEdit_Form" ).validate( {
         onkeyup: function(element) {
             $(element).valid();           
           }, 
@@ -261,12 +261,12 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
 		});
   //validation
 
-function crudModalForm_Reset(){
-     $("#crudItemAddEdit_Form")[0].reset();
-     $('#crudItemAddEdit_Form').valid(); 
-     var validator = $( "#crudItemAddEdit_Form" ).validate();
+function crud2ModalForm_Reset(){
+     $("#crud2ItemAddEdit_Form")[0].reset();
+     $('#crud2ItemAddEdit_Form').valid(); 
+     var validator = $( "#crud2ItemAddEdit_Form" ).validate();
      validator.resetForm();
-     $("#crudItemAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
+     $("#crud2ItemAddEdit_Form").find('.is-valid').removeClass("is-valid"); 
     // $(".selectpicker").selectpicker('refresh');
 
 }
@@ -274,15 +274,15 @@ function crudModalForm_Reset(){
 
 </script>
 <!-- modal for add and edit -->
-<div class="modal" id="crudItemModal">
+<div class="modal" id="crud2ItemModal">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Add Item</h4>
-                <button type="button" onclick="crudModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" onclick="crud2ModalForm_Reset();" class="close" data-dismiss="modal">&times;</button>
               </div>
              <div class="AlertMessageModal"></div> 
-              <form mathod="POST" id="crudItemAddEdit_Form">            
+              <form mathod="POST" id="crud2ItemAddEdit_Form">            
               <div class="modal-body">              
                 <div class="row">
                   <div class="col-sm-6">
@@ -316,7 +316,7 @@ function crudModalForm_Reset(){
               <input type="hidden" name="ID" value=""  id="ID"/>            
               </div>
               <div class="col-md-6 text-right">   
-                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="crudModalForm_Reset();">Close</button>
+                <button type="button" class="btn bg-secondary btn-sm" data-dismiss="modal" onclick="crud2ModalForm_Reset();">Close</button>
                 <button type="submit" class="btn bg-success btn-sm" id="SaveButton">Save</button>
               </div>
               </div>

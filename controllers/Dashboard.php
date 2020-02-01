@@ -293,4 +293,46 @@ class Dashboard extends CI_Controller {
 		header('Content-Type: application/json');
 		$this->LoginModel->CrudItemSave($this->userId);
 	}
+
+	//////////////crud2 start
+
+	public function crud2()
+		{
+			$this->load->view('header');				
+	        $this->load->view('pages/crud2');                
+			$this->load->view('footer');
+		}
+
+	function crud2DetailsView_Ajax()	
+	{		
+		header('Content-Type: application/json');
+		$this->datatables->select('ID,NAME,CONTACT,EMAIL');
+		$this->datatables->from('crud2');		
+		echo $this->datatables->generate();	   
+	}	
+
+	function Getcrud2DetailsEditData_Ajax(){
+		$sysId = 	$this->input->post('sysId');		
+		$result['data'] = $this->LoginModel->GetCrud2DetailsEditData($sysId);		
+		echo json_encode($result);
+	}
+
+	function Crud2DetailsDelete_Ajax(){
+	$sysId =	$this->input->post('sysId');	
+	$delete = $this->db->delete('crud2',"ID = '".$sysId."'");		 
+	 if($delete){
+	 	echo json_encode('delete seccessfully');
+	 }
+	}
+
+	function Crud2ItemUpdate_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->Crud2ItemUpdate($this->userId);
+	}
+
+	function Crud2ItemSave_Ajax(){
+		header('Content-Type: application/json');
+		$this->LoginModel->Crud2ItemSave($this->userId);
+	}
+
 }

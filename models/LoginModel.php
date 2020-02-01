@@ -464,8 +464,49 @@ class LoginModel extends CI_Model {
 				echo json_encode('error');
 			}
 		}
+/////////////crud 2 start
+ public function GetCrud2DetailsEditData($sysId){
+     	$sql = 'SELECT * FROM crud2 WHERE ID = "'.$sysId.'"';
+		return  $this->db->query($sql)->result_array();
+     }
 
-		
+	 public function Crud2ItemSave($userId){		
+		//$ID = $this->input->post('ID');
+        $NAME = $this->input->post('NAME'); 
+		$EMAIL = $this->input->post('EMAIL'); 
+		$CONTACT = $this->input->post('CONTACT');
+		$data = array(
+			'NAME' => $NAME, 
+			'EMAIL' => $EMAIL, 
+			'CONTACT' => $CONTACT
+		);
+		$insert =  $this->db->insert('crud2',$data); 
+		$insertId = $this->db->insert_id();
+			if($insert){
+				echo json_encode($insertId);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
+     function Crud2ItemUpdate($userId){
+		$ID = $this->input->post('ID');
+        $NAME = $this->input->post('NAME'); 
+		$EMAIL = $this->input->post('EMAIL'); 
+		$CONTACT = $this->input->post('CONTACT'); 		
+		$data = array(
+			'NAME' => $NAME, 
+			'EMAIL' => $EMAIL, 
+			'CONTACT' => $CONTACT
+		);		
+		$update = $this->db->update('crud2', $data, array('ID' => $ID));		
+			if($update){
+				echo json_encode($ID);
+			} 
+			else{
+				echo json_encode('error');
+			}
+		}
 	
 }
 

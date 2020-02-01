@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 01, 2020 at 05:10 AM
+-- Generation Time: Feb 01, 2020 at 05:32 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -48316,7 +48316,7 @@ CREATE TABLE IF NOT EXISTS `crud` (
   `CONTACT` varchar(200) NOT NULL,
   `EMAIL` varchar(200) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `crud`
@@ -48327,6 +48327,21 @@ INSERT INTO `crud` (`ID`, `NAME`, `CONTACT`, `EMAIL`) VALUES
 (11, 'ghj', 'ghj', 'ghj'),
 (12, 'ghjjj', 'grjfgjh', 'fjfgj'),
 (13, 'wertwer', 'wetwetwetw', 'werwert');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `crud2`
+--
+
+DROP TABLE IF EXISTS `crud2`;
+CREATE TABLE IF NOT EXISTS `crud2` (
+  `ID` int(4) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(200) NOT NULL,
+  `EMAIL` varchar(200) NOT NULL,
+  `CONTACT` varchar(200) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -48565,7 +48580,7 @@ CREATE TABLE IF NOT EXISTS `menudetail` (
   `V_CR_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `V_UP_TIME` varchar(200) NOT NULL,
   PRIMARY KEY (`M_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menudetail`
@@ -48577,7 +48592,8 @@ INSERT INTO `menudetail` (`M_ID`, `M_SNO`, `M_NAME`, `M_LINK`, `M_ICON`, `M_LOCA
 (3, '5', 'Menu', 'Dashboard/MenuDetails', 'fas fa-bars', 'Setting', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:17:45', ''),
 (4, '1', 'Dashboard', 'Dashboard', 'fas fa-fw fa-tachometer-alt', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:29:17', ''),
 (5, '3', 'Pet Info', 'Dashboard/PetDetails', 'fas fa-info-circle', 'Dashboard', 'Y', 'en', 'Khush@vilayat', '2019-12-12 14:31:44', ''),
-(8, '6', 'crud', 'Dashboard/crud', 'fas fa-bars', 'Dashboard', 'Y', 'en', 'superadmin', '2020-02-01 04:52:45', '');
+(8, '6', 'crud', 'Dashboard/crud', 'fas fa-bars', 'Dashboard', 'Y', 'en', 'superadmin', '2020-02-01 04:52:45', ''),
+(9, '7', 'crud2', 'Dashboard/crud2', 'fas fa-user-friends', 'Dashboard', 'Y', 'en', 'superadmin', '2020-02-01 05:25:31', '');
 
 -- --------------------------------------------------------
 
