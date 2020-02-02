@@ -9,7 +9,8 @@ class Dashboard extends CI_Controller {
             $this->logged_in();            
             $this->userId = $this->session->userdata('U_USERNAME');
 			$userId = $this->session->userdata('U_USERNAME'); 
-            //$this->Menu['menudata'] = $this->LoginModel->MenuData();         
+            //$this->Menu['menudata'] = $this->LoginModel->MenuData(); 
+            initialize('message');//complesory        
           }
         // check log in  function  
         private function logged_in()

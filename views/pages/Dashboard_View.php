@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Overview</li>
+          <li class="breadcrumb-item active"> <?= lang('welcome_message')?></li>
         </ol>
 
         <!-- Icon Cards-->

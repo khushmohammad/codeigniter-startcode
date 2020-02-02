@@ -22,7 +22,7 @@ $userTypeSession = $this->session->userdata('U_USER_TYPE');
         <div class="card mb-3">            
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Data Table Example</div>
+            <?= lang('welcome_message')?></div>
           <div class="card-body">
             <div class="">
             <table class="nowrap table table-striped table-bordered  table-hover" id="datatables" width="100%">

@@ -1,6 +1,7 @@
 <?php $userTypeSession = $this->session->userdata('U_USER_TYPE'); 
  $SettingMenu =  $this->LoginModel->SettingMenu(); 
 $DashboardMenu =  $this->LoginModel->DashboardMenu();
+$lang = $this->session->userdata('site_lang');
 //echo '<pre>'; print_r($SettingMenu); echo '</pre>';  ?>    
   <nav class="navbar navbar-expand bg-light static-top ">
     <div class="col-md-6">
@@ -12,7 +13,13 @@ $DashboardMenu =  $this->LoginModel->DashboardMenu();
    </div>
   <div class="col-md-6">
     <!-- Navbar -->
-    <ul class="navbar-nav" style="float: right;">
+    <ul class="navbar-nav" style="float: right;">        
+          
+          <select class="form-control" onchange="javascript:window.location.href='<?php echo base_url(); ?>Welcome/switchLang/'+this.value;">
+            <option value="english" <?php if($lang == 'english') echo 'selected="selected"'; ?>>English</option>
+            <option value="Hindi" <?php if($lang == 'Hindi') echo 'selected="selected"'; ?>>Hindi</option>
+        </select>
+         
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="badge badge-danger">9+</span>
@@ -25,6 +32,7 @@ $DashboardMenu =  $this->LoginModel->DashboardMenu();
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
+
       </li>
     
       <li class="nav-item dropdown no-arrow">
@@ -38,6 +46,7 @@ $DashboardMenu =  $this->LoginModel->DashboardMenu();
         </div>
       </li>
     </ul>
+
     </div>
   </nav>
 
