@@ -326,3 +326,32 @@ function crudModalForm_Reset(){
         </div>
       </div>
       <!-- modal end for add edit -->
+	  
+	  <script>
+$(document).ready(function(){
+  $("#test").keyup(function(){
+  
+  var month = $("#month").val();
+  
+  var day  = $("#day").val();
+  
+  var par = $("#test").val();
+  
+  var perdaysalary = parseFloat(month) / parseFloat(day);
+  
+  
+  var salary = parseFloat(perdaysalary)* parseFloat(par);
+    //alert(Math.ceil(salary)+'     new '+ parseFloat(salary) );
+    $('#salary').val(Math.ceil(salary));
+    
+  });
+});
+</script>
+</head>
+<body>
+
+<p>persent: <input type="text" id="test" value="25"></p>
+<p>month: <input type="text" id="month" value="5000"></p>
+<p>day: <input type="text" id="day" value="30"></p>
+<p>Salary: <input type="text" id="salary" value=""></p>
+<button>Show Value</button>
